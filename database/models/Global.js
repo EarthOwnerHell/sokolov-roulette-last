@@ -2,10 +2,14 @@ const { model, Schema } = require('mongoose')
 
 const defaultValue = (type, value, index = false) => ({ type, default: value, index });
 
-const Global = new model('Globals', new Schema({
-    depCourse: defaultValue(Number, 16_000),
-    hackPercent: defaultValue(Number, 5),
-    refBonuse: defaultValue(Number, 40_000),
-}))
+const Global = model(
+    'Global',
+    new Schema({
+        name: defaultValue(String, 'Global'),
+        forRef: defaultValue(Number, 33000),
+        lossToday: defaultValue(Number, 0),
+        winToday: defaultValue(Number, 0),
+    })
+);
 
 module.exports = Global; 

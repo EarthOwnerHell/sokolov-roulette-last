@@ -1,30 +1,30 @@
-require('dotenv').config();
+const { VK } = require('vk-io');
+const connectDb = require('./database/connect');
+//const newDonate = require('./settings/keksik.js');
+const { token, groupId } = require('./settings/config.json')
+const { vkDice, vkDiceCallback } = require('./settings/vkdice')
+const schedule = require('node-schedule');
+const botVk = new VK({
+    token: token,
+    pollingGroupId: groupId
+  })
+const updatesManager = require('./updatesController/updatesManager')
+const { vk } = require('./settings/vk');
+const { autoCreateGlobal } = require('./database/managers/global');
+const { resetLossWin, getUserTimeReg } = require('./settings/tools');
+const serverListen = require('./settings/server');
 
-const { vk, vkHelp } = require('./settings/vk.js')
+//serverListen()
 
-const connectMongo = require('./database/connect.js');
+connectDb();
 
-const serverListener = require('./keksik')
+autoCreateGlobal();
 
-const updatesController = require('./settings/vkUpdates/controller.js');
+const resetSchedule = schedule.scheduleJob({ hour: 0, minute: 0 }, () => {
+    resetLossWin();
+  });
 
-const dbGlobal = require('./database/managers/global.js');
-
-const checkGameResults = require('./pages/game/helpers/getResults.js')
-
-const { getUserTimeReg } = require('./tools.js');
-
-connectMongo()
-
-serverListener()
-
-checkGameResults()
-
-dbGlobal.add()
-
-// Проверка на фейк, дата реги < 14 дней
-
-vk.updates.use(async (ctx, next) => {
+  vk.updates.use(async (ctx, next) => {
 
     const userId = ctx?.fromId || ctx?.likerId || ctx?.senderId || ctx?.userId
 
@@ -32,16 +32,22 @@ vk.updates.use(async (ctx, next) => {
 
     const accessToBot = await getUserTimeReg(userId)
 
-    if (!accessToBot) return vkHelp.msg({
-        peer_id: userId,
-        message: '😓 Бот распознал ваш аккаунт как непригодный для игры (недавно созданный).\n\n✅ Чтобы пользоваться ботом, пожалуйста, зайдите со своего основного аккаунта'
-    })
+    if (!accessToBot) return msg(userId,'😓 Бот распознал ваш аккаунт как непригодный для игры (недавно созданный).\n\n✅ Чтобы пользоваться ботом, пожалуйста, зайдите со своего основного аккаунта')
 
     return next()
 })
 
-vk.updates.on(['message_new', 'wall_reply', 'like', 'wall_repost', 'group_leave', 'group_join', 'message_event', 'group_join', 'group_leave'], updatesController)
+vk.updates.on(['message_new', 'wall_reply', 'like', 'wall_repost', 'group_leave', 'group_join', 'message_event', 'group_join', 'group_leave', 'chat_invite_user'], updatesManager)
 
-vk.updates.start()
-    .catch(console.error)
-    .then(console.log('[ 🔔 ] Бот работает'))
+vk.updates.start().then(console.log('--> Бот запущен.'));
+
+/*
+vkDice.api.api.callback({ callback: "https://blackjack-server.online"}).then(console.log).catch(console.error);
+
+vkDiceCallback.on(event => plusCubics(event.from_user, event.amount))
+vkDiceCallback.start(443, '91.222.238.81').then(console.log('--> VKDice Callback работает')).catch(console.error);
+*/
+module.exports = {
+    botVk,
+    vkDice
+}

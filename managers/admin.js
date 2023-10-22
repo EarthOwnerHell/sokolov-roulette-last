@@ -1,34 +1,30 @@
-const adminMenu = require("../keyboards/inline/admin")
-const changeCourse = require("../pages/admin/changeCourse")
-const createBonuseForRepost = require("../pages/admin/createBonuseForRepost")
-const giveBalance = require("../pages/admin/giveBalance")
-const mailing = require("../pages/admin/mailing")
-const setBan = require("../pages/admin/setBan")
-const setHackPercent = require("../pages/admin/setHackPercent")
-const setPrivilege = require("../pages/admin/setPrivilege")
-const setRefBonuse = require("../pages/admin/setRefBonuse")
+const { adminMenu } = require("../keyboards/usual")
+const buyCourse = require("../pages/adminCommands/buyCourse")
+const giveBalance = require("../pages/adminCommands/giveBalance")
+const giveBan = require("../pages/adminCommands/giveBan")
+const giveUnban = require("../pages/adminCommands/giveUnban")
+const mailing = require("../pages/adminCommands/mailing")
+const newBonusePost = require("../pages/adminCommands/newBonusePost")
+const forRef = require("../pages/adminCommands/forRef")
 
-module.exports = async (msg) => {
-    
-    const commands = {
-        admin: () => { msg.send('На', { keyboard: adminMenu })},
+module.exports = adminManager = async (msg) => {
+
+    commands = {
+        admin: () =>
+            msg.send('Админ меню', {
+                keyboard: adminMenu,
+            }),
+        newBonus: () => newBonusePost(msg),
         mailing: () => mailing(msg),
-        changeBalance: () => giveBalance(msg),
-        changeCourses: () => changeCourse(msg),
-        createRepost: () => createBonuseForRepost(msg),
-        setPrivilege: () => setPrivilege(msg),
-        setBan: () => setBan(msg),
-        setHackPercent: () => setHackPercent(msg),
-        sendToHui: () => {
-            msg.send('ТЫ НЕ МОГ БЛЯТЬ РАНЬШЕ О СВОЕЙ КЛАВИАТУРЕ С ЧИСЛАМИ БЛЯТЬ ПРИДУМАТЬ, ТЕМА, НАХУЙ? НЕ В 2:40 НОЧИ')
-        },
-        setRefBonuse: () => setRefBonuse(msg),
-    }
+        giveBan: () => giveBan(msg),
+        giveBalance: () => giveBalance(msg),
+        courseBuy: () => buyCourse(msg),
+        forRef: () => forRef(msg),
+        giveUnban: () => giveUnban(msg)
+    };
 
     try {
-        const command = Object.values(msg.messagePayload || msg.eventPayload)[0]
-
-        commands[command]()
-    } catch (e) { console.log('[ ❗ ] Не нашли команду при нажатии') }
+        commands[msg.messagePayload.admin]()
+    } catch (e) { console.log(e) }
 
 }

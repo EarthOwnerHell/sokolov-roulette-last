@@ -1,37 +1,54 @@
-const Global = require("../models/Global");
+const Global = require("../models/global")
 
-const dbGlobal = {
-    get: () => Global.findOne({}).lean(),
-    add: async () => {
+const getGlobal = (name = 'Global') => Global.findOne({ name })
 
-        const global = await dbGlobal.get()
 
-        if (global) return;
+const autoCreateGlobal = async () => {
 
-        Global.create({});
+    const global = await getGlobal()
 
-    },
-    setDepCourse: (depCourse) => {
-        Global.updateOne({}, {
-            $set: {
-                'depCourse': depCourse
-            }
-        }).then()
-    },
-    setHeckPercent: (value) => {
-        Global.updateOne({}, {
-            $set: {
-                'hackPercent': value
-            }
-        }).then()
-    },
-    setRefBonuse: (value) => {
-        Global.updateOne({}, {
-            $set: {
-                'refBonuse': value
-            }
-        }).then()
-    },
+    if (global) return
+    
+    const newGlobal = new Global({ })
+
+    newGlobal.save().then(console.log)
+
 }
 
-module.exports = dbGlobal
+const editWinToday = (sum) => (
+    Global.findOneAndUpdate({
+        name: 'Global'
+    }, {
+        $inc: {
+            'winToday': sum
+        }
+    }).then()
+)
+
+const editLossToday = (sum) => (
+    Global.findOneAndUpdate({
+        name: 'Global',
+    }, {
+        $inc: {
+            'lossToday': sum
+        }
+    }).then()
+)
+
+const setForRef = (sum) => (
+    Global.findOneAndUpdate({
+        name: 'Global'
+    }, {
+        $set: {
+            'forRef': sum
+        }
+    }).then(console.log(`--> Сменили сумму за рефа на ${sum}`))
+)
+
+module.exports = {
+    getGlobal,
+    autoCreateGlobal,
+    setForRef,
+    editWinToday,
+    editLossToday
+};
