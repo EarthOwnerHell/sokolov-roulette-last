@@ -16,15 +16,6 @@ const numberWithSpace = (value) => new Intl.NumberFormat('ru-RU').format(value);
 
 const formClick = (id, text = id) => `@id${id}(${text})`;
 
-function getRandomInt(min, max) {
-    const range = max - min + 1;
-    const randomBytes = crypto.randomBytes(4);
-    const randomNumber = Math.floor(
-    (randomBytes.readUInt32LE() / 0xffffffff) * range
-    ) + min;
-    return randomNumber;
-    }
-
 function getLength(number){
     return number.toString().length
 }
@@ -133,7 +124,6 @@ module.exports = {
     getConvertedArray,
     getUserTimeReg,
     getLength,
-    getRandomInt,
     resetLossWin,
     commandArgs
 };

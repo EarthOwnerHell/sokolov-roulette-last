@@ -1,14 +1,12 @@
+const { createHash } = require("crypto");
 const bet = require("../../database/managers/bet");
 const game = require("../../database/managers/game");
 const { getUser } = require("../../database/managers/user");
-const { commandArgs } = require("../../settings/tools");
-const { vk, questionManager } = require("../../settings/vk");
 const { forBetText } = require("./gameTools");
-
-vk.updates.use(questionManager.middleware);
+const { randomDependingMode, makeArrayFromObject, totalValues } = require("./generateCombination");
+const { createSecretWord } = require("./hash");
 
 module.exports = makeBet = async (msg) => {
-    const { text, senderId } = msg
     const { balance, id, name } = await getUser(msg.senderId)
 
     let gameId = ''
@@ -25,23 +23,33 @@ module.exports = makeBet = async (msg) => {
 
     console.log(checkGame)
 
-    if (!checkGame) return newGame = await game.createGame({
-        peerId: peerId,
-        hash: 'лоооол', 
-        hashKey: "лооолkey", 
-        duration: 60, 
-        color: 'красное', 
-        number: 24, 
-        isEnded: false})
+    const gameMode = checkGame.game
 
+    if (!checkGame){
+        const valuesForHash = randomDependingMode[gameMode]()
+
+        const arrayValues = makeArrayFromObject(valuesForHash)
+
+        const hashData = totalValues(arrayValues)
+
+        let secretWord = createSecretWord(hashData, gameMode)
+
+        secretWord = hashData + secretWord
+
+        const hash = createHash(secretWord);
+
+        const newGame = await game.createGame({peerId,hash,hashKey:secretWord,gameMode: gameMode,endTime:60,results:valuesForHash,isEnded:false});
+
+        return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#35; Хэш игры: ${hash}`)
+    }
     if (checkGame) {
         gameId = await game.getGameId(peerId)
     }
-    let userBet = await questionManager.ask(msg, `${forBetText[betOn][0]} @id${id}(${name}), введите ставку на ${forBetText[betOn][1]}:`) //{keyboard: blackjackBet(balance)})
+
+
+    let userBet = await msg.question(`${forBetText[betOn][0]} @id${id}(${name}), введите ставку на ${forBetText[betOn][1]}:`) //{keyboard: blackjackBet(balance)})
 
     let betAmount = userBet.text//Number(userBet.text.replace(/к/g, "000").replace(/\s/g, ""));
-
-    await msg.send(betAmount)
 
     const newBet = await bet.createBet({
         gameId: gameId,

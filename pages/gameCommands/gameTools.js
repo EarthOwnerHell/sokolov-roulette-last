@@ -30,4 +30,12 @@ const forBetText = {
     'less': ['⬅', 'Меньше 7']
 }
 
-module.exports = { forBetText }
+let gameModel = {
+    'odd' : [],
+    'even' : [],
+    'more' : [],
+    'less' : [],
+    'seven' : []
+}
+
+module.exports = { forBetText, gameModel }

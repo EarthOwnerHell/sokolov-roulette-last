@@ -1,16 +1,13 @@
 const { model, Schema } = require('mongoose');
 
-const defaultValue = (type, value, index = false) => ({ type, default: value, index });
-
 const Game = model('Game', new Schema({
-    peerId: defaultValue(Number, 0),
-    hash: defaultValue(String, ''),
-    hashKey: defaultValue(String, ''),
-    gameMode: defaultValue(String, ''),
-    endTime: defaultValue(Number, 60),
-    color: defaultValue(String, ''),
-    number: defaultValue(Number, 0),
-    isEnded: defaultValue(Boolean, false)
-}))
+    peerId: { type: Number, default: 0 },
+    hash: { type: String, default: '' },
+    hashKey: { type: String, default: '' },
+    gameMode: { type: String, default: '' },
+    endTime: { type: Number, default: 60 },
+    results: { type: Object },
+    isEnded: { type: Boolean, default: false }
+    }))
 
 module.exports = Game

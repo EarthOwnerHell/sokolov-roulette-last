@@ -1,5 +1,5 @@
-const md5 = require('md5')
-const crypto = require('../../settings/tools')
+const md5 = require('md5');
+const crypto = require('crypto');
 
 const createSecretWord = (textForHashing, password) => {
     const algorithm = 'aes-192-cbc'
@@ -11,14 +11,24 @@ const createSecretWord = (textForHashing, password) => {
 
     const encryptedText = cipher.update(textForHashing, 'utf8', 'hex') + cipher.final('hex');
 
-    return `${textForHashing}|${encryptedText}`
+    return `${encryptedText}`
 }
+
+function getRandomValue(min, max) {
+    const range = max - min + 1;
+    const randomBytes = crypto.randomBytes(4);
+    const randomNumber = Math.floor(
+    (randomBytes.readUInt32LE() / 0xffffffff) * range
+    ) + min;
+    return randomNumber;
+    }
 
 const createHash = (secretWord) => md5(secretWord)
 
 module.exports = {
     createHash,
-    createSecretWord
+    createSecretWord,
+    getRandomValue
 }
 
 /*const secretWord = createSecretWord(`${winNumber}|${winColor}`, 'blackjack')

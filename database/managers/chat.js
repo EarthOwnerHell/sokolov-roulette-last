@@ -15,7 +15,7 @@ const chat = {
         peerId: peerId
     }, {
         $set: {
-            reposters: game
+            game: game
         }
     })
 }
