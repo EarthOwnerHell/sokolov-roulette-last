@@ -52,9 +52,7 @@ module.exports = bank = async (msg) => {
     let betsAmount = 0
     for (let i = 0; i < bets.length; i++){
         const userBet = bets[i]
-        console.log(userBet.betType)
         const name = await getVkNameById(userBet.userId)
-        console.log(userBet.userId)
         betsAmount += userBet.betAmount
         const forAddingSupplier = `   @id${userBet.userId}(${name}) → ${numberWithSpace((userBet.betAmount).toFixed(0))} Кубиков\n`
         gameModel[userBet.betType].push(forAddingSupplier)

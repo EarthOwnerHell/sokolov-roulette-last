@@ -5,6 +5,7 @@ const { getUser } = require("../../database/managers/user");
 const { forBetText } = require("./gameTools");
 const { randomDependingMode, makeArrayFromObject, totalValues } = require("./generateCombination");
 const { createSecretWord } = require("./hash");
+const chat = require("../../database/managers/chat");
 
 module.exports = makeBet = async (msg) => {
     const { balance, id, name } = await getUser(msg.senderId)
@@ -19,11 +20,11 @@ module.exports = makeBet = async (msg) => {
 
     const betOn = splitPayload[1]
 
+    const checkChat = await chat.getChat(peerId)
+
+    const gameMode = checkChat.game
+
     const checkGame = await game.getGame(peerId)
-
-    console.log(checkGame)
-
-    const gameMode = checkGame.game
 
     if (!checkGame){
         const valuesForHash = randomDependingMode[gameMode]()
@@ -40,7 +41,7 @@ module.exports = makeBet = async (msg) => {
 
         const newGame = await game.createGame({peerId,hash,hashKey:secretWord,gameMode: gameMode,endTime:60,results:valuesForHash,isEnded:false});
 
-        return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#35; Хэш игры: ${hash}`)
+        return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#10067; Хэш игры: ${hash}`)
     }
     if (checkGame) {
         gameId = await game.getGameId(peerId)

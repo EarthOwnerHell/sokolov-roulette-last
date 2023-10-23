@@ -71,4 +71,4 @@ let gameModelsForBank = {
     }
 }
 
-module.exports = { forBetText, gamesArraysDefault, gameModelsForBank }
+module.exports = { forBetText, gameModelsForBank }
