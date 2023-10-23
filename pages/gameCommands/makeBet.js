@@ -1,10 +1,9 @@
-const { createHash } = require("crypto");
 const bet = require("../../database/managers/bet");
 const game = require("../../database/managers/game");
 const { getUser } = require("../../database/managers/user");
 const { forBetText } = require("./gameTools");
 const { randomDependingMode, makeArrayFromObject, totalValues } = require("./generateCombination");
-const { createSecretWord } = require("./hash");
+const { createSecretWord, createHash } = require("./hash");
 const chat = require("../../database/managers/chat");
 
 module.exports = makeBet = async (msg) => {
@@ -40,13 +39,10 @@ module.exports = makeBet = async (msg) => {
         const hash = createHash(secretWord);
 
         const newGame = await game.createGame({peerId,hash,hashKey:secretWord,gameMode: gameMode,endTime:60,results:valuesForHash,isEnded:false});
-
-        return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#10067; Хэш игры: ${hash}`)
     }
     if (checkGame) {
         gameId = await game.getGameId(peerId)
     }
-
 
     let userBet = await msg.question(`${forBetText[betOn][0]} @id${id}(${name}), введите ставку на ${forBetText[betOn][1]}:`) //{keyboard: blackjackBet(balance)})
 
