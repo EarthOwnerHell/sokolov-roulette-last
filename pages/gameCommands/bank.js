@@ -59,9 +59,8 @@ module.exports = bank = async (msg) => {
     }
     gameModel = Object.entries(gameModel)
     for (let i = 0; i < gameModel.length; i++){
-        b = gameModel[i]
-        console.log(b)
-        b[1].length == 0 ? '' : suppliers += `\n\n${forBetText[b[0]][0]} Ставки на ${forBetText[b[0]][1]}:\n${b[1].join('')}`
+        elementInModel = gameModel[i]
+        elementInModel[1].length == 0 ? '' : suppliers += `\n\n${forBetText[elementInModel[0]][0]} Ставки на ${forBetText[elementInModel[0]][1]}:\n${elementInModel[1].join('')}`
     }
     gameModelsForBank[gameMode] = gameMode == 'l7m' ? {'odd' : [], 'even' : [],'more' : [], 'less' : [], 'seven' : []} : gameMode == 'wheel' ? {'odd' : [], 'even' : [],'1-12' : [], '13-24' : [], '25-36' : [],'red' : [], 'black' : [], 'zero' : []} : gameMode == 'dice' ? {'odd' : [], 'even' : [],'1-4' : [], '5-8' : [], '9-12' : [],'black' : [], 'white' : [], 'golden' : []} : gameMode == 'cube' ? {'odd' : [], 'even' : [], 'one' : [], 'two' : [], 'three' : [], 'four' : [], 'five' : [], 'six' : []} : {'2X' : [], '3X' : [], '5X' : [], '10X' : []} 
     const totalText = `🏦 Банк раунда: ${numberWithSpace(betsAmount.toFixed(0))}\n\n` + suppliers  + `\n\n&#10067; Хэш игры: ${checkGame.hash}` + `\n⌛ До конца раунда: ${checkGame.endTime} с`
