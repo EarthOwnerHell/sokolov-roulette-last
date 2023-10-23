@@ -1,23 +1,27 @@
-function totalValues(array){
-    let forHash = ''
-    array.forEach(element => {
-        forHash += `${element}|`
-    });
-    return forHash
-}
+a = 
+    {
+        more: '➡ Ставки на Больше 7:\n' +
+          '@id297789589(Крис) → 10 🎲\n' +
+          '\n' +
+          '@id297789589(Крис) → 1 000 🎲\n',
+        seven: '🔵 Ставки на 7:\n' +
+          '@id297789589(Крис) → 10 🎲\n' +
+          '\n' +
+          '@id297789589(Крис) → 40 🎲\n' +
+          '\n' +
+          '@id297789589(Крис) → 1 000 000 🎲\n',
+        less: '⬅ Ставки на Меньше 7:\n' +
+          '@id297789589(Крис) → 10 🎲\n' +
+          '\n' +
+          '@id297789589(Крис) → 100 🎲\n',
+        even: '⚡ Ставки на Чётное:\n' +
+          '@id297789589(Крис) → 100 🎲\n' +
+          '\n' +
+          '@id297789589(Крис) → 500 🎲\n',
+        odd: '⚡ Ставки на Нечётное:\n@id297789589(Крис) → 500 🎲\n'
+      }
+      
 
-function makeArrayFromObject(object){
-    const allValues = Object.entries(object);
-    let total = []
-    for (let i = 0; i < allValues.length; i++){
-        const value = allValues[i][1]
-        total.push(value)
-    }
-    return total
-}
 
-const arrayValues = makeArrayFromObject({'color': 'white', 'number': 26})
-        
-const hashData = totalValues(arrayValues)
-
-console.log(hashData)
+b = Object.entries(a)
+console.log(b[0][1])

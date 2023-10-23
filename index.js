@@ -13,8 +13,10 @@ const { vk } = require('./settings/vk');
 const { autoCreateGlobal } = require('./database/managers/global');
 const { resetLossWin, getUserTimeReg } = require('./settings/tools');
 const serverListen = require('./settings/server');
+const checkGameResults = require('./pages/gameCommands/getResults.js');
 
 //serverListen()
+checkGameResults()
 
 connectDb();
 

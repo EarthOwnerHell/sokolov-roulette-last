@@ -11,7 +11,7 @@ const bet = {
             betType,
             betAmount
         })
-        bet.save().then(console.log(`Новая ставка!\n---\nПоставил: https://vk.com/id${userId}\n---\nСтавка на: ${betType}\n---\nСумма: ${numberWithSpace(betAmount)} Кубиков\n---\nID игры: ${gameId}`))
+        bet.save().then(console.log(`Новая ставка!\n---\nПоставил: https://vk.com/id${userId}\n---\nСтавка на: ${betType}\n---\nСумма: ${numberWithSpace(betAmount)} 🎲\n---\nID игры: ${gameId}`))
     },
     getBets: (gameId) =>  Bets.find({ gameId: gameId }).lean()
 }
