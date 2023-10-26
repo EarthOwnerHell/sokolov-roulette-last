@@ -64,9 +64,16 @@ module.exports = bank = async (msg) => {
         betsTexts[betType] += `    @id${userId}(${name}) → ${numberWithSpace((betAmount).toFixed(0))} 🎲\n`
         betsAmount += betAmount
     }
+<<<<<<< HEAD
     const betsTextsArray = Object.entries(betsTexts)
     for (let i = 0; i < betsTextsArray.length; i++){
         suppliersText += betsTextsArray[i][1]
+=======
+    gameModel = Object.entries(gameModel)
+    for (let i = 0; i < gameModel.length; i++){
+        elementInModel = gameModel[i]
+        elementInModel[1].length == 0 ? '' : suppliers += `\n\n${forBetText[elementInModel[0]][0]} Ставки на ${forBetText[elementInModel[0]][1]}:\n${elementInModel[1].join('')}`
+>>>>>>> cc5aa2aa8cbe00cb62c8327f0ccdeae2b78f8645
     }
     const totalText = `🏦 Банк раунда: ${numberWithSpace(betsAmount.toFixed(0))} 🎲\n\n` + suppliersText  + `\n\n&#10067; Хэш игры: ${checkGame.hash}` + `\n⌛ До конца раунда: ${convertMsToSec(checkGame.endTime - Date.now())} с`
     return msg.send(totalText)
