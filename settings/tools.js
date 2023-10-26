@@ -113,6 +113,12 @@ const getUserTimeReg = async (id) => {
     return Date.now() - time >= 86_400_000 * 14 && Date.now() - time > 0 ? 1 : 0
 }
 
+const convertMsToSec = (miliseconds) => {
+    const total_seconds = parseInt(Math.floor(miliseconds / 1000));
+
+    return parseInt(total_seconds % 60);
+}
+
 
 
 module.exports = {
@@ -125,5 +131,6 @@ module.exports = {
     getUserTimeReg,
     getLength,
     resetLossWin,
-    commandArgs
+    commandArgs,
+    convertMsToSec
 };

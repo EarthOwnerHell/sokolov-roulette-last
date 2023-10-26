@@ -18,6 +18,7 @@ const game = {
 
             game.save().then(console.log(`--> Новая игра!`))
         },
+    changeGameStatus: (gameId) => Game.findByIdAndUpdate(gameId, { isEnded: true }, { new: true }).lean().exec(),
 
 }
 
