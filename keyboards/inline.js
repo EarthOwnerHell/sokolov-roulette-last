@@ -38,6 +38,18 @@ const inlineProfileBoard = Keyboard.keyboard([
         ]
     ]).inline()
 
+const chatSettingsBoard = Keyboard.keyboard([
+    [
+        textButton("⌛ Изменить время раунда", "changeEndTime", colors.blue)
+    ],
+    [
+        textButton('🎰 Сменить игровой режим', 'changeGameMode', colors.blue)
+    ],
+    [
+        textButton('👨‍💻 Добавить админа', 'addChatAdmin', colors.blue)
+    ]
+]).inline()
+
     const chooseGameInGroup = Keyboard.keyboard([
         [
             textButton('🎲 Cube ', 'set_game:cube', colors.green),
@@ -92,5 +104,6 @@ module.exports = {
     topsBoard,
     reviewMenu,
     whatIsButton,
-    chooseGameInGroup
+    chooseGameInGroup,
+    chatSettingsBoard
 };

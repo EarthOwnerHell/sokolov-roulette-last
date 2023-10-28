@@ -5,7 +5,7 @@ const Game = model('Game', new Schema({
     hash: { type: String, default: '' },
     hashKey: { type: String, default: '' },
     gameMode: { type: String, default: '' },
-    endTime: { type: Number, default: Date.now() + 30_000 },
+    endTime: { type: Number, default: 30_000 },
     results: { type: Object },
     isEnded: { type: Boolean, default: false }
     }))

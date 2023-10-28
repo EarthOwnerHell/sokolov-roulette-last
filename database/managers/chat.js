@@ -17,7 +17,23 @@ const chat = {
         $set: {
             game: game
         }
-    })
+    }),
+    setEndTime: (peerId, endTime) => Chat.updateOne({
+        peerId: peerId
+    }, {
+        $set: {
+            endTime: endTime
+        }
+    }),
+    addAdmin: (peerId, userId) => {
+        Chat.updateOne({
+            peerId
+        }, {
+            $push: {
+                admins: userId
+            }
+        }).then(console.log('Новый админ!'))
+    }
 }
 
 module.exports = chat

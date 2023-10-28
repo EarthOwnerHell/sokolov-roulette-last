@@ -1,4 +1,7 @@
+const addAdm = require("../pages/gameCommands/addAdm")
 const bank = require("../pages/gameCommands/bank")
+const changeEndTime = require("../pages/gameCommands/changeEndTime")
+const changeGameMode = require("../pages/gameCommands/changeGameMode")
 const makeBet = require("../pages/gameCommands/makeBet")
 const setGame = require("../pages/gameCommands/setGame")
 
@@ -6,7 +9,10 @@ module.exports = chatManager = async (msg) => {
     commands = {
         'set_game': () => setGame(msg),
         'make_bet': () => makeBet(msg),
-        'bank': () => bank(msg)
+        'bank': () => bank(msg),
+        'changeEndTime': () => changeEndTime(msg),
+        'changeGameMode': () => changeGameMode(msg),
+        'addChatAdmin': () => addAdm(msg)
     }
     try {
         if (msg.messagePayload.command.includes(':')){

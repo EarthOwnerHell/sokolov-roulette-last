@@ -13,15 +13,17 @@ module.exports = bank = async (msg) => {
 
     const peerId = msg.peerId
 
+    const thisChat = await chat.getChat(peerId)
+
+    const endTimeChat = thisChat.endTime
+
+    const gameMode = thisChat.game
+
     const checkGame = await game.getGame(peerId)
 
     let gameId = ''
 
     if (!checkGame){
-        const checkChat = await chat.getChat(peerId)
-
-        const gameMode = checkChat.game
-
         const valuesForHash = randomDependingMode[gameMode]()
 
         const arrayValues = makeArrayFromObject(valuesForHash)
@@ -34,18 +36,21 @@ module.exports = bank = async (msg) => {
 
         const hash = createHash(secretWord);
 
-        const newGame = await game.createGame({peerId,hash,hashKey:secretWord,gameMode: gameMode,endTime:Date.now() + 30_000,results:valuesForHash,isEnded:false});
+        const newGame = await game.createGame({peerId,hash,hashKey:secretWord,gameMode: gameMode, endTime: endTimeChat, results:valuesForHash, isEnded:false});
 
-        return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#10067; Хэш игры: ${hash}`)
+        return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#10067; Хэш игры: ${hash}\n⌛ До конца раунда: ${convertMsToSec((Date.now() + endTimeChat) - (Date.now()))} с`)
     }
+
     if (checkGame) {
         gameId = await game.getGameId(peerId)
     }
 
+    const endTime = checkGame.endTime
+
     const bets = await bet.getBets(gameId)
     
     if (bets.length == 0){
-        return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#10067; Хэш игры: ${checkGame.hash}`)
+        return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#10067; Хэш игры: ${checkGame.hash} \n⌛ До конца раунда: ${convertMsToSec(endTime)} с`)
     }
     let suppliersText = ''
     let betsAmount = 0
@@ -64,17 +69,12 @@ module.exports = bank = async (msg) => {
         betsTexts[betType] += `    @id${userId}(${name}) → ${numberWithSpace((betAmount).toFixed(0))} 🎲\n`
         betsAmount += betAmount
     }
-<<<<<<< HEAD
     const betsTextsArray = Object.entries(betsTexts)
     for (let i = 0; i < betsTextsArray.length; i++){
         suppliersText += betsTextsArray[i][1]
-=======
-    gameModel = Object.entries(gameModel)
-    for (let i = 0; i < gameModel.length; i++){
-        elementInModel = gameModel[i]
-        elementInModel[1].length == 0 ? '' : suppliers += `\n\n${forBetText[elementInModel[0]][0]} Ставки на ${forBetText[elementInModel[0]][1]}:\n${elementInModel[1].join('')}`
->>>>>>> cc5aa2aa8cbe00cb62c8327f0ccdeae2b78f8645
     }
-    const totalText = `🏦 Банк раунда: ${numberWithSpace(betsAmount.toFixed(0))} 🎲\n\n` + suppliersText  + `\n\n&#10067; Хэш игры: ${checkGame.hash}` + `\n⌛ До конца раунда: ${convertMsToSec(checkGame.endTime - Date.now())} с`
+
+    const totalText = `🏦 Банк раунда: ${numberWithSpace(betsAmount.toFixed(0))} 🎲\n\n` + suppliersText  + `\n\n&#10067; Хэш игры: ${checkGame.hash}` + `\n⌛ До конца раунда: ${convertMsToSec(endTime - Date.now())} с`
+
     return msg.send(totalText)
 }

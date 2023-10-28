@@ -5,14 +5,18 @@ const { gamePayloadsTranslate } = require("./gameTools");
 const { randomDependingMode, makeArrayFromObject, totalValues } = require("./generateCombination");
 const { createSecretWord, createHash } = require("./hash");
 const chat = require("../../database/managers/chat");
-const { numberWithSpace } = require("../../settings/tools");
+const { numberWithSpace, convertMsToSec } = require("../../settings/tools");
 
 module.exports = makeBet = async (msg) => {
     const { balance, id, name } = await getUser(msg.senderId)
 
-    let gameId = ''
-
     const peerId = msg.peerId
+
+    const thisChat = await chat.getChat(peerId)
+
+    const endTimeChat = thisChat.endTime
+
+    let gameId = ''
 
     let payload = msg.messagePayload.command
 
@@ -23,9 +27,7 @@ module.exports = makeBet = async (msg) => {
     const checkGame = await game.getGame(peerId)
 
     if (!checkGame){
-        const checkChat = await chat.getChat(peerId)
-
-        const gameMode = checkChat.game
+        const gameMode = thisChat.game
 
         const valuesForHash = randomDependingMode[gameMode]()
 
@@ -39,12 +41,11 @@ module.exports = makeBet = async (msg) => {
 
         const hash = createHash(secretWord);
 
-        const newGame = await game.createGame({peerId,hash,hashKey:secretWord,gameMode: gameMode,endTime:60,results:valuesForHash,isEnded:false});
+        const newGame = await game.createGame({peerId,hash,hashKey:secretWord,gameMode: gameMode, endTime: endTimeChat, results:valuesForHash, isEnded:false});
     }
     if (checkGame) {
         gameId = await game.getGameId(peerId)
     }
-
     let userBet = await msg.question(`${gamePayloadsTranslate[betOn][0]} @id${id}(${name}), введите ставку на ${gamePayloadsTranslate[betOn][1]}:`) //{keyboard: blackjackBet(balance)})
 
     if (!balance) return msg.send(`❗ У вас нет 🎲 на балансе.`)
@@ -66,5 +67,7 @@ module.exports = makeBet = async (msg) => {
         betAmount: Number(finalBet)
     })
     
+    const startGame = await game.startEndTime(gameId, endTimeChat)
+
     return msg.send(`✅ @id${id}(${name}), успешная ставка ${numberWithSpace(finalBet.toFixed(0))} 🎲 на ${gamePayloadsTranslate[betOn][1]}!`)
 }

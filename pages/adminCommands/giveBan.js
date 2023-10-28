@@ -11,8 +11,7 @@ module.exports = giveBan = async (msg) => {
     const userId = await getId(forBan.text)
 
     if (!userId.id || userId.type !== 'user') return msg.send('Ошибка, проверь вводимые данные')
-
-
+    
     msg.send(`Успешно забанили ${formClick(userId.id, 'пользователя')}`)
     
     setBan(userId.id)

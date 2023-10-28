@@ -119,8 +119,6 @@ const convertMsToSec = (miliseconds) => {
     return parseInt(total_seconds % 60);
 }
 
-
-
 module.exports = {
     deckOfNum,
     crypto,

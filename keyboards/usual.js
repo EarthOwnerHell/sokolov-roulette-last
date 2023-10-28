@@ -131,10 +131,6 @@ const l7mBoard = (
             textButton('Меньше', 'make_bet:less', colors.green),
         ],
         [
-            textButton('Чётное', 'make_bet:even', colors.red),
-            textButton('Нечётное', 'make_bet:odd', colors.red)
-        ],
-        [
             urlButton('🔗 Пополнить', 'https://vk.com/sokolov_roulette')
         ]
     ])
