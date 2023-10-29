@@ -1,4 +1,4 @@
-const Chat = require("../models/chat")
+const Chat = require("../models/Chat")
 
 const chat = {
     getChat: (peerId) => Chat.findOne({ peerId }).lean(),
