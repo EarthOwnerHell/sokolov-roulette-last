@@ -44,7 +44,6 @@ module.exports = async (msg) => {
             const { items } = await vk.api.messages.getConversationMembers({
             peer_id: groupId,
             });
-            console.log(items)
             const bot = items.find((item) => item.member_id === -groupId);
             if (!bot) return
                 if (bot.is_admin) {

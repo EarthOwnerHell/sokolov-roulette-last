@@ -9,21 +9,21 @@ const whatIsButton =  Keyboard.keyboard([
     ]
 ]).inline()
 
-/*const blackjackBet = (balance) => (
+const betKeyboard = (balance) => (
     Keyboard.keyboard([
     [
-        textButton(`${numberWithSpace((balance / 10).toFixed(0))}`, 'firstVariant', green),
+        textButton(`${numberWithSpace((balance / 10).toFixed(0))}`, 'firstVariant', colors.green),
     ],
     [
-        textButton(`${numberWithSpace((balance / 4).toFixed(0))}`, 'secondVariant', green)
+        textButton(`${numberWithSpace((balance / 4).toFixed(0))}`, 'secondVariant', colors.green)
     ],
     [
-        textButton(`${numberWithSpace((balance / 2).toFixed(0))}`, "thitdVariant", green)
+        textButton(`${numberWithSpace((balance / 2).toFixed(0))}`, "thitdVariant", colors.green)
     ],
     [
-        textButton(`${numberWithSpace((balance).toFixed(0))}`, 'fourthVariant', red),
+        textButton(`${numberWithSpace((balance).toFixed(0))}`, 'fourthVariant', colors.red),
     ],
-]).inline())*/
+]).inline())
 
 const inlineProfileBoard = Keyboard.keyboard([
         [
@@ -110,6 +110,7 @@ const reviewMenu = Keyboard.keyboard([
 
 module.exports = {
     inlineProfileBoard,
+    betKeyboard,
     topsBoard,
     reviewMenu,
     whatIsButton,

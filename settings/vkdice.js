@@ -15,7 +15,7 @@ function whatReserve(){
 }
 
 function plusCubics(id, sum){
-    vkMsg(id, `✅ Баланс пополненен на ${numberWithSpace(sum)} 🎲\n🍀 Приятной игры!`)
+    msg.send(id, `✅ Баланс пополненен на ${numberWithSpace(sum)} 🎲\n🍀 Приятной игры!`)
     return plusBalanceUser(id, sum)
 }
 

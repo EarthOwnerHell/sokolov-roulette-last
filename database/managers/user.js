@@ -1,9 +1,11 @@
-const { vkMsg } = require('../../settings/vk')
 const { formClick, numberWithSpace } = require('../../settings/tools')
 const { Users } = require('../models/user')
 const { getGlobal } = require('./global')
 
-const getUser = (id) => Users.findOne({ id })
+const getUser = async(id) => {
+    const user = await Users.findOne({ id })
+    return user
+}
 const getUserByNumber = (phone) => Users.findOne({ phone })
 
 const plusBalanceUser = (id, sum) => (
@@ -74,7 +76,7 @@ const minusBalanceUser = (id, sum) => (
         $inc: {
             'balance': -sum
         }
-    }).then()
+    }).then(console.log(sum))
 
 )
 
@@ -128,8 +130,8 @@ const createUser = async (props) => {
             }
         }).then(console.log)
 
-        vkMsg(id, `💸 Вы получили 250 000 🎲 за переход по реф.ссылке!`)
-        vkMsg(forRefferer.id, `🚀 ${formClick(id, 'Пользователь')} перешёл по вашей ссылке!\n🎁 На баланс начислено ${forRef} 🎲\n\n🍀Удачной игры!`)
+        msg.send(id, `💸 Вы получили 250 000 🎲 за переход по реф.ссылке!`)
+        msg.send(forRefferer.id, `🚀 ${formClick(id, 'Пользователь')} перешёл по вашей ссылке!\n🎁 На баланс начислено ${forRef} 🎲\n\n🍀Удачной игры!`)
 
     }
 

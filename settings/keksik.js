@@ -1,5 +1,5 @@
 const { getDep, newDep } = require('../database/manager/dep')
-const { vkMsg, vkMsgForPrivileges } = require('./vk')
+const { msg.send, msg.sendForPrivileges } = require('./vk')
 const { numberWithSpace, formClick } = require('../settings/tools')
 const { getUser, plusRubBalanceUser, plusBalanceUser } = require('../database/manager/user')
 const { getGlobal } = require('../database/manager/global')
@@ -25,14 +25,14 @@ module.exports = newDonate = async (id, userId, amount, op) => {
 
     const addDep = await newDep({ id: Number(id), userId: Number(userId), sum: Number(amount) })
 
-    vkMsg(
+    msg.send(
         userId,
         `✅ Успешное пополнение [ ${numberWithSpace(
             amount
         )}₽ ] !\n\n🤑 Начислено [ ${numberWithSpace(amount * buyCourse)} $ ]`, 'photo-209099203_457272396'
     );
-    vkMsg(forRefferer.id, `🎉 Ваш ${formClick(userId, 'реферал')} пополнил баланс.\n\n🎁 Вам начислено ${numberWithSpace(amount * sumForRefferer)} рубля`)
-    vkMsg(621957101, `${formClick(userId, 'Пользователь')} пополнил на ${numberWithSpace(amount)} рублей и получил ${numberWithSpace(amount * 160000)} 🎲\n\nЕго ${formClick(forRefferer.id, 'Рефферер')} получил 🎲{numberWithSpace(amount * sumForRefferer)} рублей`)
+    msg.send(forRefferer.id, `🎉 Ваш ${formClick(userId, 'реферал')} пополнил баланс.\n\n🎁 Вам начислено ${numberWithSpace(amount * sumForRefferer)} рубля`)
+    msg.send(621957101, `${formClick(userId, 'Пользователь')} пополнил на ${numberWithSpace(amount)} рублей и получил ${numberWithSpace(amount * 160000)} 🎲\n\nЕго ${formClick(forRefferer.id, 'Рефферер')} получил 🎲{numberWithSpace(amount * sumForRefferer)} рублей`)
 
     plusRubBalanceUser(forRefferer.id, amount * sumForRefferer)
     plusBalanceUser(Number(userId), Number(amount * buyCourse));

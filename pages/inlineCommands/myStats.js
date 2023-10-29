@@ -1,7 +1,8 @@
+const { getUser } = require('../../database/managers/user')
 const { numberWithSpace } = require('../../settings/tools')
 
 module.exports = ref = async (msg) =>  {
-    const { winCubes, withdrawnCubes, deppedCubes } = msg.user
+    const { winCubes, withdrawnCubes, deppedCubes } = await getUser(msg.senderId)
     return msg.send(
 `
 🍀 Вы выиграли за всё время: ${numberWithSpace(winCubes.toFixed(0))}

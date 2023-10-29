@@ -7,7 +7,8 @@ const Game = model('Game', new Schema({
     gameMode: { type: String, default: '' },
     endTime: { type: Number, default: 30_000 },
     results: { type: Object },
-    isEnded: { type: Boolean, default: false }
+    isEnded: { type: Boolean, default: false },
+    isStarted: { type: Boolean, default: false }
     }))
 
 module.exports = Game

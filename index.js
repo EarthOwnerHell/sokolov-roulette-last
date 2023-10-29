@@ -4,16 +4,11 @@ const connectDb = require('./database/connect');
 const { token, groupId } = require('./settings/config.json')
 const { vkDice, vkDiceCallback } = require('./settings/vkdice')
 const schedule = require('node-schedule');
-const botVk = new VK({
-    token: token,
-    pollingGroupId: groupId
-  })
 const updatesManager = require('./updatesController/updatesManager')
 const { vk } = require('./settings/vk');
 const { autoCreateGlobal } = require('./database/managers/global');
 const { resetLossWin, getUserTimeReg } = require('./settings/tools');
 const serverListen = require('./settings/server');
-const game = require('./database/managers/game');
 const checkResults = require('./pages/gameCommands/getResults.js');
 
 //serverListen()
@@ -50,6 +45,5 @@ vkDiceCallback.on(event => plusCubics(event.from_user, event.amount))
 vkDiceCallback.start(443, '91.222.238.81').then(console.log('--> VKDice Callback работает')).catch(console.error);
 */
 module.exports = {
-    botVk,
     vkDice
 }

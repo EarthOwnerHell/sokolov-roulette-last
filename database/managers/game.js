@@ -5,7 +5,7 @@ const game = {
     getGames: () => Game.find({ isEnded: false }).lean(),
     getGameId: (peerId) => Game.findOne({ peerId, isEnded: false }).lean().then(game => game._id.toHexString()),
     createGame: async (props) => {
-            const { peerId, hash, hashKey, gameMode, endTime, results, isEnded } = props
+            const { peerId, hash, hashKey, gameMode, endTime, results, isEnded, isStarted } = props
             const game = new Game({
                 peerId,
                 hash,
@@ -13,7 +13,8 @@ const game = {
                 gameMode,
                 endTime,
                 results,
-                isEnded
+                isEnded,
+                isStarted
             })
 
             try {
@@ -26,8 +27,9 @@ const game = {
                 throw err;
               }
         },
-    startEndTime: (gameId, endTime) => Game.findByIdAndUpdate(gameId, { endTime: Date.now() + endTime }, {new: true}).lean().exec(),
+    startEndTime: (gameId, endTime) => Game.findByIdAndUpdate(gameId, { $set: { endTime: endTime } }, { new: true }).lean().exec(),
     changeGameStatus: (gameId) => Game.findByIdAndUpdate(gameId, { isEnded: true }, { new: true }).lean().exec(),
+    changeStartStatus: (gameId) => Game.findByIdAndUpdate(gameId, { isStarted: true }, { new: true }).lean().exec(),
     deleteGame: (gameId) => Game.findByIdAndDelete(gameId).lean().exec(),
 
 }

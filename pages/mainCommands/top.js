@@ -1,5 +1,4 @@
 const { getTop } = require("../../database/manager/user");
-const { vkMsg } = require("../../settings/vk");
 const { formClick, numberWithSpace } = require("../../settings/tools");
 
 

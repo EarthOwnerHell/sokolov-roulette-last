@@ -41,7 +41,7 @@ module.exports = bank = async (msg) => {
 
         const hash = createHash(secretWord);
 
-        const newGame = await game.createGame({peerId,hash,hashKey:secretWord,gameMode: gameMode, endTime: endTimeChat, results:valuesForHash, isEnded:false});
+        const newGame = await game.createGame({peerId,hash,hashKey:secretWord,gameMode: gameMode, endTime: endTimeChat, results:valuesForHash, isEnded:false, isStarted: false});
 
         return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#10067; Хэш игры: ${hash}\n⌛ До конца раунда: ${convertMsToSec(endTimeChat / 1000)}`)
     }
@@ -66,19 +66,20 @@ module.exports = bank = async (msg) => {
         const betType = bets[i].betType
         const betAmount = bets[i].betAmount
         const userId = bets[i].userId
+        const userName = await getVkNameById(userId)
         let betText = betsTexts[betType]
         if (!betText) {
             betText = gamePayloadsTranslate[betType][2]
             betsTexts[betType] = betText
         }
-        betsTexts[betType] += `    @id${userId}(${name}) → ${numberWithSpace((betAmount).toFixed(0))} 🎲\n`
+        betsTexts[betType] += `    @id${userId}(${userName}) → ${numberWithSpace((betAmount).toFixed(0))} 🎲\n`
         betsAmount += betAmount
     }
     const betsTextsArray = Object.entries(betsTexts)
     for (let i = 0; i < betsTextsArray.length; i++){
         suppliersText += betsTextsArray[i][1]
     }
-
+    console.log(betsTexts)
     const totalText = `🏦 Банк раунда: ${numberWithSpace(betsAmount.toFixed(0))} 🎲\n\n` + suppliersText  + `\n\n&#10067; Хэш игры: ${checkGame.hash}` + `\n⌛ До конца раунда: ${convertMsToSec((endTime - Date.now()) / 1000)}`
 
     return msg.send(totalText)

@@ -1,4 +1,4 @@
-const { vk, api, vkMsg} = require('./vk');
+const { vk, api, vkHelp } = require('./vk');
 const { getRandomId } = require('vk-io')
 const axios = require('axios')
 const { plusBalanceUser } = require('../database/managers/user')
@@ -27,7 +27,7 @@ const commandArgs = (msg) => {
 
 const resetLossWin = async() => {
     const { winToday, lossToday } = await getGlobal()
-    vkMsg(297789589, `ℹ🧑‍💻Итоги сегодняшнего дня:\n\n🟥 Выиграно: ${numberWithSpace(winToday)}\n🟩 Проиграно: ${numberWithSpace(lossToday)}\n\n💸 Прибыль: ${numberWithSpace(lossToday - winToday)}`)
+    vkHelp({peer_id: 297789589, message: `ℹ🧑‍💻Итоги сегодняшнего дня:\n\n🟥 Выиграно: ${numberWithSpace(winToday)}\n🟩 Проиграно: ${numberWithSpace(lossToday)}\n\n💸 Прибыль: ${numberWithSpace(lossToday - winToday)}`})
     editWinToday(-winToday)
     editLossToday(-lossToday)
     return
