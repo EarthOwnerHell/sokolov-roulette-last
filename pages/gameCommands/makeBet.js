@@ -1,6 +1,6 @@
 const bet = require("../../database/managers/bet");
 const game = require("../../database/managers/game");
-const { getUser } = require("../../database/managers/user");
+const { getUser, minusBalanceUser } = require("../../database/managers/user");
 const { gamePayloadsTranslate } = require("./gameTools");
 const { randomDependingMode, makeArrayFromObject, totalValues } = require("./generateCombination");
 const { createSecretWord, createHash } = require("./hash");
@@ -42,6 +42,8 @@ module.exports = makeBet = async (msg) => {
         const hash = createHash(secretWord);
 
         const newGame = await game.createGame({peerId,hash,hashKey:secretWord,gameMode: gameMode, endTime: endTimeChat, results:valuesForHash, isEnded:false});
+
+        gameId = newGame._id
     }
     if (checkGame) {
         gameId = await game.getGameId(peerId)
@@ -68,6 +70,10 @@ module.exports = makeBet = async (msg) => {
     })
     
     const startGame = await game.startEndTime(gameId, endTimeChat)
+
+    console.log(startGame)
+
+    const minusBalance = await minusBalanceUser(id, Number(finalBet))
 
     return msg.send(`✅ @id${id}(${name}), успешная ставка ${numberWithSpace(finalBet.toFixed(0))} 🎲 на ${gamePayloadsTranslate[betOn][1]}!`)
 }

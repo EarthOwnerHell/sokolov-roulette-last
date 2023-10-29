@@ -1,6 +1,7 @@
 const bet = require("../../database/managers/bet");
 const game = require("../../database/managers/game");
 const { plusBalanceUser } = require("../../database/managers/user");
+const { honestyCheck } = require("../../keyboards/inline");
 const { numberWithSpace } = require("../../settings/tools");
 const { getVkNameById, vkHelp } = require("../../settings/vk");
 const { gamePayloadsTranslate } = require("./gameTools");
@@ -8,7 +9,7 @@ const { gamePayloadsTranslate } = require("./gameTools");
 const getWinnersAndLoosers = {
     'l7m' : async (data) => {
         const { results: { number }, peerId } = data
-        let textToReturn = ''
+        let textToReturn = number != 7 ? `🎰 Выпало число ${number}!\n\n` : `🎰 Выпало число ${number} 🔵!\n\n`
         const gameId = await game.getGameId(peerId)
         const bets = await bet.getBets(gameId)
         for (let i = 0; i < bets.length; i++){
@@ -21,15 +22,13 @@ const getWinnersAndLoosers = {
                 textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace((userBetAmount * gamePayloadsTranslate[userBetType][3]).toFixed(0))}) 🎲\n`
                 plusBalanceUser(userId, (userBetAmount * gamePayloadsTranslate[userBetType][3]).toFixed(0))
             }
-            else if (userBetType == 'more' || userBetType == 'seven' && number < 7) textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n\n`
-            else if (userBetType == 'less' || userBetType == 'seven' && number > 7) textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n\n`
-
+           else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
         }
         return textToReturn
     },
     'wheel' : async(data) => {
         const { results: { number, color }, peerId } = data
-        let textToReturn = ''
+        let textToReturn = `🎰 Выпало число ${number} ${gamePayloadsTranslate[color][0]}!\n\n`
         const gameId = await game.getGameId(peerId)
         const bets = await bet.getBets(gameId)
         for (let i = 0; i < bets.length; i++){
@@ -42,13 +41,13 @@ const getWinnersAndLoosers = {
                 textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace((userBetAmount * gamePayloadsTranslate[userBetType][3]).toFixed(0))}) 🎲\n`
                 plusBalanceUser(userId, (userBetAmount * gamePayloadsTranslate[userBetType][3]).toFixed(0))
             }
-            else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n\n`
+            else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
         }
         return textToReturn
     },
     'cube': async(data) => {
         const { results: { number }, peerId } = data
-        let textToReturn = ''
+        let textToReturn = `🎰 Выпало число ${number}!\n\n`
         const gameId = await game.getGameId(peerId)
         const bets = await bet.getBets(gameId)
         for (let i = 0; i < bets.length; i++){
@@ -61,13 +60,13 @@ const getWinnersAndLoosers = {
                 textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace((userBetAmount * gamePayloadsTranslate[userBetType][3]).toFixed(0))}) 🎲\n`
                 plusBalanceUser(userId, (userBetAmount * gamePayloadsTranslate[userBetType][3]).toFixed(0))
             }
-            else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n\n`
+            else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
         }
         return textToReturn
     },
     'dice': async(data) => {
         const { results: { number, color }, peerId } = data
-        let textToReturn = ''
+        let textToReturn = `🎰 Выпало число ${number} ${gamePayloadsTranslate[color][0]}!\n\n`
         const gameId = await game.getGameId(peerId)
         const bets = await bet.getBets(gameId)
         for (let i = 0; i < bets.length; i++){
@@ -80,13 +79,13 @@ const getWinnersAndLoosers = {
                 textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace((userBetAmount * gamePayloadsTranslate[userBetType][3]).toFixed(0))}) 🎲\n`
                 plusBalanceUser(userId, (userBetAmount * gamePayloadsTranslate[userBetType][3]).toFixed(0))
             }
-            else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n\n`
+            else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
         }
         return textToReturn
     },
     'double': async(data) => {
         const { results: { coefficent }, peerId } = data
-        let textToReturn = ''
+        let textToReturn = `🎰 Выпал коэффицент ${coefficent} ${gamePayloadsTranslate[coefficent][0]}!\n\n`
         const gameId = await game.getGameId(peerId)
         const bets = await bet.getBets(gameId)
         for (let i = 0; i < bets.length; i++){
@@ -99,7 +98,7 @@ const getWinnersAndLoosers = {
                 textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace((userBetAmount * gamePayloadsTranslate[userBetType][3]).toFixed(0))}) 🎲\n`
                 plusBalanceUser(userId, (userBetAmount * gamePayloadsTranslate[userBetType][3]).toFixed(0))
             }
-            else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n\n`
+            else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
         }
         return textToReturn
     }
@@ -115,19 +114,17 @@ function checkResults() {
         gameId = await game.getGameId(round.peerId)
         const bets = await bet.getBets(gameId)
         if (bets.length == 0) continue
-        console.log(thisGame.endTime)
         if (thisGame?.endTime && Date.now() - thisGame?.endTime >= 0) {
-        const { peerId, results: { number }, hash, hashKey, gameMode } = thisGame;
-        const ggg = getWinnersAndLoosers[gameMode]
-        const textWithPlayers = await ggg(thisGame);
+        const { peerId, hash, hashKey, gameMode } = thisGame;
+        const getRoundInfo = getWinnersAndLoosers[gameMode]
+        const finalText = await getRoundInfo(thisGame);
 
-        const finalText = `🔥 Раунд подошёл к концу!\nВыпало: ${number}\n\n` + textWithPlayers;
-    
         const changeStatus = await game.changeGameStatus(gameId)
 
         vkHelp({
             peer_id: peerId,
-            message: finalText,
+            message: finalText + `\n\n❓ Хэш игры: ${hash}\n🔑 Ключ к хэшу: ${hashKey}`,
+            keyboard: honestyCheck
         });
 
         }

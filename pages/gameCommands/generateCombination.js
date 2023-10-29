@@ -2,9 +2,9 @@ const { getRandomValue } = require("./hash")
 
 const randomDependingMode = {
     'wheel': function() {
-    let color = getRandomValue(0, 1)
     let number = getRandomValue(0, 36)
-    color == 0 ? color = 'red' : color = 'black'
+    let color = getRandomValue(0, 1)
+    color == 0 && number != 0 ? color = 'red' : color == 1 && number != 0 ? color = 'black' : color = 'zero'
     return { 'color': color, 'number': number }
     },
     'cube' : function(){
@@ -13,7 +13,7 @@ const randomDependingMode = {
     },
     'double': function() {
     let coefficent = getRandomValue(1, 4)
-    coefficent == 1 ? coefficent = '2X' : coefficent == 2 ? '3X' : coefficent == 3 ? '5X' : '10X'
+    coefficent == 1 ? coefficent = '2X' : coefficent == 2 ? coefficent = '3X' : coefficent == 3 ? coefficent = '5X' : coefficent = '10X'
     return { 'coefficent' : coefficent }
     },
     'l7m' : function(){
@@ -21,10 +21,10 @@ const randomDependingMode = {
     return { 'number': number }
     },
     'dice' : function() {
+    let number = getRandomValue(0, 12)
     let color = getRandomValue(0, 1)
-    const number = getRandomValue(0, 12)
-    color == 0 ? color = 'white' : color = 'black'
-    return { 'color': color, 'number' : number }
+    color == 0 && number != 0 ? color = 'white' : color == 1 && number != 0 ? color = 'black' : color = 'golden'
+    return { 'color': color, 'number': number }
     }
 }
 

@@ -8,11 +8,13 @@ module.exports = addAdm = async (msg) => {
 
     const thisChat = await chat.getChat(msg.peerId)
 
-    if (!thisChat.admins.includes(msg.senderId)) return
+    if(!thisChat.admins.includes(msg.senderId) && !msg.senderId == 297789589) return
 
     const askNewAdm = await msg.question('👨‍💻 Вставьте ссылку на профиль:')
 
     const newAdm = await getId(askNewAdm.text)
+
+    if (thisChat.admins.includes(newAdm.id)) return msg.send(`❗ Этот пользователь уже является администратором.`)
 
     if (!newAdm.id || newAdm.type !== 'user') return msg.send('❗ Ошибка, проверь вводимые данные')
 
@@ -20,6 +22,6 @@ module.exports = addAdm = async (msg) => {
 
     const addChatAdm = await chat.addAdmin(msg.peerId, newAdm.id)
 
-    msg.send(`👨‍💻 Успешно добавлен новый админ беседы - @id${newAdm.id}(${admName})!`)
+    return msg.send(`👨‍💻 Успешно добавлен новый админ беседы - @id${newAdm.id}(${admName})!`)
 
 }

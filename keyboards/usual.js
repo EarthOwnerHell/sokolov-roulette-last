@@ -26,7 +26,7 @@ const mainBoard = (admin) => (
 const wheelBoard = (
     Keyboard.keyboard([
         [
-            textButton('Баланс', 'games', colors.green), 
+            textButton('Баланс', 'balance', colors.green), 
             textButton('Банк', 'bank', colors.green)             
         ],
         [
@@ -52,7 +52,7 @@ const wheelBoard = (
 const cubeBoard = (
     Keyboard.keyboard([
         [
-            textButton('Баланс', 'games', colors.green), 
+            textButton('Баланс', 'balance', colors.green), 
             textButton('Банк', 'bank', colors.green)             
         ],
         [
@@ -78,7 +78,7 @@ const cubeBoard = (
 const diceBoard = (
     Keyboard.keyboard([
         [
-            textButton('Баланс', 'games', colors.green), 
+            textButton('Баланс', 'balance', colors.green), 
             textButton('Банк', 'bank', colors.green)             
         ],
         [
@@ -104,7 +104,7 @@ const diceBoard = (
 const doubleBoard = (
     Keyboard.keyboard([
         [
-            textButton('Баланс', 'games', colors.grey), 
+            textButton('Баланс', 'balance', colors.grey), 
             textButton('Банк', 'bank', colors.grey)             
         ],
         [
@@ -122,7 +122,7 @@ const doubleBoard = (
 const l7mBoard = (
     Keyboard.keyboard([
         [
-            textButton('Баланс', 'games', colors.grey), 
+            textButton('Баланс', 'balance', colors.grey), 
             textButton('Банк', 'bank', colors.grey)             
         ],
         [

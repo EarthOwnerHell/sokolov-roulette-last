@@ -38,6 +38,12 @@ const inlineProfileBoard = Keyboard.keyboard([
         ]
     ]).inline()
 
+    const honestyCheck = Keyboard.keyboard([
+        [
+            urlButton("#⃣ Проверка честности", 'https://vk.com/sokolov_roulette')
+        ],
+    ]).inline()
+
 const chatSettingsBoard = Keyboard.keyboard([
     [
         textButton("⌛ Изменить время раунда", "changeEndTime", colors.blue)
@@ -46,7 +52,10 @@ const chatSettingsBoard = Keyboard.keyboard([
         textButton('🎰 Сменить игровой режим', 'changeGameMode', colors.blue)
     ],
     [
-        textButton('👨‍💻 Добавить админа', 'addChatAdmin', colors.blue)
+        textButton('➕👨‍💻 Добавить админа', 'addChatAdmin', colors.blue),
+    ],
+    [
+        textButton('➖👨‍💻 Снять админа', 'delAdm', colors.red),
     ]
 ]).inline()
 
@@ -105,5 +114,6 @@ module.exports = {
     reviewMenu,
     whatIsButton,
     chooseGameInGroup,
-    chatSettingsBoard
+    chatSettingsBoard,
+    honestyCheck
 };

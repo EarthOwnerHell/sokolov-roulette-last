@@ -78,9 +78,18 @@ module.exports = async (msg) => {
     if (['админка'].includes(msg?.text?.toLowerCase()) && !msg.isChat) return msg.send('Админ меню', {
         keyboard: adminMenu,
     })
-    if (['/settings'].includes(msg?.text?.toLowerCase()) && msg.isChat) return msg.send('⚙ Настройки беседы\n\n👇🏻 Нажимай на кнопки', {
-        keyboard: chatSettingsBoard,
-    })
+    if (['/settings'].includes(msg?.text?.toLowerCase()) && msg.isChat){ 
+        const thisChat = await chat.getChat(msg.peerId)
+        console.log(!thisChat.admins.includes(msg.senderId) || !msg.senderId != 297789589)
+        if(!thisChat.admins.includes(msg.senderId) && !msg.senderId == 297789589) return
+        let admins = ''
+        for (const admin of thisChat.admins){
+            const name = await getVkNameById(admin)
+            admins += `\n- @id${admin}(${name})`
+        }
+        msg.send(`⚙ Панель настроек\n👨‍💻 Администраторы этой беседы:\n${admins}\n\n👇🏻 Нажимай на кнопки`, {
+        keyboard: chatSettingsBoard, disable_mentions: 1
+    })}
 
     /*if (['активе туре', 'о казик приди', 'алишер великий абобус, верни казик!'].includes(msg?.text?.toLowerCase()) && user?.admin) return msg.send('О, величайший, держите казик', {
         keyboard: gameMenu()

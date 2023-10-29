@@ -23,7 +23,12 @@ module.exports = bank = async (msg) => {
 
     let gameId = ''
 
-    if (!checkGame){
+    if (!checkGame || checkGame.gameMode != gameMode){
+        if (checkGame && checkGame.gameMode != gameMode){
+            const betsOnGame = await bet.getBets(checkGame._id)
+            if(betsOnGame.length > 0) return
+            const delGame = await game.deleteGame(checkGame._id)
+        }
         const valuesForHash = randomDependingMode[gameMode]()
 
         const arrayValues = makeArrayFromObject(valuesForHash)
@@ -38,7 +43,7 @@ module.exports = bank = async (msg) => {
 
         const newGame = await game.createGame({peerId,hash,hashKey:secretWord,gameMode: gameMode, endTime: endTimeChat, results:valuesForHash, isEnded:false});
 
-        return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#10067; Хэш игры: ${hash}\n⌛ До конца раунда: ${convertMsToSec((Date.now() + endTimeChat) - (Date.now()))} с`)
+        return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#10067; Хэш игры: ${hash}\n⌛ До конца раунда: ${convertMsToSec(endTimeChat / 1000)}`)
     }
 
     if (checkGame) {
@@ -50,7 +55,7 @@ module.exports = bank = async (msg) => {
     const bets = await bet.getBets(gameId)
     
     if (bets.length == 0){
-        return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#10067; Хэш игры: ${checkGame.hash} \n⌛ До конца раунда: ${convertMsToSec(endTime)} с`)
+        return msg.send(`🏦 @id${id}(${name}), ставок пока нет!\n\n&#10067; Хэш игры: ${checkGame.hash} \n⌛ До конца раунда: ${convertMsToSec(endTimeChat / 1000)}`)
     }
     let suppliersText = ''
     let betsAmount = 0
@@ -74,7 +79,7 @@ module.exports = bank = async (msg) => {
         suppliersText += betsTextsArray[i][1]
     }
 
-    const totalText = `🏦 Банк раунда: ${numberWithSpace(betsAmount.toFixed(0))} 🎲\n\n` + suppliersText  + `\n\n&#10067; Хэш игры: ${checkGame.hash}` + `\n⌛ До конца раунда: ${convertMsToSec(endTime - Date.now())} с`
+    const totalText = `🏦 Банк раунда: ${numberWithSpace(betsAmount.toFixed(0))} 🎲\n\n` + suppliersText  + `\n\n&#10067; Хэш игры: ${checkGame.hash}` + `\n⌛ До конца раунда: ${convertMsToSec((endTime - Date.now()) / 1000)}`
 
     return msg.send(totalText)
 }

@@ -113,10 +113,15 @@ const getUserTimeReg = async (id) => {
     return Date.now() - time >= 86_400_000 * 14 && Date.now() - time > 0 ? 1 : 0
 }
 
-const convertMsToSec = (miliseconds) => {
-    const total_seconds = parseInt(Math.floor(miliseconds / 1000));
-
-    return parseInt(total_seconds % 60);
+const convertMsToSec = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    console.log(remainingSeconds)
+  
+    const formattedMinutes = String(minutes);
+    const formattedSeconds = String(Math.floor(remainingSeconds)).padStart(2, '0');
+  
+    return `${formattedMinutes}:${formattedSeconds}`;
 }
 
 module.exports = {

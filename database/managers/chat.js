@@ -33,6 +33,15 @@ const chat = {
                 admins: userId
             }
         }).then(console.log('Новый админ!'))
+    },
+    delAdm: (peerId, userId) => {
+        Chat.updateOne({
+            peerId
+        }, {
+            $pull: {
+                admins: userId
+            }
+        }).then(console.log('Сняли админа с полномочий'))
     }
 }
 

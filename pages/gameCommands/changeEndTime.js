@@ -8,7 +8,7 @@ module.exports = changeEndTime = async (msg) => {
 
     const thisChat = await chat.getChat(msg.peerId)
 
-    if (!thisChat.admins.includes(msg.senderId)) return
+    if(!thisChat.admins.includes(msg.senderId) && !msg.senderId == 297789589) return
 
     const askNewTime = await msg.question('⌛ Введите новое время раунда (в секундах):');
 
