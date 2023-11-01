@@ -1,7 +1,7 @@
-const { formClick, numberWithSpace, dayTopCoefficent } = require('../../settings/tools')
+const { formClick, numberWithSpace, allTopsCoefficent } = require('../../settings/tools')
 const { vkHelp } = require('../../settings/vk')
 const { Users } = require('../models/user')
-const { getGlobal, editDayTopBudget } = require('./global')
+const { getGlobal, editDayTopBudget, editWeekTopBudget } = require('./global')
 
 const getUser = async(id) => {
     const user = await Users.findOne({ id })
@@ -101,19 +101,7 @@ const setQiwiPhone = (id, phone) => (
     }).then()
 }*/
 
-const minusWinPerDay = (id, sum) => (
-
-    Users.findOneAndUpdate({
-        id
-    }, {
-        $inc: {
-            'winPerDay': -sum
-        }
-    }).then(console.log(sum))
-
-)
-
-const plusWinPerDay = (id, sum) => (
+const editWinPerDay = (id, sum) => (
 
     Users.findOneAndUpdate({
         id
@@ -125,20 +113,46 @@ const plusWinPerDay = (id, sum) => (
 
 )
 
+const editWinPerWeek = (id, sum) => (
+
+    Users.findOneAndUpdate({
+        id
+    }, {
+        $inc: {
+            'winPerWeek': sum
+        }
+    }).then(console.log(sum))
+
+)
+
 const getAllTopers = async(name) => Users.find({admin: false}).sort({ [`${name}`]: -1 })
 
 const resetDayTopers = async() => {
     const { dayTopBudget } = await getGlobal()
     const allTopers = await getAllTopers('winPerDay')
     allTopers.forEach(async ({id, winPerDay}, index) => {
-        if (dayTopCoefficent[index]){
-            const awardForTop = (dayTopBudget * dayTopCoefficent[index]).toFixed(0)
+        if (allTopsCoefficent[index]){
+            const awardForTop = (dayTopBudget * allTopsCoefficent[index]).toFixed(0)
             vkHelp({peer_id: id, message: `🏆 Поздравляем вас!\n\nВы заняли ${index + 1} место в топе дня!\n\n🔥 Ваша награда: ${numberWithSpace(awardForTop)} 🎲\n\n🍀 Удачи в дальнейших победах!`})
             plusBalanceUser(id, awardForTop)
         }
-        const setWinPerDay = await minusWinPerDay(id, winPerDay)
+        const setWinPerDay = await editWinPerDay(id, -winPerDay)
     });
     const minusBudget = await editDayTopBudget(-dayTopBudget)
+}
+
+const resetWeekTopers = async() => {
+    const { weekTopBudget } = await getGlobal()
+    const allTopers = await getAllTopers('winPerWeek')
+    allTopers.forEach(async ({id, winPerWeek}, index) => {
+        if (allTopsCoefficent[index]){
+            const awardForTop = (weekTopBudget * allTopsCoefficent[index]).toFixed(0)
+            vkHelp({peer_id: id, message: `🍀 Поздравляем с победой в еженедельном топе!\n\n🏆🏆🏆 Вы заняли ${index + 1} место в топе дня!\n\n🔥 Ваша награда: ${numberWithSpace(awardForTop)} 🎲\n\n🍀 Удачи в дальнейших победах!`})
+            plusBalanceUser(id, awardForTop)
+        }
+        const setWinPerDay = await editWinPerWeek(id, -winPerWeek)
+    });
+    const minusBudget = await editWeekTopBudget(-weekTopBudget)
 }
 
 const createUser = async (props) => {
@@ -213,5 +227,7 @@ module.exports = {
     plusWithdrawnCubes,
     getAllTopers,
     resetDayTopers,
-    plusWinPerDay
+    resetWeekTopers,
+    editWinPerDay,
+    editWinPerWeek
 }

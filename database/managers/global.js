@@ -1,3 +1,4 @@
+const { numberWithSpace } = require("../../settings/tools")
 const Global = require("../models/global")
 
 const getGlobal = (name = 'Global') => Global.findOne({ name })
@@ -22,9 +23,18 @@ const editDayTopBudget = (sum) => (
         $inc: {
             'dayTopBudget': sum
         }
-    }).then(console.log(`Бюджет топа дня изменен на ${sum}`))
+    }).then(console.log(`Бюджет топа дня изменен на --> ${sum}`))
 )
 
+const editWeekTopBudget = (sum) => (
+    Global.findOneAndUpdate({
+        name: 'Global',
+    }, {
+        $inc: {
+            'weekTopBudget': sum
+        }
+    }).then(console.log(`Бюджет топа недели изменен --> ${sum}`))
+)
 
 const editWinToday = (sum) => (
     Global.findOneAndUpdate({
@@ -62,5 +72,6 @@ module.exports = {
     setForRef,
     editWinToday,
     editLossToday,
-    editDayTopBudget
+    editDayTopBudget,
+    editWeekTopBudget
 };

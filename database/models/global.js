@@ -9,7 +9,8 @@ const Global = model(
         forRef: defaultValue(Number, 33000),
         lossToday: defaultValue(Number, 0),
         winToday: defaultValue(Number, 0),
-        dayTopBudget: defaultValue(Number, 0)
+        dayTopBudget: defaultValue(Number, 0),
+        weekTopBudget: defaultValue(Number, 0)
     })
 );
 

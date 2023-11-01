@@ -1,4 +1,5 @@
 const { vk, api, vkHelp } = require('./vk');
+const schedule = require('node-schedule');
 const { getRandomId } = require('vk-io')
 const axios = require('axios')
 const { plusBalanceUser } = require('../database/managers/user')
@@ -33,7 +34,7 @@ const resetLossWin = async() => {
     return
     }
 
-    const dayTopCoefficent = {
+    const allTopsCoefficent = {
         0: 0.35,
         1: 0.18,
         2: 0.12,
@@ -137,6 +138,11 @@ const convertMsToSec = (seconds) => {
     return `${formattedMinutes}:${formattedSeconds}`;
 }
 
+const rule = new schedule.RecurrenceRule();
+rule.dayOfWeek = 4; // 0 - воскресенье, 1 - понедельник, и так далее
+rule.hour = 0;
+rule.minute = 54;
+
 module.exports = {
     deckOfNum,
     crypto,
@@ -149,5 +155,6 @@ module.exports = {
     resetLossWin,
     commandArgs,
     convertMsToSec,
-    dayTopCoefficent
+    allTopsCoefficent,
+    rule
 };
