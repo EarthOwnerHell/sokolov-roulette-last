@@ -29,6 +29,8 @@ module.exports = makeBet = async (msg) => {
 
     const checkGame = await game.getGame(peerId)
 
+    console.log(checkGame)
+
     let isStarted = false
 
     if (!checkGame || checkGame.gameMode != gameMode){
@@ -67,11 +69,9 @@ module.exports = makeBet = async (msg) => {
         if(betsThisGame.length > 0 && checkGame.endTime - Date.now() <= 3_000) return msg.send(`🕖❗ @id${id}(${name}), нельзя сделать ставку за 3 секунды до конца раунда!`)
     }
 
-    let userBet = await msg.question(`${gamePayloadsTranslate[betOn][0]} @id${id}(${name}), введите ставку на ${gamePayloadsTranslate[betOn][1]}:`, {keyboard: betKeyboard(balance)}) 
-
-    console.log(userBet)
-
     if (!balance) return msg.send(`❗ У вас нет 🎲 на балансе.`)
+
+    let userBet = await msg.question(`${gamePayloadsTranslate[betOn][0]} @id${id}(${name}), введите ставку на ${gamePayloadsTranslate[betOn][1]}:`, {keyboard: betKeyboard(balance)}) 
 
     let reserve = 10000000000
 
@@ -98,7 +98,7 @@ module.exports = makeBet = async (msg) => {
 
     const betsThisGame = await bet.getBetsUser(gameId, id)
 
-    console.log(betsThisGame)
+   let betsType = [] 
 
     if(betsThisGame.length == 0){
         const newBet = await bet.createBet({
@@ -107,25 +107,24 @@ module.exports = makeBet = async (msg) => {
             betType: betOn,
             betAmount: Number(finalBet)
         })
+        betsType.push(betOn)
     }
-    let editBet = ''
-    let newBet = ''
+
     for(let i = 0; i < betsThisGame.length; i++){
         const checkType = betsThisGame[i].betType
-        console.log(betOn, checkType, betOn == checkType)
-        if(betOn == checkType){
-            editBet = await bet.editBet(gameId, id, checkType, Number(finalBet))
-            break
-        } else {
+        betsType.push(checkType)
+    }
+
+    if(betsType.includes(betOn)){
+        const editBet = await bet.editBet(gameId, id, betOn, Number(finalBet))
+    } else {
             const newBet = await bet.createBet({
                 gameId: gameId,
                 userId : id,
                 betType: betOn,
                 betAmount: Number(finalBet)
             })
-            break
         }
-    }
 
         minusBalanceUser(id, Number(finalBet))
 

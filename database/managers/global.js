@@ -15,6 +15,17 @@ const autoCreateGlobal = async () => {
 
 }
 
+const editDayTopBudget = (sum) => (
+    Global.findOneAndUpdate({
+        name: 'Global',
+    }, {
+        $inc: {
+            'dayTopBudget': sum
+        }
+    }).then(console.log(`Бюджет топа дня изменен на ${sum}`))
+)
+
+
 const editWinToday = (sum) => (
     Global.findOneAndUpdate({
         name: 'Global'
@@ -50,5 +61,6 @@ module.exports = {
     autoCreateGlobal,
     setForRef,
     editWinToday,
-    editLossToday
+    editLossToday,
+    editDayTopBudget
 };

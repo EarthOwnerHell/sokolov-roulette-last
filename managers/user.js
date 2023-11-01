@@ -5,6 +5,7 @@ const tops = require('../pages/mainCommands/tops')
 const ref = require('../pages/mainCommands/ref')
 const inDeveloping = require('../pages/adminCommands/inDeveloping')
 const myStats = require('../pages/inlineCommands/myStats')
+const getTops = require('../pages/inlineCommands/top')
 const shop = require('../pages/mainCommands/shop')
 module.exports = userManager = async (msg) => {
     commands = {
@@ -20,8 +21,8 @@ module.exports = userManager = async (msg) => {
         tops: () => tops(msg),
         shop: () => shop(msg),
         promo: () => promo(msg),
-        dayTop: () => getTops(msg, 'winPerToday'),
-        weekTop: () => getTops(msg, 'winPerWeek'),
+        dayTop: () => getTops(msg, 'dayTop'),
+        weekTop: () => getTops(msg, 'weekTop'),
     }
 
     try {

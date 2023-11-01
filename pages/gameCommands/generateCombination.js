@@ -23,7 +23,8 @@ const randomDependingMode = {
     'dice' : function() {
     let number = getRandomValue(0, 12)
     let color = getRandomValue(0, 1)
-    color == 0 && number != 0 ? color = 'white' : color == 1 && number != 0 ? color = 'black' : color = 'golden'
+    number == 0 ? number = 'Золото' : ''
+    color == 0 && number != 'Золото' ? color = 'white' : color == 1 && number != 'Золото' ? color = 'black' : color = 'golden'
     return { 'color': color, 'number': number }
     }
 }

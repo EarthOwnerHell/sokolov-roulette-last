@@ -83,7 +83,7 @@ const diceBoard = (
         ],
         [
             textButton('Чёрное', 'make_bet:black', colors.blue),  
-            textButton('Золотое', 'make_bet:golden', colors.blue),        
+            textButton('Золото', 'make_bet:golden', colors.blue),        
             textButton('Белое', 'make_bet:white', colors.blue),
         ],
         [

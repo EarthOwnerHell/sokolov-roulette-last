@@ -79,7 +79,7 @@ module.exports = bank = async (msg) => {
     for (let i = 0; i < betsTextsArray.length; i++){
         suppliersText += betsTextsArray[i][1]
     }
-    console.log(betsTexts)
+
     const totalText = `🏦 Банк раунда: ${numberWithSpace(betsAmount.toFixed(0))} 🎲\n\n` + suppliersText  + `\n\n&#10067; Хэш игры: ${checkGame.hash}` + `\n⌛ До конца раунда: ${convertMsToSec((endTime - Date.now()) / 1000)}`
 
     return msg.send(totalText)

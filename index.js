@@ -10,6 +10,7 @@ const { autoCreateGlobal } = require('./database/managers/global');
 const { resetLossWin, getUserTimeReg } = require('./settings/tools');
 const serverListen = require('./settings/server');
 const checkResults = require('./pages/gameCommands/getResults.js');
+const { resetDayTopers } = require('./database/managers/user');
 
 //serverListen()
 
@@ -17,8 +18,9 @@ connectDb();
 
 autoCreateGlobal();
 
-const resetSchedule = schedule.scheduleJob({ hour: 0, minute: 0 }, () => {
+const resetSchedule = schedule.scheduleJob({ hour: 16, minute: 11 }, () => {
     resetLossWin();
+    resetDayTopers()
   });
 
   vk.updates.use(async (ctx, next) => {

@@ -33,6 +33,19 @@ const resetLossWin = async() => {
     return
     }
 
+    const dayTopCoefficent = {
+        0: 0.35,
+        1: 0.18,
+        2: 0.12,
+        3: 0.09,
+        4: 0.07,
+        5: 0.06,
+        6: 0.05,
+        7: 0.04,
+        8: 0.035,
+        9: 0.015,
+    }
+
 function getSeconds(millis) {
   var minutes = Math.floor(millis / 60000);
   var seconds = ((millis % 60000) / 1000).toFixed(0);
@@ -135,5 +148,6 @@ module.exports = {
     getLength,
     resetLossWin,
     commandArgs,
-    convertMsToSec
+    convertMsToSec,
+    dayTopCoefficent
 };

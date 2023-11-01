@@ -1,6 +1,7 @@
-const { formClick, numberWithSpace } = require('../../settings/tools')
+const { formClick, numberWithSpace, dayTopCoefficent } = require('../../settings/tools')
+const { vkHelp } = require('../../settings/vk')
 const { Users } = require('../models/user')
-const { getGlobal } = require('./global')
+const { getGlobal, editDayTopBudget } = require('./global')
 
 const getUser = async(id) => {
     const user = await Users.findOne({ id })
@@ -100,7 +101,45 @@ const setQiwiPhone = (id, phone) => (
     }).then()
 }*/
 
-const getTop = async (name) => Users.find({ admin: false }).sort({ [`${name}`]: -1 }).limit(10)
+const minusWinPerDay = (id, sum) => (
+
+    Users.findOneAndUpdate({
+        id
+    }, {
+        $inc: {
+            'winPerDay': -sum
+        }
+    }).then(console.log(sum))
+
+)
+
+const plusWinPerDay = (id, sum) => (
+
+    Users.findOneAndUpdate({
+        id
+    }, {
+        $inc: {
+            'winPerDay': sum
+        }
+    }).then(console.log(sum))
+
+)
+
+const getAllTopers = async(name) => Users.find({admin: false}).sort({ [`${name}`]: -1 })
+
+const resetDayTopers = async() => {
+    const { dayTopBudget } = await getGlobal()
+    const allTopers = await getAllTopers('winPerDay')
+    allTopers.forEach(async ({id, winPerDay}, index) => {
+        if (dayTopCoefficent[index]){
+            const awardForTop = (dayTopBudget * dayTopCoefficent[index]).toFixed(0)
+            vkHelp({peer_id: id, message: `🏆 Поздравляем вас!\n\nВы заняли ${index + 1} место в топе дня!\n\n🔥 Ваша награда: ${numberWithSpace(awardForTop)} 🎲\n\n🍀 Удачи в дальнейших победах!`})
+            plusBalanceUser(id, awardForTop)
+        }
+        const setWinPerDay = await minusWinPerDay(id, winPerDay)
+    });
+    const minusBudget = await editDayTopBudget(-dayTopBudget)
+}
 
 const createUser = async (props) => {
 
@@ -166,11 +205,13 @@ module.exports = {
     plusBalanceUser,
     minusBalanceUser,
     setQiwiPhone,
-    getTop,
     setBan,
     editSymbol,
     getUserByNumber, 
     setUnban,
     plusWinCubes,
-    plusWithdrawnCubes
+    plusWithdrawnCubes,
+    getAllTopers,
+    resetDayTopers,
+    plusWinPerDay
 }
