@@ -19,6 +19,16 @@ const plusBalanceUser = (id, sum) => (
     }).then()
 )
 
+const plusBonuseBalanceUser = (id, sum) => (
+    Users.findOneAndUpdate({
+        id
+    }, {
+        $inc: {
+            'bonuseBalance': sum
+        }
+    }).then()
+)
+
 const plusWinCubes = (id, sum) => (
     Users.findOneAndUpdate({
         id
@@ -133,7 +143,7 @@ const resetDayTopers = async() => {
     allTopers.forEach(async ({id, winPerDay}, index) => {
         if (allTopsCoefficent[index]){
             const awardForTop = (dayTopBudget * allTopsCoefficent[index]).toFixed(0)
-            vkHelp({peer_id: id, message: `🏆 Поздравляем вас!\n\nВы заняли ${index + 1} место в топе дня!\n\n🔥 Ваша награда: ${numberWithSpace(awardForTop)} 🎲\n\n🍀 Удачи в дальнейших победах!`})
+            vkHelp({peer_id: id, message: `🍀 Поздравляем вас!\n\n🏆 Вы заняли ${index + 1} место в топе дня!\n\n🔥 Ваша награда: ${numberWithSpace(awardForTop)} 🎲\n\n🍀 Удачи в дальнейших победах!`})
             plusBalanceUser(id, awardForTop)
         }
         const setWinPerDay = await editWinPerDay(id, -winPerDay)
@@ -147,7 +157,7 @@ const resetWeekTopers = async() => {
     allTopers.forEach(async ({id, winPerWeek}, index) => {
         if (allTopsCoefficent[index]){
             const awardForTop = (weekTopBudget * allTopsCoefficent[index]).toFixed(0)
-            vkHelp({peer_id: id, message: `🍀 Поздравляем с победой в еженедельном топе!\n\n🏆🏆🏆 Вы заняли ${index + 1} место в топе дня!\n\n🔥 Ваша награда: ${numberWithSpace(awardForTop)} 🎲\n\n🍀 Удачи в дальнейших победах!`})
+            vkHelp({peer_id: id, message: `🍀 Поздравляем с победой в еженедельном топе!\n\n🏆🏆🏆 Вы заняли ${index + 1} место!\n\n🔥 Ваша награда: ${numberWithSpace(awardForTop)} 🎲\n\n🍀 Удачи в дальнейших победах!`})
             plusBalanceUser(id, awardForTop)
         }
         const setWinPerDay = await editWinPerWeek(id, -winPerWeek)
@@ -229,5 +239,6 @@ module.exports = {
     resetDayTopers,
     resetWeekTopers,
     editWinPerDay,
-    editWinPerWeek
+    editWinPerWeek,
+    plusBonuseBalanceUser
 }

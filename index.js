@@ -10,7 +10,7 @@ const { autoCreateGlobal } = require('./database/managers/global');
 const { resetLossWin, getUserTimeReg, rule } = require('./settings/tools');
 const serverListen = require('./settings/server');
 const checkResults = require('./pages/gameCommands/getResults.js');
-const { resetDayTopers } = require('./database/managers/user');
+const { resetDayTopers, resetWeekTopers } = require('./database/managers/user');
 
 //serverListen()
 
@@ -19,11 +19,10 @@ connectDb();
 autoCreateGlobal();
 
 const job = schedule.scheduleJob(rule, function() {
-  // Ваше действие, которое должно повторяться каждый понедельник
-  console.log('Действие, которое повторяется каждый понедельник');
+    resetWeekTopers()
 });
 
-const resetSchedule = schedule.scheduleJob({ hour: 16, minute: 11 }, () => {
+const resetSchedule = schedule.scheduleJob({ hour: 0, minute: 0 }, () => {
     resetLossWin();
     resetDayTopers()
   });

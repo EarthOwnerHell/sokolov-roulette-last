@@ -139,9 +139,9 @@ const convertMsToSec = (seconds) => {
 }
 
 const rule = new schedule.RecurrenceRule();
-rule.dayOfWeek = 4; // 0 - воскресенье, 1 - понедельник, и так далее
+rule.dayOfWeek = 1; // 0 - воскресенье, 1 - понедельник, и так далее
 rule.hour = 0;
-rule.minute = 54;
+rule.minute = 0;
 
 module.exports = {
     deckOfNum,

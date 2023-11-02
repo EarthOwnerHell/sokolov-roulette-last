@@ -1,4 +1,4 @@
-const shopCarousel = require("../../keyboards/carousels");
+const { shopCarousel } = require("../../keyboards/carousels");
 const { getRandomId } = require('vk-io')
 
 module.exports = shop = async (msg) => {

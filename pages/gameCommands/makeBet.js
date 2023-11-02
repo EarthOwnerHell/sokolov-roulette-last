@@ -11,6 +11,8 @@ const { betKeyboard } = require("../../keyboards/inline");
 module.exports = makeBet = async (msg) => {
     const { balance, id, name } = await getUser(msg.senderId)
 
+    if (!balance) return msg.send(`❗ У вас нет 🎲 на балансе.`)
+
     const peerId = msg.peerId
 
     const thisChat = await chat.getChat(peerId)
@@ -68,8 +70,6 @@ module.exports = makeBet = async (msg) => {
         console.log(checkGame.endTime - Date.now())
         if(betsThisGame.length > 0 && checkGame.endTime - Date.now() <= 3_000) return msg.send(`🕖❗ @id${id}(${name}), нельзя сделать ставку за 3 секунды до конца раунда!`)
     }
-
-    if (!balance) return msg.send(`❗ У вас нет 🎲 на балансе.`)
 
     let userBet = await msg.question(`${gamePayloadsTranslate[betOn][0]} @id${id}(${name}), введите ставку на ${gamePayloadsTranslate[betOn][1]}:`, {keyboard: betKeyboard(balance)}) 
 

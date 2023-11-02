@@ -112,5 +112,4 @@ const shopCarousel = JSON.stringify({
     ]
 });
 
-module.exports = groupsCarousel
-module.exports = shopCarousel
+module.exports = { groupsCarousel, shopCarousel }
