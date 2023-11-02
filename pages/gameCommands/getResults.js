@@ -3,7 +3,7 @@ const game = require("../../database/managers/game");
 const { editDayTopBudget, editWeekTopBudget } = require("../../database/managers/global");
 const { plusBalanceUser, editWinPerDay, editWinPerWeek } = require("../../database/managers/user");
 const { honestyCheck } = require("../../keyboards/inline");
-const { numberWithSpace } = require("../../settings/tools");
+const { numberWithSpace, convertMsToSec } = require("../../settings/tools");
 const { getVkNameById, vkHelp } = require("../../settings/vk");
 const { gamePayloadsTranslate } = require("./gameTools");
 
@@ -150,6 +150,8 @@ function checkResults() {
         gameId = await game.getGameId(round.peerId)
         const bets = await bet.getBets(gameId)
         if (bets.length == 0) continue
+        console.log(Date.now() - thisGame?.endTime >= -3_000 && Date.now() - thisGame?.endTime <= -2_000)
+        if (Date.now() - thisGame?.endTime >= -3_000 && Date.now() - thisGame?.endTime <= -2_000) vkHelp({peer_id: thisGame.peerId, message: '🎰 Раунд подходит к концу...'})
         if (thisGame?.endTime && Date.now() - thisGame?.endTime >= 0) {
         const { peerId, hash, hashKey, gameMode } = thisGame;
         const getRoundInfo = getWinnersAndLoosers[gameMode]
@@ -161,7 +163,7 @@ function checkResults() {
 
         vkHelp({
             peer_id: peerId,
-            message: finalText[0] + `${finalText[1] > 0 ? deductionsToTop : ''} 🎲\n\n❓ Хэш игры: ${hash}\n🔑 Ключ к хэшу: ${hashKey}`,
+            message: finalText[0] + `${finalText[1] > 0 ? deductionsToTop + ' 🎲' : ''}\n\n❓ Хэш игры: ${hash}\n🔑 Ключ к хэшу: ${hashKey}`,
             keyboard: honestyCheck
         });
 

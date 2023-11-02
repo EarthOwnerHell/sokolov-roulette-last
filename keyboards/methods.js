@@ -1,5 +1,4 @@
 const { Keyboard } = require('vk-io')
-const callBack = require('./callback')
 
 const colors = {
     'green' : Keyboard.POSITIVE_COLOR,
@@ -39,6 +38,14 @@ const adminButton = (label, admin = label, color = Keyboard.SECONDARY_COLOR) => 
     })
 )
 
+const callBack = (label, command = label, color = Keyboard.SECONDARY_COLOR) => (
+    Keyboard.callbackButton({
+        label,
+        payload: { command },
+        color,
+    })
+)
+
 module.exports = {
-    makeButton, urlButton, textButton, adminButton, colors
+    makeButton, urlButton, textButton, adminButton, callBack, colors
 }

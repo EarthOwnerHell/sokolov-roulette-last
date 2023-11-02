@@ -28,8 +28,7 @@ module.exports = setGame = async (msg) => {
         const newAdm = chat.addAdmin(peerId, userId)
       }
     } else if (chatAdmins.length > 0){
-      if (!chatAdmins.includes(userId) && !msg.senderId == 297789589) return 
-    }
+      if(!thisChat.admins.includes(msg.senderId) && msg.senderId != 297789589) return    }
 
     if (gameMode.length !== 1){
         return msg.send('📵 Сработал античит СТОПHAMSTER, не пытайтесь обмануть SOKOLOV ROULETTE')

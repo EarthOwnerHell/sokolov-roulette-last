@@ -153,7 +153,8 @@ const adminMenu = Keyboard.keyboard([
         adminButton('Выдать баланс', 'giveBalance', colors.blue)
     ],
     [
-        adminButton('Сумма за рефа', 'forRef', colors.red)
+        adminButton('Сумма за рефа', 'forRef', colors.red),
+        adminButton('Новый промокод', 'newPromo', colors.blue)
     ],
     [
         textButton('Назад', 'back', colors.red)

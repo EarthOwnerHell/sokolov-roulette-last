@@ -1,11 +1,11 @@
 const { adminMenu } = require("../keyboards/usual")
-const buyCourse = require("../pages/adminCommands/buyCourse")
 const giveBalance = require("../pages/adminCommands/giveBalance")
 const giveBan = require("../pages/adminCommands/giveBan")
 const giveUnban = require("../pages/adminCommands/giveUnban")
 const mailing = require("../pages/adminCommands/mailing")
 const newBonusePost = require("../pages/adminCommands/newBonusePost")
 const forRef = require("../pages/adminCommands/forRef")
+const newPromo = require("../pages/adminCommands/createPromo")
 
 module.exports = adminManager = async (msg) => {
 
@@ -20,7 +20,8 @@ module.exports = adminManager = async (msg) => {
         giveBalance: () => giveBalance(msg),
         courseBuy: () => buyCourse(msg),
         forRef: () => forRef(msg),
-        giveUnban: () => giveUnban(msg)
+        giveUnban: () => giveUnban(msg),
+        newPromo: () => newPromo(msg)
     };
 
     try {

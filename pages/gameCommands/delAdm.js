@@ -8,8 +8,7 @@ module.exports = delAdm = async (msg) => {
 
     const thisChat = await chat.getChat(msg.peerId)
 
-    if(!thisChat.admins.includes(msg.senderId) && !msg.senderId == 297789589) return
-
+    if(!thisChat.admins.includes(msg.senderId) && msg.senderId != 297789589) return
     const askAdmForDel = await msg.question('❌ Вставьте ссылку на профиль:')
 
     const admForDel = await getId(askAdmForDel.text)

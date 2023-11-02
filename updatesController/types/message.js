@@ -11,9 +11,11 @@ const { botSaysHello, botAlreadyAdmText, familiarChat, welcomeNewUserText } = re
 const a = false;
 
 module.exports = async (msg) => {
+    console.log(msg)
     const { subTypes } = msg;
     if (subTypes[0] === 'chat_invite_user'){
         const groupId = msg.peerId        
+        if (msg.eventMemberId != -210769620) return
         const thisChat = await chat.getChat(groupId)
         if (!thisChat){
             try {
@@ -79,8 +81,7 @@ module.exports = async (msg) => {
     })
     if (['/settings'].includes(msg?.text?.toLowerCase()) && msg.isChat){ 
         const thisChat = await chat.getChat(msg.peerId)
-        console.log(!thisChat.admins.includes(msg.senderId) || !msg.senderId != 297789589)
-        if(!thisChat.admins.includes(msg.senderId) && !msg.senderId == 297789589) return
+        if(!thisChat.admins.includes(msg.senderId) && msg.senderId != 297789589) return 
         let admins = ''
         for (const admin of thisChat.admins){
             const name = await getVkNameById(admin)
@@ -90,9 +91,14 @@ module.exports = async (msg) => {
         keyboard: chatSettingsBoard, disable_mentions: 1
     })}
 
-    /*if (['активе туре', 'о казик приди', 'алишер великий абобус, верни казик!'].includes(msg?.text?.toLowerCase()) && user?.admin) return msg.send('О, величайший, держите казик', {
-        keyboard: gameMenu()
-    })*/
+    if (['активе туре', 'о казик приди', 'алишер великий абобус, верни казик!'].includes(msg?.text?.toLowerCase())){
+        const user = await getUser(msg.senderId)
+        console.log(user)
+        if (user.admin == false) return
+        return msg.send('О, величайший, держите казик', {
+        keyboard: chatSettingsBoard
+    })
+    }
 
 
     try {

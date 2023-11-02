@@ -1,11 +1,23 @@
 const { Keyboard } = require('vk-io')
+const { colors, callBack, textButton } = require('./methods')
 
-const callBack = (label, command = label, color = Keyboard.SECONDARY_COLOR) => (
-    Keyboard.callbackButton({
-        label,
-        payload: { command },
-        color,
-    })
-)
+const profileBoardWithCallback = Keyboard.keyboard([
+    [
+        callBack("📊 Моя статистика", "myStats", colors.red)
+    ],
+    [
+        textButton('🎁 Промокод', 'promo', colors.blue)
+    ],
+    [
+        callBack('💰 Пополнить', 'dep', colors.green),
+        callBack('💸 Вывести', 'withdraw', colors.green),
+    ]
+]).inline()
 
-module.exports = callBack
+const backToProfile = Keyboard.keyboard([
+    [
+        callBack("⏪ Назад", "profile", colors.green)
+    ],
+]).inline()
+
+module.exports = { profileBoardWithCallback, backToProfile }

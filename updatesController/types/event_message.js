@@ -1,7 +1,9 @@
 const { createUser, getUser } = require('../../database/managers/user');
-const userManager = require('../../managers/user');
+const eventManager = require('../../managers/eventManager');
+const { getVkNameById } = require('../../settings/vk');
 
 module.exports = async (ctx) => {
+    console.log(ctx)
     const userId = ctx.userId;
 
     const user = await getUser(userId)
@@ -14,8 +16,8 @@ module.exports = async (ctx) => {
         refferer: ctx.refferalValue,
     });
     try {
-        const command = Object.values(ctx.eventPayload)[1]
-        
-        if (command) userManager(ctx);
+        const command = ctx.eventPayload.command
+        console.log(command)
+        if (command) eventManager(ctx); 
     } catch { }
 }
