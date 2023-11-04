@@ -1,5 +1,6 @@
 const https = require('https');
 const { plusCubics } = require('./vkdice');
+const fs = require('fs')
 
 const options = {
     key: fs.readFileSync('/etc/letsencrypt/live/blackjack-server.online/privkey.pem'),
