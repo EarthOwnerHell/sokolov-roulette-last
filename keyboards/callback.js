@@ -1,5 +1,5 @@
 const { Keyboard } = require('vk-io')
-const { colors, callBack, textButton } = require('./methods')
+const { colors, callBack, textButton, urlButton } = require('./methods')
 
 const profileBoardWithCallback = Keyboard.keyboard([
     [
@@ -14,10 +14,15 @@ const profileBoardWithCallback = Keyboard.keyboard([
     ]
 ]).inline()
 
-const backToProfile = Keyboard.keyboard([
+const backToProfile = (commandIsDep) => Keyboard.keyboard([
     [
         callBack("⏪ Назад", "profile", colors.green)
     ],
+    commandIsDep ? 
+    [
+        urlButton(`📎 «Как пополнить баланс 🎲»`, 'https://vk.com/sokolov_roulette')
+    ] : []
+
 ]).inline()
 
 module.exports = { profileBoardWithCallback, backToProfile }

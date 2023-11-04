@@ -15,6 +15,6 @@ module.exports = myStats = async (msg) =>  {
         user_id: userId,
         peer_id: peerId
     })
-    return messageEdit({peer_id: peerId, message_id: lastMessage, message: `🍀 Вы выиграли за всё время: ${numberWithSpace(winCubes.toFixed(0))} 🎲\n———\n💰 Вы пополнили: ${numberWithSpace(deppedCubes.toFixed(0))} 🎲\n———\n🎲 Вы вывели: ${numberWithSpace(withdrawnCubes.toFixed(0))} 🎲`, keyboard: backToProfile})
+    return messageEdit({peer_id: peerId, message_id: lastMessage, message: `🍀 Вы выиграли за всё время: ${numberWithSpace(winCubes.toFixed(0))} 🎲\n———\n💰 Вы пополнили: ${numberWithSpace(deppedCubes.toFixed(0))} 🎲\n———\n🎲 Вы вывели: ${numberWithSpace(withdrawnCubes.toFixed(0))} 🎲`, keyboard: backToProfile(false)})
 
 }

@@ -44,6 +44,12 @@ const inlineProfileBoard = Keyboard.keyboard([
         ],
     ]).inline()
 
+    const articleAboutCubics = Keyboard.keyboard([
+        [
+            urlButton(`📎 «Что такое 🎲»`, 'https://vk.com/sokolov_roulette')
+        ],
+    ]).inline()
+
 const chatSettingsBoard = Keyboard.keyboard([
     [
         textButton("⌛ Изменить время раунда", "changeEndTime", colors.blue)
@@ -116,5 +122,6 @@ module.exports = {
     whatIsButton,
     chooseGameInGroup,
     chatSettingsBoard,
-    honestyCheck
+    honestyCheck,
+    articleAboutCubics
 };

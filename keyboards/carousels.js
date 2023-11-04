@@ -10,7 +10,7 @@ const groupsCarousel = JSON.stringify({
                     "action": {
                         "type": "open_link",
                         "label": "🎮 Играть",
-                        "link": "https://vk.com/id297789589"
+                        "link": "https://vk.me/join/6hv8LT4qV4cBaR/xVqlUqZdopW5brGiQEtQ="
                     }
                 }
             ]
@@ -24,7 +24,7 @@ const groupsCarousel = JSON.stringify({
                     "action": {
                         "type": "open_link",
                         "label": "🎮 Играть",
-                        "link": "https://vk.com/id297789589"
+                        "link": "https://vk.me/join/xhTis/2/eCs75NZZhN8_CVUtJRWhS5nQyPU="
                     }
                 }
             ]
@@ -38,7 +38,7 @@ const groupsCarousel = JSON.stringify({
                     "action": {
                         "type": "open_link",
                         "label": "🎮 Играть",
-                        "link": "https://vk.com/id297789589"
+                        "link": "https://vk.me/join/hH6QJ2LtmQ5pRzssiOFsZRc8EAO6EFxpLrI="
                     }
                 }
             ]
@@ -52,13 +52,13 @@ const groupsCarousel = JSON.stringify({
                     "action": {
                         "type": "open_link",
                         "label": "🎮 Играть",
-                        "link": "https://vk.com/id297789589"
+                        "link": "https://vk.me/join/xBjZqnJs9NqIc7Eb9q/Q7Uq5C/gGyaETwho="
                     }
                 }
             ]
         },
         {
-            "title": "🔥 L7B",
+            "title": "🔥 L7M",
             "description": "⚡ Игра, в которой нужно угадать, больше/меньше 7 или выпадет 7.",
             "photo_id": "-210769620_457240419",
             "buttons": [
@@ -66,7 +66,7 @@ const groupsCarousel = JSON.stringify({
                     "action": {
                         "type": "open_link",
                         "label": "🎮 Играть",
-                        "link": "https://vk.com/id297789589"
+                        "link": "https://vk.me/join/4HlO97n8DzxrlPVkIYdJR93ovW8IQ9kXSh0="
                     }
                 }
             ]

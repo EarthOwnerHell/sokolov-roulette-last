@@ -55,6 +55,21 @@ const messageEdit = (props) => {
     })
 
 } 
+
+const sendEventAnswer = (msg, text, type) => {
+    const { eventId, userId, peerId } = msg 
+    return vk.api.messages.sendMessageEventAnswer({
+        event_id: eventId,
+        user_id: userId,
+        peer_id: peerId,
+        event_data: JSON.stringify({
+            'type': type,
+            'text': text
+        })
+    })
+
+} 
+
 const getLastBotMessage = async (peerId) => {
     const { items } = await api.messages.getHistory({
       count: 1,
@@ -87,4 +102,5 @@ module.exports = {
     getId,
     messageEdit,
     getLastBotMessage,
+    sendEventAnswer
 }

@@ -12,7 +12,7 @@ const serverListen = require('./settings/server');
 const checkResults = require('./pages/gameCommands/getResults.js');
 const { resetDayTopers, resetWeekTopers } = require('./database/managers/user');
 
-//serverListen()
+serverListen()
 
 connectDb();
 

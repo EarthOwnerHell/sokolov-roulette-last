@@ -9,7 +9,7 @@ module.exports = ref = async (msg) =>  {
     const { id, ref: { value } } = await getUser(msg.senderId)
 
     vk.api.call("utils.getShortLink", { url: `vk.me/luckyblackjack?ref=${id}` }).then(function (res) {
-        msg.send(id,`ℹ Реферальная система\n\nℹ Приглашай друзей по своей ссылке и получай бонус в размере ${numberWithSpace(forRef)} 🎲!\n\n📎 Ваша реферальная ссылка:\n[ ${res.short_url} ]`)
+        msg.send(`ℹ Реферальная система\n\nℹ Приглашай друзей по своей ссылке и получай бонус в размере ${numberWithSpace(forRef)} 🎲!\n\n📎 Ваша реферальная ссылка:\n[ ${res.short_url} ]`)
     })
     
     /*vk.api.messages.sendMessageEventAnswer({
