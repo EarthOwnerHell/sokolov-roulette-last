@@ -3,8 +3,8 @@ const { plusCubics } = require('./vkdice');
 const fs = require('fs')
 
 const options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/blackjack-server.online/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/blackjack-server.online/fullchain.pem')
+    key: 0,//fs.readFileSync('/etc/letsencrypt/live/blackjack-server.online/privkey.pem'),
+    cert: 0//fs.readFileSync('/etc/letsencrypt/live/blackjack-server.online/fullchain.pem')
   };
 function serverListen() {
   https.createServer(options, (req, res) => {

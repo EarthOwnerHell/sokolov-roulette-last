@@ -2,15 +2,17 @@ const { numberWithSpace } = require("../../settings/tools")
 const Bets = require("../models/Bets")
 
 const bet = {
-    getBet: (gameId, userId, type) => Bets.find({gameId: gameId, userId: userId, betType: type}).lean(),
-    getBetsUser: (gameId, userId) => Bets.find({ gameId: gameId, userId: userId, isEnded: false }).lean(),
+    getBet: (gameId, userId) => Bets.find({gameId: gameId, userId: userId, isEnded: false}).lean(),
+    getBetsUser: (gameId, userId) => Bets.find({ gameId: gameId, userId: userId, isEnded: false, }).lean(),
+    getBetsUserOnType: (gameId, userId, collection) => Bets.find({ gameId: gameId, userId: userId, isEnded: false, betCollection: collection }).lean(),
     createBet: (props) => {
-        const { gameId, userId, betType, betAmount } = props
+        const { gameId, userId, betType, betAmount, betCollection } = props
         const bet = new Bets({
             gameId,
             userId,
             betType,
-            betAmount
+            betAmount,
+            betCollection
         })
         bet.save().then(console.log(`Новая ставка!\n---\nПоставил: https://vk.com/id${userId}\n---\nСтавка на: ${betType}\n---\nСумма: ${numberWithSpace(betAmount)} 🎲\n---\nID игры: ${gameId}`))
     },

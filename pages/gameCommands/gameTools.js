@@ -30,6 +30,37 @@ const gamePayloadsTranslate = {
     'less': ['⬅', 'Меньше 7', '\n\n⬅ Ставки на Меньше 7:\n', 2.3]
 }
 
+const typingBets = {
+    '1-12': 'interval',
+    '13-24': 'interval',
+    '25-36': 'interval',
+    'red': 'color',
+    'black': 'color',
+    'zero': 'special',
+    'even': 'property',
+    'odd': 'property',
+    'one': 'number',
+    'two': 'number',
+    'three': 'number',
+    'four': 'number',
+    'five': 'number',
+    'six': 'number',
+    'golden': 'special',
+    'white': 'color',
+    '1-4': 'interval',
+    '5-8': 'interval',
+    '9-12': 'interval',
+    '2X': 'coefficent',
+    '3X': 'coefficent',
+    '5X': 'coefficent',
+    '10X': 'coefficent',
+    'more': 'range',
+    'seven': 'special',
+    'less': 'range'
+}
+
+let maxOfBets = { 'color' : 1, 'interval' : 2, 'range' : 1, 'special' : 1, 'property' : 1, 'number' : 5, 'coefficent' : 2}
+
 const botAlreadyAdmText = `👋🏻 Спасибо за приглашение!\n\n🎰 Выбирайте игровой режим!\n⚙ Админ беседы всегда сможет при желании его поменять, для этого напишите /settings для настройки беседы.`
 
 const botSaysHello = `👋🏻 Спасибо за приглашение!\n\nℹ Выдайте мне, пожалуйста, администратора в этой беседе, иначе я не смогу работать.\n\n🎰 Выбирайте игровой режим!\n⚙ Админ беседы всегда сможет при желании его поменять, для этого напишите /settings для настройки беседы.`
@@ -38,4 +69,4 @@ const familiarChat = `👀 Знакомое место, кажется, я зд�
 
 const welcomeNewUserText = `👋🏻 Привет!\n\n🎰 Это @sokolov_roulette(SOKOLOV ROULETTE), игра на виртуальную валюту @diceys(Кубики) в формате бота.\n\n🤑 Топы дня, промокоды, раздачи, конкурсы и многое другое ждёт тебя в нашем проекте!`
 
-module.exports = { gamePayloadsTranslate, botAlreadyAdmText, botSaysHello, familiarChat, welcomeNewUserText }
+module.exports = { maxOfBets, typingBets, gamePayloadsTranslate, botAlreadyAdmText, botSaysHello, familiarChat, welcomeNewUserText }

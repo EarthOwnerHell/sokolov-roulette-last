@@ -46,6 +46,7 @@ const getWinnersAndLoosers = {
             const userName = await getVkNameById(userId)
             const userBetAmount = bet.betAmount
             const userBetType = bet.betType
+            console.log(userBetType, number >= 1 && number <= 12)
             if ((userBetType == '1-12' && number >= 1 && number <= 12)  || (userBetType == '13-24' && number >= 13 && number <= 24)  || (userBetType == '25-36' && number >= 25 && number <= 36) || (userBetType == 'red' && color == 'red')  || (userBetType == 'black' && color == 'black') || (userBetType == 'odd' && number % 2 != 0) || (userBetType == 'even' && number % 2 == 0) || (userBetType == 'zero' && number == 0)){
                 const userWin = userBetAmount * gamePayloadsTranslate[userBetType][3].toFixed(0) 
                 plusBalanceUser(userId, userWin)
@@ -150,7 +151,6 @@ function checkResults() {
         gameId = await game.getGameId(round.peerId)
         const bets = await bet.getBets(gameId)
         if (bets.length == 0) continue
-        console.log(Date.now() - thisGame?.endTime >= -3_000 && Date.now() - thisGame?.endTime <= -2_000)
         if (Date.now() - thisGame?.endTime >= -3_000 && Date.now() - thisGame?.endTime <= -2_000) vkHelp({peer_id: thisGame.peerId, message: '🎰 Раунд подходит к концу...'})
         if (thisGame?.endTime && Date.now() - thisGame?.endTime >= 0) {
         const { peerId, hash, hashKey, gameMode } = thisGame;

@@ -11,7 +11,6 @@ const { botSaysHello, botAlreadyAdmText, familiarChat, welcomeNewUserText } = re
 const a = false;
 
 module.exports = async (msg) => {
-    console.log(msg)
     const { subTypes } = msg;
     if (subTypes[0] === 'chat_invite_user'){
         const groupId = msg.peerId        
@@ -48,16 +47,15 @@ module.exports = async (msg) => {
             });
             const bot = items.find((item) => item.member_id === -groupId);
             if (!bot) return
-                if (bot.is_admin) {
+            if (bot.is_admin) {
                 const newChat = await chat.createChat({
-                peerId: groupId,
-                botAdmin: false
+                    peerId: groupId,
+                    botAdmin: false
                 });
                 return msg.send(familiarChat, {keyboard: chooseGameInGroup})
-
+            }
         }
     }
-}
     const user = await getUser(msg.senderId)
     //if (user.id != 297789589) return msg.send("Разработка идёт, ожидайте...")
     if (a && !user?.admin) return;
@@ -73,7 +71,7 @@ module.exports = async (msg) => {
                         refferer: msg.referralValue,
                     });
     }
-        if (['меню', 'начать', 'старт'].includes(msg?.text?.toLowerCase()) && !msg.isChat) return msg.send('Главное меню', {
+    if (['меню', 'начать', 'старт', 'назад'].includes(msg?.text?.toLowerCase()) && !msg.isChat) return msg.send('Главное меню', {
         keyboard: mainBoard(user.admin)
     })
     if (['админка'].includes(msg?.text?.toLowerCase()) && !msg.isChat) return msg.send('Админ меню', {

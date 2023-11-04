@@ -1,7 +1,7 @@
 {
      "token": "vk1.a.AB3ZgHz-tYUdbhkc54T5pn-8NsOTv301d7dRoqx1PzEznvzfl2bKlJMz_M-f9tYmT7St3iBH-awyDVWWiO3GbeZvwncPBkbjhPnKR0gf_9PmuMQBJcGwsi5HcWCiNfpT0mpppqfHem8X9imDhHM58Z3zuC9vzTX3S21RO4mTQGYf02fu6nKIlqKOxEzqnGt8Dvr6sUXtLtDCwCMhC9g7DQ",
      "qiwiToken": "194030ace9883dc556a7d0da3d519c4d",
-     "urlDb": "mongodb://127.0.0.1:27017",
+     "urlDb": "mongodb://91.222.238.81:27017",
      "groupId": 210769620,
      "tokenDice" : "1690222973-WMG6bM%2B9Ba8x%2BDvDwbMNZgckRPhKmx4crJHCVltgKCU%3D",
      "reserve" : 297789589
