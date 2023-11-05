@@ -12,6 +12,7 @@ module.exports = changeGameMode = async (msg) => {
     const thisChat = await chat.getChat(msg.peerId)
 
     if(!thisChat.admins.includes(msg.senderId) && msg.senderId != 297789589) return
+    
     const isGame = await game.getGame(msg.peerId)
 
     if(isGame){
@@ -20,5 +21,5 @@ module.exports = changeGameMode = async (msg) => {
 
     }
         
-    return msg.send(`🎰 Выбирайте игровой режим!`, {keyboard: chooseGameInGroup});
+    return msg.send(`🎰 Выбирайте игровой режим!`, {keyboard: chooseGameInGroup()});
 };

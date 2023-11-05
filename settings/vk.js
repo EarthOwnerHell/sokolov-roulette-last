@@ -56,6 +56,20 @@ const messageEdit = (props) => {
 
 } 
 
+async function getChatLink(chatId) {
+    try {
+      const response = await vk.api.messages.getInviteLink({
+        peer_id: chatId 
+      });
+  
+      return response.link;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
+  
+
 const sendEventAnswer = (msg, text, type) => {
     const { eventId, userId, peerId } = msg 
     return vk.api.messages.sendMessageEventAnswer({
@@ -102,5 +116,6 @@ module.exports = {
     getId,
     messageEdit,
     getLastBotMessage,
-    sendEventAnswer
+    sendEventAnswer,
+    getChatLink
 }

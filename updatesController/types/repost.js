@@ -1,10 +1,12 @@
 const repost = require("../../database/managers/repost");
+const { plusBalanceUser } = require("../../database/managers/user");
 const { numberWithSpace } = require("../../settings/tools");
 const vkHelp = require("../../settings/vk")
 
 module.exports = async (msg) => {
     console.log(msg)
     if (msg.subTypes[0] !== 'wall_repost') return;
+    
 
     const repostInfo = await repost.get(msg.wall.copyHistory[0].id)
     const userId = msg.wall.ownerId
@@ -15,7 +17,8 @@ module.exports = async (msg) => {
 
     vkHelp({
         peer_id: userId,
-        message: `📣 Спасибо за репост!\n\n💰На ваш баланс начислено ${numberWithSpace(post.sumBonuseRepost)} 🎲`
+        message: `📣 Спасибо за репост!\n\n💰На ваш баланс начислено ${numberWithSpace(repostInfo.bonuseAmount)} 🎲`
     })
+    plusBalanceUser(userId, repostInfo.bonuseAmount)
     repost.addReposter(msg.wall.copyHistory[0].id, userId)
 }

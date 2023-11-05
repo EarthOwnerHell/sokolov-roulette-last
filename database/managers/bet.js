@@ -6,13 +6,14 @@ const bet = {
     getBetsUser: (gameId, userId) => Bets.find({ gameId: gameId, userId: userId, isEnded: false, }).lean(),
     getBetsUserOnType: (gameId, userId, collection) => Bets.find({ gameId: gameId, userId: userId, isEnded: false, betCollection: collection }).lean(),
     createBet: (props) => {
-        const { gameId, userId, betType, betAmount, betCollection } = props
+        const { gameId, userId, betType, betAmount, betCollection, userName } = props
         const bet = new Bets({
             gameId,
             userId,
             betType,
             betAmount,
-            betCollection
+            betCollection,
+            userName
         })
         bet.save().then(console.log(`Новая ставка!\n---\nПоставил: https://vk.com/id${userId}\n---\nСтавка на: ${betType}\n---\nСумма: ${numberWithSpace(betAmount)} 🎲\n---\nID игры: ${gameId}`))
     },

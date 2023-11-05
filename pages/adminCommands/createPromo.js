@@ -1,7 +1,5 @@
-const { setBuyCourse } = require('../../database/managers/global');
-const { plusBalanceUser } = require('../../database/managers/user');
-const { vk, getId, questionManager } = require('../../settings/vk');
-const { formClick, numberWithSpace } = require('../../settings/tools');
+const { vk, questionManager } = require('../../settings/vk');
+const { numberWithSpace } = require('../../settings/tools');
 const promo = require('../../database/managers/promo');
 
 vk.updates.use(questionManager.middleware);

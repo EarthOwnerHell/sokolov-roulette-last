@@ -26,9 +26,10 @@ module.exports = setGame = async (msg) => {
       if (!user) return
       if (user.is_admin && chatAdmins.length == 0) {
         const newAdm = chat.addAdmin(peerId, userId)
-      }
+      } else if (!user.is_admin) return msg.send('❗ Только администраторы беседы могут менять режим')
     } else if (chatAdmins.length > 0){
-      if(!thisChat.admins.includes(msg.senderId) && msg.senderId != 297789589) return    }
+      if(!thisChat.admins.includes(msg.senderId) && msg.senderId != 297789589) return 
+    }
 
     if (gameMode.length !== 1){
         return msg.send('📵 Сработал античит СТОПHAMSTER, не пытайтесь обмануть SOKOLOV ROULETTE')
@@ -43,5 +44,5 @@ module.exports = setGame = async (msg) => {
 
     const setGame = await chat.setGame(peerId, mode)
 
-    return msg.send(`✅ Режим беседы изменен на ${mode}`, {keyboard: gameKeyboard[mode]})
+    return msg.send(`✅ Режим беседы изменен на ${mode.toUpperCase()}`, {keyboard: gameKeyboard[mode]})
 }

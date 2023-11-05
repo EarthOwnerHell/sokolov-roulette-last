@@ -5,6 +5,7 @@ const defaultValue = (type, value, index = false) => ({ type, default: value, in
 const Chat = model('Chat', new Schema({
     peerId: defaultValue(Number, 0),
     game: defaultValue(String, ''),
+    groupType: defaultValue(String, 'standart'),
     botAdmin: defaultValue(Boolean, false),
     endTime: defaultValue(Number, 60_000),
     admins: defaultValue(Array, [])

@@ -100,6 +100,14 @@ function getConvertedArray(array, splitBy = 99) {
     return mainChunc.map((childArr) => childArr.join(','));
 }
 
+const translateGroupTypes = {
+    'official' : '@sokolov_roulette(Официальная)',
+    'standart' : 'Бесплатная (0%)',
+    'comfort' : 'Комфорт (5%)',
+    'premium' : 'Премиум (10%)',
+    'vip': 'VIP (15%)'
+}
+
 const getUserTimeReg = async (id) => {
     let now;
     
@@ -156,5 +164,6 @@ module.exports = {
     commandArgs,
     convertMsToSec,
     allTopsCoefficent,
-    rule
+    rule,
+    translateGroupTypes
 };

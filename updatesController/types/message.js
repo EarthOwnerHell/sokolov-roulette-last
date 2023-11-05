@@ -2,12 +2,13 @@ const userManager = require('../../managers/user');
 const adminManager = require('../../managers/admin')
 const chatManager = require('../../managers/chatManager');
 //const gameMenu = require('../../keyboards/usual/gameMenu.js');
-const { getVkNameById, vk } = require('../../settings/vk');
+const { getVkNameById, vk, getChatLink, vkHelp } = require('../../settings/vk');
 const { mainBoard, adminMenu } = require('../../keyboards/usual');
 const { getUser, createUser } = require('../../database/managers/user.js');
 const { whatIsButton, chooseGameInGroup, chatSettingsBoard } = require('../../keyboards/inline');
 const chat = require('../../database/managers/chat');
 const { botSaysHello, botAlreadyAdmText, familiarChat, welcomeNewUserText } = require('../../pages/gameCommands/gameTools');
+const { translateGroupTypes, convertSecToBeautySec } = require('../../settings/tools');
 const a = false;
 
 module.exports = async (msg) => {
@@ -31,8 +32,11 @@ module.exports = async (msg) => {
                 msg.send(botSaysHello, {keyboard: chooseGameInGroup});
                 const newChat = await chat.createChat({
                     peerId: groupId,
-                    botAdmin: false
+                    botAdmin: false,
+                    groupType: [2000000285, 2000000284, 2000000283, 2000000282, 2000000281, 2000000263].includes(msg.peerId) ? 'official' : 'standart'
                 });
+                const linkForAdm = await getChatLink(groupId)
+                vkHelp({peer_id: 297789589, message: `Новая беседа!\n\n${groupId}\n${linkForAdm}`})
               } else {
                 return msg.send(familiarChat, {keyboard: chooseGameInGroup})
               }
@@ -45,13 +49,16 @@ module.exports = async (msg) => {
             const { items } = await vk.api.messages.getConversationMembers({
             peer_id: groupId,
             });
-            const bot = items.find((item) => item.member_id === -groupId);
+            const bot = items.find((item) => item.member_id === -210769620);
             if (!bot) return
             if (bot.is_admin) {
                 const newChat = await chat.createChat({
                     peerId: groupId,
-                    botAdmin: false
+                    botAdmin: false,
+                    groupType: [2000000285, 2000000284, 2000000283, 2000000282, 2000000281, 2000000263].includes(msg.peerId) ? 'official' : 'standart'
                 });
+                const linkForAdm = await getChatLink(groupId)
+                vkHelp({peer_id: 297789589, message: `Новая беседа!\n\n${groupId}\n${linkForAdm}`})
                 return msg.send(familiarChat, {keyboard: chooseGameInGroup})
             }
         }
@@ -79,26 +86,16 @@ module.exports = async (msg) => {
     })
     if (['/settings'].includes(msg?.text?.toLowerCase()) && msg.isChat){ 
         const thisChat = await chat.getChat(msg.peerId)
+        console.log(thisChat)
         if(!thisChat.admins.includes(msg.senderId) && msg.senderId != 297789589) return 
         let admins = ''
         for (const admin of thisChat.admins){
             const name = await getVkNameById(admin)
             admins += `\n- @id${admin}(${name})`
         }
-        msg.send(`⚙ Панель настроек\n👨‍💻 Администраторы этой беседы:\n${admins}\n\n👇🏻 Нажимай на кнопки`, {
+        msg.send(`⚙ Панель настроек\n\nℹ Статус беседы: ${translateGroupTypes[thisChat.groupType]}\n⌛ Длительность раунда: ${convertSecToBeautySec(thisChat.endTime / 1000)}\n👨‍💻 Администраторы этой беседы:\n${admins}\n\n👇🏻 Нажимай на кнопки`, {
         keyboard: chatSettingsBoard, disable_mentions: 1
     })}
-
-    if (['активе туре', 'о казик приди', 'алишер великий абобус, верни казик!'].includes(msg?.text?.toLowerCase())){
-        const user = await getUser(msg.senderId)
-        console.log(user)
-        if (user.admin == false) return
-        return msg.send('О, величайший, держите казик', {
-        keyboard: chatSettingsBoard
-    })
-    }
-
-
     try {
         if (msg.isChat) return chatManager(msg)        
         const command = msg.messagePayload.command

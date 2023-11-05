@@ -114,6 +114,20 @@ const reviewMenu = Keyboard.keyboard([
     [urlButton('💬 Беседа', 'https://vk.me/join/AJQ1d_TAWiFqQesViof56Yel')],
 ]).inline();*/
 
+    /*const chooseGameInGroup = (payload) => Keyboard.keyboard([
+        [
+            textButton('🎲 Cube ', `set_game:cube:${payload}`, colors.green),
+            textButton('🎰 Wheel ', `set_game:wheel:${payload}`, colors.green)
+        ],
+        [
+            textButton('🟣 Double', `set_game:double:${payload}`, colors.green),
+            textButton('⭐ Dice  ', `set_game:dice:${payload}`, colors.green)
+        ],
+        [
+            textButton('🔥 L7M', `set_game:l7m:${payload}`, colors.green),
+        ]
+    ]).inline()*/
+
 module.exports = {
     inlineProfileBoard,
     betKeyboard,

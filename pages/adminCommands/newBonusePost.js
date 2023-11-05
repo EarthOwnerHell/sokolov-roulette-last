@@ -6,7 +6,7 @@ module.exports = async (msg) => {
 
     if (!Number(postId.text)) return msg.send('Неверно')
 
-    const bonuseAmount = await msg.question('Количество денег за репост:')
+    const bonuseAmount = await msg.question('Количество кубиков за репост:')
 
     if (!Number(bonuseAmount.text) || Number(bonuseAmount.text) <= 0) return msg.send('Неее')
 

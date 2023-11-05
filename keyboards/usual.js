@@ -157,6 +157,9 @@ const adminMenu = Keyboard.keyboard([
         adminButton('Новый промокод', 'newPromo', colors.blue)
     ],
     [
+        adminButton('Изменить статус беседы', 'changeGroupType', colors.green),
+    ],
+    [
         textButton('Назад', 'back', colors.red)
     ]
 ])

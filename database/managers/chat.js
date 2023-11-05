@@ -3,10 +3,11 @@ const Chat = require("../models/Chat")
 const chat = {
     getChat: (peerId) => Chat.findOne({ peerId }).lean(),
     createChat: (props) => {
-        const { peerId, botAdmin } = props
+        const { peerId, botAdmin, groupType } = props
         const chat = new Chat({
             peerId,
-            botAdmin
+            botAdmin,
+            groupType
         })
     
         chat.save().then(console.log(`--> Новая беседа!`))
@@ -23,6 +24,13 @@ const chat = {
     }, {
         $set: {
             endTime: endTime
+        }
+    }),
+    setGroupType: (peerId, type) => Chat.updateOne({
+        peerId: peerId
+    }, {
+        $set: {
+        groupType: type
         }
     }),
     addAdmin: (peerId, userId) => {

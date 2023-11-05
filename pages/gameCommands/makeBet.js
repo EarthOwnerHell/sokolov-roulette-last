@@ -61,6 +61,7 @@ module.exports = makeBet = async (msg) => {
             const typeForArray = typingBets[betType]
             if (betType != betOn) betTypes[typeForArray] += 1
         })
+        
         if (maxOfBets[typingBets[betOn]] < betTypes[typingBets[betOn]]) return msg.send('❗ Нельзя делать столько ставок на различные события')
 
         isStarted = true
@@ -119,7 +120,8 @@ module.exports = makeBet = async (msg) => {
             userId : id,
             betType: betOn,
             betAmount: Number(finalBet),
-            betCollection: typingBets[betOn]
+            betCollection: typingBets[betOn],
+            userName: name
         })
         betsType.push(betOn)
     }
@@ -137,7 +139,8 @@ module.exports = makeBet = async (msg) => {
                 userId : id,
                 betType: betOn,
                 betAmount: Number(finalBet),
-                betCollection: typingBets[betOn]
+                betCollection: typingBets[betOn],
+                userName: name
             })
         }
 

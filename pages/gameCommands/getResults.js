@@ -3,7 +3,7 @@ const game = require("../../database/managers/game");
 const { editDayTopBudget, editWeekTopBudget } = require("../../database/managers/global");
 const { plusBalanceUser, editWinPerDay, editWinPerWeek } = require("../../database/managers/user");
 const { honestyCheck } = require("../../keyboards/inline");
-const { numberWithSpace, convertMsToSec } = require("../../settings/tools");
+const { numberWithSpace, convertSecToBeautySec } = require("../../settings/tools");
 const { getVkNameById, vkHelp } = require("../../settings/vk");
 const { gamePayloadsTranslate } = require("./gameTools");
 
@@ -28,7 +28,7 @@ const getWinnersAndLoosers = {
                 editDayTopBudget(userWin * 0.05)
                 editWeekTopBudget(userWin * 0.025)
                 deductionsToTops += userWin * 0.075
-                textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))}) 🎲\n`
+                textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))} 🎲)\n`
             }
            else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
         }
@@ -55,7 +55,7 @@ const getWinnersAndLoosers = {
                 editDayTopBudget(userWin * 0.05)
                 editWeekTopBudget(userWin * 0.025)
                 deductionsToTops += userWin * 0.075
-                textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))}) 🎲\n`
+                textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))} 🎲)\n`
             }
             else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
         }
@@ -81,7 +81,7 @@ const getWinnersAndLoosers = {
                 editDayTopBudget(userWin * 0.05)
                 editWeekTopBudget(userWin * 0.025)
                 deductionsToTops += userWin * 0.075
-                textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))}) 🎲\n`
+                textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))} 🎲)\n`
             }
             else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
         }
@@ -107,7 +107,7 @@ const getWinnersAndLoosers = {
                 editDayTopBudget(userWin * 0.05)
                 editWeekTopBudget(userWin * 0.025)
                 deductionsToTops += userWin * 0.075
-                textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))}) 🎲\n`
+                textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))} 🎲)\n`
             }
             else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
         }
@@ -133,7 +133,7 @@ const getWinnersAndLoosers = {
                 editDayTopBudget(userWin * 0.05)
                 editWeekTopBudget(userWin * 0.025)
                 deductionsToTops += userWin * 0.075
-                textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))}) 🎲\n`
+                textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))} 🎲)\n`
             }
             else textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
         }
@@ -151,7 +151,7 @@ function checkResults() {
         gameId = await game.getGameId(round.peerId)
         const bets = await bet.getBets(gameId)
         if (bets.length == 0) continue
-        if (Date.now() - thisGame?.endTime >= -3_000 && Date.now() - thisGame?.endTime <= -2_000) vkHelp({peer_id: thisGame.peerId, message: '🎰 Раунд подходит к концу...'})
+        if (Date.now() - thisGame?.endTime >= -1_000 && Date.now() - thisGame?.endTime <= 0) vkHelp({peer_id: thisGame.peerId, message: '🔮 Раунд подходит к концу...'})
         if (thisGame?.endTime && Date.now() - thisGame?.endTime >= 0) {
         const { peerId, hash, hashKey, gameMode } = thisGame;
         const getRoundInfo = getWinnersAndLoosers[gameMode]
