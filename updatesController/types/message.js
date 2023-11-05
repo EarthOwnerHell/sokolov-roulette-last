@@ -86,7 +86,6 @@ module.exports = async (msg) => {
     })
     if (['/settings'].includes(msg?.text?.toLowerCase()) && msg.isChat){ 
         const thisChat = await chat.getChat(msg.peerId)
-        console.log(thisChat)
         if(!thisChat.admins.includes(msg.senderId) && msg.senderId != 297789589) return 
         let admins = ''
         for (const admin of thisChat.admins){

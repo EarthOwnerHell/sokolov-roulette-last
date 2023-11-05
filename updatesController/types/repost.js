@@ -4,7 +4,6 @@ const { numberWithSpace } = require("../../settings/tools");
 const vkHelp = require("../../settings/vk")
 
 module.exports = async (msg) => {
-    console.log(msg)
     if (msg.subTypes[0] !== 'wall_repost') return;
     
 

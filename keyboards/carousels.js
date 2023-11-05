@@ -87,7 +87,7 @@ const shopCarousel = JSON.stringify({
                         "type": "callback",
                         "label": "⭐ Привилегии",
                         "payload" : {
-                            "command" : "privileges"
+                            "command" : 'inDeveloping'//"privileges"
                         }
                     }
                 }
@@ -103,7 +103,7 @@ const shopCarousel = JSON.stringify({
                         "type": "callback",
                         "label": "💸 Купить баланс",
                         "payload" : {
-                            "command" : "buyBonuseBalance"
+                            "command" : 'inDeveloping'//"buyBonuseBalance"
                         }
                     }
                 }

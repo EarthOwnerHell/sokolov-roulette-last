@@ -30,7 +30,6 @@ module.exports = userManager = async (msg) => {
     }
 
     try {
-        console.log(msg, commands[msg.messagePayload.command])
         commands[msg.messagePayload.command]()
     } catch (e) { console.log('--> Не нажали на кнопку User Manager\'a') }
 
