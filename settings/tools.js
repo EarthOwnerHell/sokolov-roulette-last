@@ -135,7 +135,7 @@ const getUserTimeReg = async (id) => {
     return Date.now() - time >= 86_400_000 * 14 && Date.now() - time > 0 ? 1 : 0
 }
 
-const convertMsToSec = (seconds) => {
+const convertSecToBeautySec = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     console.log(remainingSeconds)
@@ -162,7 +162,7 @@ module.exports = {
     getLength,
     resetLossWin,
     commandArgs,
-    convertMsToSec,
+    convertSecToBeautySec,
     allTopsCoefficent,
     rule,
     translateGroupTypes
