@@ -19,6 +19,7 @@ module.exports = chatManager = async (msg) => {
         'balance': () => balance(msg)
     }
     try {
+        startTime = Date.now()
         if (msg.messagePayload.command.includes(':')){
             const payload = msg.messagePayload.command
             console.log(payload)

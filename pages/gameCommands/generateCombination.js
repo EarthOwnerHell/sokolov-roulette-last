@@ -3,8 +3,9 @@ const { getRandomValue, getRandomValueByPercentage } = require("./hash")
 const randomDependingMode = {
     'wheel': function() {
     let number = getRandomValue(0, 36)
+    const checkForRed = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].includes(number)
     let color = ''
-    [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].includes(number) ? color = 'red' : number == 0 ? color = 'zero' : color = 'black' 
+    checkForRed ? color = 'red' : number == 0 ? color = 'zero' : color = 'black' 
     return { 'color': color, 'number': number }
     },
     'cube' : function(){
@@ -27,8 +28,9 @@ const randomDependingMode = {
     },
     'dice' : function() {
     let number = getRandomValue(0, 12)
+    const checkForWhite = [1, 3, 5, 7, 9, 11].includes(number)
     let color = ''
-    [1, 3, 5, 7, 9, 11].includes(number) ? color = 'white' : number == 0 ? color = 'golden' : color = 'black'
+    checkForWhite ? color = 'white' : number == 0 ? color = 'golden' : color = 'black'
     number == 0 ? number = 'Золото' : ''
     return { 'color': color, 'number': number }
     }

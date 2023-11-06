@@ -10,7 +10,7 @@ const { gamePayloadsTranslate } = require("./gameTools");
 const getWinnersAndLoosers = {
     'l7m' : async (data) => {
         const { results: { number }, peerId } = data
-        let textToReturn = number != 7 ? `🎰 Выпало число ${number}!\n\n` : `🎰 Выпало число ${number} 🔵!\n\n`
+        let textToReturn = number != 7 ? `🎰 Выпало число ${number}\n\n` : `🎰 Выпало число ${number} 🔵\n\n`
         const gameId = await game.getGameId(peerId)
         const bets = await bet.getBets(gameId)
         let deductionsToTops = 0
@@ -36,7 +36,7 @@ const getWinnersAndLoosers = {
     },
     'wheel' : async(data) => {
         const { results: { number, color }, peerId } = data
-        let textToReturn = `🎰 Выпало число ${number} ${gamePayloadsTranslate[color][0]}!\n\n`
+        let textToReturn = `🎰 Выпало число ${number} ${gamePayloadsTranslate[color][0]}\n\n`
         const gameId = await game.getGameId(peerId)
         const bets = await bet.getBets(gameId)
         let deductionsToTops = 0
@@ -63,7 +63,7 @@ const getWinnersAndLoosers = {
     },
     'cube': async(data) => {
         const { results: { number }, peerId } = data
-        let textToReturn = `🎰 Выпало число ${number}!\n\n`
+        let textToReturn = `🎰 Выпало число ${number}\n\n`
         const gameId = await game.getGameId(peerId)
         const bets = await bet.getBets(gameId)
         let deductionsToTops = 0
@@ -89,7 +89,7 @@ const getWinnersAndLoosers = {
     }, 
     'dice': async(data) => {
         const { results: { number, color }, peerId } = data
-        let textToReturn = `🎰 Выпало ${Number(number) ? 'число ' : ''}${number} ${gamePayloadsTranslate[color][0]}!\n\n`
+        let textToReturn = `🎰 Выпало ${Number(number) ? 'число ' : ''}${number} ${gamePayloadsTranslate[color][0]}\n\n`
         const gameId = await game.getGameId(peerId)
         const bets = await bet.getBets(gameId)
         let deductionsToTops = 0
@@ -115,7 +115,7 @@ const getWinnersAndLoosers = {
     },
     'double': async(data) => {
         const { results: { coefficent }, peerId } = data
-        let textToReturn = `🎰 Выпал коэффицент ${coefficent} ${gamePayloadsTranslate[coefficent][0]}!\n\n`
+        let textToReturn = `🎰 Выпал коэффицент ${coefficent} ${gamePayloadsTranslate[coefficent][0]}\n\n`
         const gameId = await game.getGameId(peerId)
         const bets = await bet.getBets(gameId)
         let deductionsToTops = 0

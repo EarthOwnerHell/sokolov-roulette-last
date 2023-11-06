@@ -21,5 +21,5 @@ module.exports = changeGameMode = async (msg) => {
 
     }
         
-    return msg.send(`🎰 Выбирайте игровой режим!`, {keyboard: chooseGameInGroup()});
+    return msg.send(`🎰 Выбирайте игровой режим!`, {keyboard: chooseGameInGroup});
 };
