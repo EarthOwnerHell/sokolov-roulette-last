@@ -1,10 +1,10 @@
-const { getRandomValue } = require("./hash")
+const { getRandomValue, getRandomValueByPercentage } = require("./hash")
 
 const randomDependingMode = {
     'wheel': function() {
     let number = getRandomValue(0, 36)
-    let color = getRandomValue(0, 1)
-    color == 0 && number != 0 ? color = 'red' : color == 1 && number != 0 ? color = 'black' : color = 'zero'
+    let color = ''
+    [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].includes(number) ? color = 'red' : number == 0 ? color = 'zero' : color = 'black'
     return { 'color': color, 'number': number }
     },
     'cube' : function(){
@@ -12,8 +12,13 @@ const randomDependingMode = {
     return { 'number': number }
     },
     'double': function() {
-    let coefficent = getRandomValue(1, 4)
-    coefficent == 1 ? coefficent = '2X' : coefficent == 2 ? coefficent = '3X' : coefficent == 3 ? coefficent = '5X' : coefficent = '10X'
+    const values = [
+        { name: '2X', percentage: 50 },
+        { name: '3X', percentage: 35 },
+        { name: '5X', percentage: 12 },
+        { name: '10X', percentage: 3 }
+        ];
+    const coefficent = getRandomValueByPercentage(values)
     return { 'coefficent' : coefficent }
     },
     'l7m' : function(){
@@ -22,9 +27,9 @@ const randomDependingMode = {
     },
     'dice' : function() {
     let number = getRandomValue(0, 12)
-    let color = getRandomValue(0, 1)
+    let color = ''
+    [1, 3, 5, 7, 9, 11].includes(number) ? color = 'white' : number == 0 ? color = 'golden' : color = 'black'
     number == 0 ? number = 'Золото' : ''
-    color == 0 && number != 'Золото' ? color = 'white' : color == 1 && number != 'Золото' ? color = 'black' : color = 'golden'
     return { 'color': color, 'number': number }
     }
 }
