@@ -23,6 +23,7 @@ function getRandomValue(min, max) {
     return randomNumber;
     }
 
+
 function getRandomValueByPercentage(values) {
     // Считаем сумму всех процентов
     const sumOfPercentages = values.reduce((sum, value) => sum + value.percentage, 0);
