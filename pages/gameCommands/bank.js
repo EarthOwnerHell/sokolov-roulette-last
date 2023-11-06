@@ -9,7 +9,6 @@ const { randomDependingMode, totalValues, makeArrayFromObject } = require("./gen
 const { createHash, createSecretWord } = require("./hash");
 
 module.exports = bank = async (msg) => {
-    const startTime = Date.now()
     const { id, name } = await getUser(msg.senderId)
 
     const peerId = msg.peerId
@@ -83,6 +82,5 @@ module.exports = bank = async (msg) => {
     })
 
     const totalText = `🏦 Банк раунда: ${numberWithSpace(betsAmount.toFixed(0))} 🎲\n\n` + suppliersText  + `\n\n&#10067; Хэш игры: ${checkGame.hash}` + `\n⌛ До конца раунда: ${convertSecToBeautySec((endTime - Date.now()) / 1000)}`
-    msg.send(totalText)
-    return console.log((Date.now() - startTime) / 1000)
+    return msg.send(totalText)
 }
