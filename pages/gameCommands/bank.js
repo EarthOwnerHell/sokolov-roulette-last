@@ -3,7 +3,6 @@ const chat = require("../../database/managers/chat");
 const game = require("../../database/managers/game");
 const { getUser } = require("../../database/managers/user");
 const { numberWithSpace, convertSecToBeautySec } = require("../../settings/tools");
-const { getVkNameById, vkHelp } = require("../../settings/vk");
 const  { gamePayloadsTranslate } = require("./gameTools");
 const { randomDependingMode, totalValues, makeArrayFromObject } = require("./generateCombination");
 const { createHash, createSecretWord } = require("./hash");

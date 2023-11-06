@@ -4,7 +4,7 @@ const randomDependingMode = {
     'wheel': function() {
     let number = getRandomValue(0, 36)
     let color = ''
-    [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].includes(number) ? color = 'red' : number == 0 ? color = 'zero' : color = 'black'
+    [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].includes(number) ? color = 'red' : number == 0 ? color = 'zero' : color = 'black' 
     return { 'color': color, 'number': number }
     },
     'cube' : function(){
