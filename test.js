@@ -26,9 +26,8 @@ const values = [
   { name: '3X', percentage: 35 },
   { name: '5X', percentage: 12 },
   { name: '10X', percentage: 3 }
-];
-
-const b = 10000
+  ];
+const b = 18
 let stats = {
   '2X' : 0,
   '3X' : 0,
