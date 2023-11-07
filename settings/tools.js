@@ -146,6 +146,14 @@ const convertSecToBeautySec = (seconds) => {
     return `${formattedMinutes}:${formattedSeconds}`;
 }
 
+function range(start, end) {
+    let range = []
+    for(let i = start; i <= end; i++){
+    range.push(i)
+    }
+    return range
+    }
+
 const rule = new schedule.RecurrenceRule();
 rule.dayOfWeek = 1; // 0 - воскресенье, 1 - понедельник, и так далее
 rule.hour = 0;
@@ -165,5 +173,6 @@ module.exports = {
     convertSecToBeautySec,
     allTopsCoefficent,
     rule,
-    translateGroupTypes
+    translateGroupTypes,
+    range
 };

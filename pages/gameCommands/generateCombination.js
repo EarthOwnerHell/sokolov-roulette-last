@@ -1,16 +1,19 @@
+const { range } = require("../../settings/tools")
 const { getRandomValue, getRandomValueByPercentage } = require("./hash")
 
 const randomDependingMode = {
     'wheel': function() {
-    let number = getRandomValue(0, 36)
+    const number = getRandomValue(0, 36)
     const checkForRed = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].includes(number)
-    let color = ''
-    checkForRed ? color = 'red' : number == 0 ? color = 'zero' : color = 'black' 
-    return { 'color': color, 'number': number }
+    const color = checkForRed ? 'red' : number == 0 ? 'zero' : 'black' 
+    const numberType = number % 2 == 0 ? 'even' : 'odd'
+    const interval = range(1, 12).includes(number) ? '1-12' : range(13, 24).includes(number) ? '13-24' : range(25, 36).includes(number) ? '25-36' : 0
+    return [number, color, interval, numberType]
     },
     'cube' : function(){
     const number = getRandomValue(1, 6)
-    return { 'number': number }
+    const numberType = number % 2 == 0 ? 'even' : 'odd'
+    return [number, numberType]
     },
     'double': function() {
     const values = [
@@ -20,27 +23,27 @@ const randomDependingMode = {
         { name: '10X', percentage: 3 }
         ];
     const coefficent = getRandomValueByPercentage(values)
-    return { 'coefficent' : coefficent }
+    return [coefficent]
     },
     'l7m' : function(){
     const number = getRandomValue(1, 7)
-    return { 'number': number }
+    const numberType = number < 7 ? 'less' : number > 7 ? 'more' : 'seven'
+    return [number, numberType]
     },
     'dice' : function() {
     let number = getRandomValue(0, 12)
     const checkForWhite = [1, 3, 5, 7, 9, 11].includes(number)
-    let color = ''
-    checkForWhite ? color = 'white' : number == 0 ? color = 'golden' : color = 'black'
-    number == 0 ? number = 'Золото' : ''
-    return { 'color': color, 'number': number }
+    const color = checkForWhite ? 'white' : number == 0 ? 'zero' : 'black' 
+    const numberType = number % 2 == 0 ? 'even' : 'odd'
+    const interval = range(1, 4).includes(number) ? '1-4' : range(5, 8).includes(number) ? '5-8' : range(9, 12).includes(number) ? '9-12' : 0
+    return [number, color, interval, numberType]
     }
 }
 
 function totalValues(array){
-    let forHash = ''
-    array.forEach(element => {
-        forHash += `${element}|`
-    });
+    let forHash = ''     
+    const check = [1, 2].includes(array.length)
+    check ? forHash = `${array[0]}|` : forHash = `${array[0]}|${array[1]}|`
     return forHash
 }
 

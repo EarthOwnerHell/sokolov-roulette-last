@@ -7,12 +7,33 @@ const { createSecretWord, createHash } = require("./hash");
 const chat = require("../../database/managers/chat");
 const { numberWithSpace } = require("../../settings/tools");
 const { betKeyboard } = require("../../keyboards/inline");
+const { whatReserve } = require("../../settings/vkdice");
 
 module.exports = makeBet = async (msg) => {
     const { balance, id, name } = await getUser(msg.senderId)
 
     if (!balance) return msg.send(`❗ У вас нет 🎲 на балансе.`)
 
+    const reserve = 10000000000000//await whatReserve()
+
+    let payload = msg.messagePayload.command
+
+    let splitPayload = payload.split(':')
+
+    const betOn = splitPayload[1]
+
+    let userBet = await msg.question(`${gamePayloadsTranslate[betOn][0]} @id${id}(${name}), введите ставку на ${gamePayloadsTranslate[betOn][1]}:`, {keyboard: betKeyboard(balance)}) 
+
+    const forBet = userBet.text.includes('[club210769620|@sokolov_roulette] ') ? userBet.text.split('[club210769620|@sokolov_roulette] ') : userBet.text
+
+    let finalBet = Array.isArray(forBet) ? Number(forBet[1].replace(/к/g, "000").replace(/\s/g, "")) : String(forBet) ? Number(forBet.replace(/к/g, "000").replace(/\s/g, "")) : Number(forBet)
+
+    if (!finalBet || finalBet < 0) return msg.send(`❗ Что-то не так, проверьте введённые данные`)
+
+    if (finalBet > balance) return msg.send(`❗ У вас нет столько 🎲`)
+
+    if (finalBet > reserve.balance) return msg.send(`❗ В данный момент резерв бота мал для такой ставки, повторите попытку позднее`)
+    
     let isStarted = false
 
     const peerId = msg.peerId
@@ -25,26 +46,6 @@ module.exports = makeBet = async (msg) => {
 
     const gameMode = thisChat.game
 
-    let payload = msg.messagePayload.command
-
-    let splitPayload = payload.split(':')
-
-    const betOn = splitPayload[1]
-
-    let userBet = await msg.question(`${gamePayloadsTranslate[betOn][0]} @id${id}(${name}), введите ставку на ${gamePayloadsTranslate[betOn][1]}:`, {keyboard: betKeyboard(balance)}) 
-
-    let reserve = 10000000000
-
-    const forBet = userBet.text.includes('[club210769620|@sokolov_roulette] ') ? userBet.text.split('[club210769620|@sokolov_roulette] ') : userBet.text
-
-    let finalBet = Array.isArray(forBet) ? Number(forBet[1].replace(/к/g, "000").replace(/\s/g, "")) : typeof forBet == String ? Number(forBet.replace(/к/g, "000").replace(/\s/g, "")) : Number(forBet)
-
-    if (!finalBet || finalBet < 0) return msg.send(`❗ Что-то не так, проверьте введённые данные`)
-
-    if (finalBet > balance) return msg.send(`❗ У вас нет столько 🎲`)
-
-    if (finalBet > reserve.balance) return msg.send(`❗ В данный момент резерв бота мал для такой ставки, повторите попытку позднее`)
-    
     const checkGame = await game.getGame(peerId)
 
     if (checkGame) {
@@ -82,9 +83,7 @@ module.exports = makeBet = async (msg) => {
 
         const valuesForHash = randomDependingMode[gameMode]()
 
-        const arrayValues = makeArrayFromObject(valuesForHash)
-
-        const hashData = totalValues(arrayValues)
+        const hashData = totalValues(valuesForHash)
 
         let secretWord = createSecretWord(hashData, gameMode)
 
