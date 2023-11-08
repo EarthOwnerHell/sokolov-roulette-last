@@ -46,7 +46,7 @@ const inlineProfileBoard = Keyboard.keyboard([
 
     const articleAboutCubics = Keyboard.keyboard([
         [
-            urlButton(`📎 «Что такое 🎲»`, 'https://vk.com/sokolov_roulette')
+            urlButton(`📎 «Что такое 🎲»`, 'https://vk.com/@sokolov_roulette-article-cubics')
         ],
     ]).inline()
 
