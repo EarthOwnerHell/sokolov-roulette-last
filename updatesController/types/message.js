@@ -33,7 +33,7 @@ module.exports = async (msg) => {
                 const newChat = await chat.createChat({
                     peerId: groupId,
                     botAdmin: false,
-                    groupType: [2000000285, 2000000284, 2000000283, 2000000282, 2000000281, 2000000263].includes(msg.peerId) ? 'official' : 'standart'
+                    groupType: [2000000280, 2000000009, 2000000286, 2000000287, 2000000288].includes(msg.peerId) ? 'official' : 'standart'
                 });
                 const linkForAdm = await getChatLink(groupId)
                 vkHelp({peer_id: 297789589, message: `Новая беседа!\n\n${groupId}\n${linkForAdm}`})
