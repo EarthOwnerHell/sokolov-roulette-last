@@ -40,7 +40,7 @@ const inlineProfileBoard = Keyboard.keyboard([
 
     const honestyCheck = Keyboard.keyboard([
         [
-            urlButton("#⃣ Проверка честности", 'https://vk.com/sokolov_roulette')
+            urlButton("#⃣ Проверка честности", 'http://vk.com/@sokolov_roulette-article-hash')
         ],
     ]).inline()
 
