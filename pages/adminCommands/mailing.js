@@ -1,5 +1,5 @@
 const { getRandomId } = require('vk-io');
-const { noButtonBoard /*,mailingMenu*/ }= require('../../keyboards/inline');
+const { noButtonBoard, mailingMenu }= require('../../keyboards/inline');
 const { adminMenu } = require('../../keyboards/usual');
 const { vk, questionManager } = require('../../settings/vk');
 const { processArray, getConvertedArray } = require('../../settings/tools');
@@ -69,7 +69,7 @@ module.exports = mailing = async (msg) => {
                     peer_ids,
                     message: question.text,
                     attachment: newArr,
-                    //keyboard: mailingMenu,
+                    keyboard: mailingMenu,
                     random_id: getRandomId(),
                 })
                 .then((res) => {
