@@ -33,10 +33,10 @@ const randomDependingMode = {
     'dice' : function() {
     let number = getRandomValue(0, 12)
     const checkForWhite = [1, 3, 5, 7, 9, 11].includes(number)
-    const color = checkForWhite ? 'white' : number == 0 ? 'zero' : 'black' 
+    const color = checkForWhite ? 'white' : number == 0 ? 'golden' : 'black' 
     const numberType = number % 2 == 0 ? 'even' : 'odd'
     const interval = range(1, 4).includes(number) ? '1-4' : range(5, 8).includes(number) ? '5-8' : range(9, 12).includes(number) ? '9-12' : 0
-    return [number, color, interval, numberType]
+    return [number, color, interval, numberType, 'Золото']
     }
 }
 

@@ -16,9 +16,9 @@ const getWinnersAndLoosers = async (data) => {
 
         let topWeekBudgetToPlus = 0
 
-        const winCooombination = `${results[0]} ${gamePayloadsTranslate[results.length == 1 ? results[0] : results[1]][0]}`
+        const winCoombination = `${results.length != 5 ? results[0] : results[4]} ${gamePayloadsTranslate[results.length == 1 ? results[0] : results[1]][0]}`
 
-        let textToReturn = `🎰 ${Number(results[0]) || results[0] == 0 ? `Выпало число ${winCooombination}` : `Выпал коэффицент ${winCooombination}` }\n\n`
+        let textToReturn = `🎰 ${Number(results[0]) || results[0] == 0 && results.length < 5 ? `Выпало число ${winCoombination}` : results[0] == 0 && results.length == 5 ? `Выпало ${winCoombination}` : `Выпал коэффицент ${winCoombination}`}\n\n`;
 
         const bets = await bet.getBets(_id)
 
