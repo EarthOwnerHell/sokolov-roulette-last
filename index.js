@@ -22,7 +22,7 @@ const job = schedule.scheduleJob(rule, function() {
     resetWeekTopers()
 });
 
-const resetSchedule = schedule.scheduleJob({ hour: 0, minute: 0 }, () => {
+const resetSchedule = schedule.scheduleJob({ hour: 0, minute: 0, tz: 'Europe/Moscow' }, () => {
     resetLossWin();
     resetDayTopers()
   });

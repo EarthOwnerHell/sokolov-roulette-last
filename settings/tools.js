@@ -154,10 +154,11 @@ function range(start, end) {
     return range
     }
 
-const rule = new schedule.RecurrenceRule();
-rule.dayOfWeek = 1; // 0 - воскресенье, 1 - понедельник, и так далее
-rule.hour = 0;
-rule.minute = 0;
+    const rule = new schedule.RecurrenceRule();
+    rule.dayOfWeek = 1; // 0 - воскресенье, 1 - понедельник, и так далее
+    rule.tz = 'Europe/Moscow'; // Устанавливаем часовой пояс Москвы
+    rule.hour = 0;
+    rule.minute = 0;    
 
 module.exports = {
     deckOfNum,

@@ -5,7 +5,7 @@ const { plusBalanceUser, editWinPerDay, editWinPerWeek } = require("../../databa
 const { honestyCheck } = require("../../keyboards/inline");
 const { numberWithSpace } = require("../../settings/tools");
 const { vkHelp } = require("../../settings/vk");
-const { gamePayloadsTranslate } = require("./gameTools");
+const { gamePayloadsTranslate, photoesDependMode } = require("./gameTools");
 
 const getWinnersAndLoosers = async (data) => {
         const { results, _id } = data
@@ -81,7 +81,7 @@ function checkResults() {
         if (Date.now() - thisGame?.endTime >= -1_000 && Date.now() - thisGame?.endTime <= 0) vkHelp({peer_id: thisGame.peerId, message: '🔮 Раунд подходит к концу...'})
 
         if (thisGame?.endTime && Date.now() - thisGame?.endTime >= 0) {
-        const { peerId, hash, hashKey, gameMode } = thisGame;
+        const { peerId, hash, hashKey, gameMode, results } = thisGame;
 
         const finalText = await getWinnersAndLoosers(thisGame);
 
@@ -92,7 +92,8 @@ function checkResults() {
         vkHelp({
             peer_id: peerId,
             message: finalText[0] + `${finalText[1] > 0 ? deductionsToTop + ' 🎲' : ''}\n\n❓ Хэш игры: ${hash}\n🔑 Ключ к хэшу: ${hashKey}`,
-            keyboard: honestyCheck
+            keyboard: honestyCheck,
+            attachment: photoesDependMode[gameMode][results[0]]
         });
 
         }
