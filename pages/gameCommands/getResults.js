@@ -93,7 +93,7 @@ function checkResults() {
             peer_id: peerId,
             message: finalText[0] + `${finalText[1] > 0 ? deductionsToTop + ' 🎲' : ''}\n\n❓ Хэш игры: ${hash}\n🔑 Ключ к хэшу: ${hashKey}`,
             keyboard: honestyCheck,
-            attachment: photoesDependMode[gameMode][results[0]]
+            attachment: photoesDependMode[gameMode][results[0]] ? photoesDependMode[gameMode][results[0]] : photoesDependMode[gameMode][results[1]]
         });
 
         }
