@@ -88,7 +88,7 @@ function checkResults() {
         const changeStatus = await game.changeGameStatus(gameId)
 
         const deductionsToTop = `\n📊 Отчисления в топы: ${numberWithSpace(finalText[1].toFixed(0))}`
-        console.log(photoesDependMode[gameMode][results[0]], photoesDependMode[gameMode][results[1]])
+        
         vkHelp({
             peer_id: peerId,
             message: finalText[0] + `${finalText[1] > 0 ? deductionsToTop + ' 🎲' : ''}\n\n❓ Хэш игры: ${hash}\n🔑 Ключ к хэшу: ${hashKey}`,
