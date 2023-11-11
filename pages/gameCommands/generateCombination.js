@@ -14,7 +14,7 @@ const randomDependingMode = {
     'cube' : function(){
     const number = getRandomValue(1, 6)
     const numberType = number % 2 == 0 ? 'even' : 'odd'
-    return [number, numberType, forCubeTranslate(number)]
+    return [number, numberType, forCubeTranslate[number]]
     },
     'double': function() {
     const values = [
