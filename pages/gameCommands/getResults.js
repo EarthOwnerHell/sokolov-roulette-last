@@ -42,8 +42,8 @@ const getWinnersAndLoosers = async (data) => {
             if (!results.includes(userBet.betType)){
                 textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
 
-                statsForAdm += Number(userBetAmount.toFixed(0))
-
+                statsForAdm += Number(userBetAmount)
+ 
                 loss += userBetAmount.toFixed(0)
 
                 continue
@@ -67,7 +67,7 @@ const getWinnersAndLoosers = async (data) => {
 
             textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))} 🎲)\n`
             
-            statsForAdm -= Number(userWin.toFixed(0))
+            statsForAdm -= Number(userWin)
 
             win += userWin
         } 
