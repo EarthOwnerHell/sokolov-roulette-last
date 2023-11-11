@@ -16,7 +16,7 @@ module.exports = changeEndTime = async (msg) => {
 
     if (newTime > 120) return msg.send('❗ Раунд не может длиться более 2-ух минут!')
 
-    if (newTime < 15) return msg.send('❗ Раунд не может длиться менее 15 секунд!')
+    if (newTime < 5) return msg.send('❗ Раунд не может длиться менее 15 секунд!')
 
     const newEndTime = await chat.setEndTime(msg.peerId, newTime * 1000)
 
