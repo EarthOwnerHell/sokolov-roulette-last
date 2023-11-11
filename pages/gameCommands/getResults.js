@@ -1,7 +1,7 @@
 const bet = require("../../database/managers/bet");
 const game = require("../../database/managers/game");
 const { editDayTopBudget, editWeekTopBudget, editWinToday, editLossToday } = require("../../database/managers/global");
-const { plusBalanceUser, editWinPerDay, editWinPerWeek, plusWinCubes } = require("../../database/managers/user");
+const { plusBalanceUser, editWinPerDay, editWinPerWeek, plusWinCubesAll } = require("../../database/managers/user");
 const { honestyCheck } = require("../../keyboards/inline");
 const { numberWithSpace } = require("../../settings/tools");
 const { vkHelp, getChatLink } = require("../../settings/vk");
