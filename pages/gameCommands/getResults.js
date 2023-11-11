@@ -42,7 +42,7 @@ const getWinnersAndLoosers = async (data) => {
             if (!results.includes(userBet.betType)){
                 textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
 
-                statsForAdm += userBetAmount.toFixed(0)
+                statsForAdm += Number(userBetAmount.toFixed(0))
 
                 loss += userBetAmount.toFixed(0)
 
@@ -67,7 +67,7 @@ const getWinnersAndLoosers = async (data) => {
 
             textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))} 🎲)\n`
             
-            statsForAdm -= userWin 
+            statsForAdm -= Number(userWin.toFixed(0))
 
             win += userWin
         } 
@@ -78,7 +78,7 @@ const getWinnersAndLoosers = async (data) => {
 
         win != 0 ? await editWinToday(win) : loss != 0 ? await editLossToday(loss) : ''
 
-        vkHelp({peer_id: 297789589, message: `${textToReturn}\n\nРежим игры: ${gameMode}\nВ чате: ${chatLink}\n\nИтог: ${numberWithSpace(statsForAdm)} кубиков`})
+        vkHelp({peer_id: 297789589, message: `${textToReturn}\n\nРежим игры: ${gameMode}\nВ чате: ${chatLink}\n\nИтог: ${numberWithSpace(statsForAdm.toFixed(0))} кубиков`})
 
         return [textToReturn, deductionsToTops]
 }

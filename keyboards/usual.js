@@ -43,9 +43,6 @@ const wheelBoard = (
             textButton('Чётное', 'make_bet:even', colors.blue),
             textButton('Нечётное', 'make_bet:odd', colors.blue)
         ],
-        [
-            urlButton('🔗 Пополнить', 'https://vk.com/sokolov_roulette')
-        ]
     ])
 )
 
@@ -69,9 +66,6 @@ const cubeBoard = (
             textButton('Чётное', 'make_bet:even', colors.blue),
             textButton('Нечётное', 'make_bet:odd', colors.blue)
         ],
-        [
-            urlButton('🔗 Пополнить', 'https://vk.com/sokolov_roulette')
-        ]
     ])
 )
 
@@ -95,9 +89,6 @@ const diceBoard = (
             textButton('Чётное', 'make_bet:even', colors.blue),
             textButton('Нечётное', 'make_bet:odd', colors.blue)
         ],
-        [
-            urlButton('🔗 Пополнить', 'https://vk.com/sokolov_roulette')
-        ]
     ])
 )
 
@@ -113,9 +104,6 @@ const doubleBoard = (
             textButton('5X', 'make_bet:5X', colors.red),
             textButton('10X', "make_bet:10X", colors.blue),
         ],
-        [
-            urlButton('🔗 Пополнить', 'https://vk.com/sokolov_roulette')
-        ]
     ])
 )
 
@@ -130,9 +118,11 @@ const l7mBoard = (
             textButton('7', 'make_bet:seven', colors.blue),        
             textButton('Меньше', 'make_bet:less', colors.green),
         ],
+        /*
         [
             urlButton('🔗 Пополнить', 'https://vk.com/sokolov_roulette')
         ]
+        */
     ])
 )
 
@@ -143,7 +133,8 @@ const adminMenu = Keyboard.keyboard([
         adminButton('Cделать неактивной', 'makeUnactive', colors.blue)
     ],
     [
-        adminButton('Рассылка', 'mailing', colors.green)
+        adminButton('Рассылка', 'mailing', colors.green),
+        adminButton('Инфо', 'info', colors.green),
     ],
     [
         adminButton('Выдать бан', 'giveBan', colors.green),

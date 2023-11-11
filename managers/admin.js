@@ -7,6 +7,7 @@ const newBonusePost = require("../pages/adminCommands/newBonusePost")
 const forRef = require("../pages/adminCommands/forRef")
 const newPromo = require("../pages/adminCommands/createPromo")
 const changeGroupType = require("../pages/adminCommands/changeGroupType")
+const info = require("../pages/adminCommands/info")
 
 module.exports = adminManager = async (msg) => {
 
@@ -23,6 +24,7 @@ module.exports = adminManager = async (msg) => {
         forRef: () => forRef(msg),
         giveUnban: () => giveUnban(msg),
         newPromo: () => newPromo(msg),
+        info: () => info(msg),
         changeGroupType: () => changeGroupType(msg)
     };
 
