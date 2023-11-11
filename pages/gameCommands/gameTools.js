@@ -30,6 +30,15 @@ const gamePayloadsTranslate = {
     'less': ['⬅', 'Меньше 7', '\n\n⬅ Ставки на Меньше 7:\n', 2.3]
 }
 
+const forCubeTranslate = {
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six',
+}
+
 const photoesDependMode = {
     'wheel': {
         0: 'photo-210769620_457240484',
@@ -146,4 +155,4 @@ const familiarChat = `👀 Знакомое место, кажется, я зд�
 
 const welcomeNewUserText = `👋🏻 Привет!\n\n🎰 Это @sokolov_roulette(SOKOLOV ROULETTE), игра на виртуальную валюту @diceys(Кубики) в формате бота.\n\n🤑 Топы дня, промокоды, раздачи, конкурсы и многое другое ждёт тебя в нашем проекте!`
 
-module.exports = { maxOfBets, photoesDependMode, typingBets, gamePayloadsTranslate, botAlreadyAdmText, botSaysHello, familiarChat, welcomeNewUserText }
+module.exports = {  forCubeTranslate, maxOfBets, photoesDependMode, typingBets, gamePayloadsTranslate, botAlreadyAdmText, botSaysHello, familiarChat, welcomeNewUserText }

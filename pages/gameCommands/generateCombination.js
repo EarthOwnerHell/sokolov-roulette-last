@@ -1,4 +1,5 @@
 const { range } = require("../../settings/tools")
+const { forCubeTranslate } = require("./gameTools")
 const { getRandomValue, getRandomValueByPercentage } = require("./hash")
 
 const randomDependingMode = {
@@ -13,7 +14,7 @@ const randomDependingMode = {
     'cube' : function(){
     const number = getRandomValue(1, 6)
     const numberType = number % 2 == 0 ? 'even' : 'odd'
-    return [number, numberType]
+    return [number, numberType, forCubeTranslate(number)]
     },
     'double': function() {
     const values = [
