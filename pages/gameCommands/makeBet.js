@@ -14,7 +14,7 @@ module.exports = makeBet = async (msg) => {
 
     if (!balance) return msg.send(`❗ У вас нет 🎲 на балансе.`)
 
-    const reserve = 10000000000000//await whatReserve()
+    const reserve = await whatReserve()
 
     let payload = msg.messagePayload.command
 
