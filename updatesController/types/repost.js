@@ -1,7 +1,7 @@
 const repost = require("../../database/managers/repost");
 const { plusBalanceUser } = require("../../database/managers/user");
 const { numberWithSpace } = require("../../settings/tools");
-const vkHelp = require("../../settings/vk")
+const { vkHelp } = require("../../settings/vk")
 
 module.exports = async (msg) => {
     if (msg.subTypes[0] !== 'wall_repost') return;
