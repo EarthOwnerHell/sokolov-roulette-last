@@ -36,7 +36,7 @@ const randomDependingMode = {
     const color = checkForWhite ? 'white' : number == 0 ? 'golden' : 'black' 
     const numberType = number % 2 == 0 ? 'even' : 'odd'
     const interval = range(1, 4).includes(number) ? '1-4' : range(5, 8).includes(number) ? '5-8' : range(9, 12).includes(number) ? '9-12' : 0
-    return [number, color, interval, numberType, 'Золото']
+    return number == 0 ? [number, color, interval, numberType, 'Золото'] : [number, color, interval, numberType]
     }
 }
 
