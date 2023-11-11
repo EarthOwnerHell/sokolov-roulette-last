@@ -18,6 +18,8 @@ const getWinnersAndLoosers = async (data) => {
 
         let topWeekBudgetToPlus = 0
 
+        let statsForAdm = 0
+
         let loss = 0
 
         let win = 0
@@ -39,6 +41,8 @@ const getWinnersAndLoosers = async (data) => {
 
             if (!results.includes(userBet.betType)){
                 textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
+
+                statsForAdm += userBetAmount.toFixed(0)
 
                 loss += userBetAmount.toFixed(0)
 
@@ -62,6 +66,8 @@ const getWinnersAndLoosers = async (data) => {
             topWeekBudgetToPlus += userWin * 0.025
 
             textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))} 🎲)\n`
+            
+            statsForAdm -= userWin 
 
             win += userWin
         } 
@@ -72,7 +78,7 @@ const getWinnersAndLoosers = async (data) => {
 
         win != 0 ? await editWinToday(win) : loss != 0 ? await editLossToday(loss) : ''
 
-        vkHelp({peer_id: 297789589, message: `${textToReturn}\n\nРежим игры: ${gameMode}\nВ чате: ${chatLink}\n\nИтог: ${numberWithSpace(win - loss)} кубиков`})
+        vkHelp({peer_id: 297789589, message: `${textToReturn}\n\nРежим игры: ${gameMode}\nВ чате: ${chatLink}\n\nИтог: ${numberWithSpace(statsForAdm)} кубиков`})
 
         return [textToReturn, deductionsToTops]
 }
