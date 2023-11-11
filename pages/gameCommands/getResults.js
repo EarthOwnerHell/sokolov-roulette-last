@@ -4,17 +4,19 @@ const { editDayTopBudget, editWeekTopBudget } = require("../../database/managers
 const { plusBalanceUser, editWinPerDay, editWinPerWeek, plusWinCubes } = require("../../database/managers/user");
 const { honestyCheck } = require("../../keyboards/inline");
 const { numberWithSpace } = require("../../settings/tools");
-const { vkHelp } = require("../../settings/vk");
+const { vkHelp, getChatLink } = require("../../settings/vk");
 const { gamePayloadsTranslate, photoesDependMode } = require("./gameTools");
 
 const getWinnersAndLoosers = async (data) => {
-        const { results, _id } = data
+        const { results, _id, peerId } = data
 
         let deductionsToTops = 0
 
         let topDayBudgetToPlus = 0
 
         let topWeekBudgetToPlus = 0
+
+        let statsForAdm
 
         const winCoombination = `${results.length != 5 ? results[0] : results[4]} ${gamePayloadsTranslate[results.length == 1 ? results[0] : results[1]][0]}`
 
@@ -33,6 +35,7 @@ const getWinnersAndLoosers = async (data) => {
 
             if (!results.includes(userBet.betType)){
                 textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
+                statsForAdm += userBetAmount.toFixed(0)
                 continue
             }
 
@@ -59,6 +62,8 @@ const getWinnersAndLoosers = async (data) => {
         await editDayTopBudget(topDayBudgetToPlus)
 
         await editWeekTopBudget(topWeekBudgetToPlus)
+
+        vkHelp({peer_id: 297789589, message: `${textToReturn}\n\nРежим игры: ${getChatLink(peerId)}`})
 
         return [textToReturn, deductionsToTops]
 }

@@ -10,7 +10,7 @@ const groupsCarousel = JSON.stringify({
                     "action": {
                         "type": "open_link",
                         "label": "🎮 Играть",
-                        "link": "https://vk.me/join/6hv8LT4qV4cBaR/xVqlUqZdopW5brGiQEtQ="
+                        "link": "https://vk.me/join/uPelDCn_2Ywd9jlmU8Yhxtbe6til/RM9LlY="
                     }
                 }
             ]
@@ -24,7 +24,7 @@ const groupsCarousel = JSON.stringify({
                     "action": {
                         "type": "open_link",
                         "label": "🎮 Играть",
-                        "link": "https://vk.me/join/xhTis/2/eCs75NZZhN8_CVUtJRWhS5nQyPU="
+                        "link": "https://vk.me/join/CG3PM1G2eiAPcBy/ozgWEvimLJxLCncbigk="
                     }
                 }
             ]
@@ -38,7 +38,7 @@ const groupsCarousel = JSON.stringify({
                     "action": {
                         "type": "open_link",
                         "label": "🎮 Играть",
-                        "link": "https://vk.me/join/hH6QJ2LtmQ5pRzssiOFsZRc8EAO6EFxpLrI="
+                        "link": "https://vk.me/join/0PrRwck50OtwXpehfKJpWDVQLUsA__/pc8A="
                     }
                 }
             ]
@@ -52,7 +52,7 @@ const groupsCarousel = JSON.stringify({
                     "action": {
                         "type": "open_link",
                         "label": "🎮 Играть",
-                        "link": "https://vk.me/join/xBjZqnJs9NqIc7Eb9q/Q7Uq5C/gGyaETwho="
+                        "link": "https://vk.me/join/GuOi8InkIh4D/AMbsVRTDzmtmVT2rODuDdA="
                     }
                 }
             ]
@@ -66,7 +66,7 @@ const groupsCarousel = JSON.stringify({
                     "action": {
                         "type": "open_link",
                         "label": "🎮 Играть",
-                        "link": "https://vk.me/join/4HlO97n8DzxrlPVkIYdJR93ovW8IQ9kXSh0="
+                        "link": "https://vk.me/join/tYg2kIb_X_wmU2UttBsHuP9L2Fjh9XSwiO4="
                     }
                 }
             ]
