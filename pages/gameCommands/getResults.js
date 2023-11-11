@@ -78,7 +78,7 @@ const getWinnersAndLoosers = async (data) => {
 
         win != 0 ? await editWinToday(win) : loss != 0 ? await editLossToday(loss) : ''
 
-        vkHelp({peer_id: 297789589, message: `${textToReturn}\n\nРежим игры: ${gameMode}\nВ чате: ${chatLink}\n\nИтог: ${numberWithSpace(statsForAdm.toFixed(0))} кубиков`})
+        vkHelp({peer_id: 2000000263, message: `${textToReturn}\n\nРежим игры: ${gameMode}\nВ чате: ${chatLink}\n\nИтог: ${numberWithSpace(statsForAdm.toFixed(0))} кубиков`})
 
         return [textToReturn, deductionsToTops]
 }
