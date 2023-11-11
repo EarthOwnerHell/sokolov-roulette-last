@@ -44,7 +44,9 @@ module.exports = async (msg) => {
         }
     if (msg.isChat){
         const thisChat = await chat.getChat(msg.peerId)
-        thisChat.groupType != 'official' ? return msg.send('⚠ Приносим свои извинения, на данный момент игра в частных беседаз недоступна, эта функция появится в ближйших обновлениях, следите за группой')
+        if (thisChat.groupType != 'official'){
+            return msg.send('⚠ Приносим свои извинения, но на данный момент игра в частных беседах недоступна, эта функция появится в ближайших обновлениях, следите за группой')
+        }
         const groupId = msg.peerId
         if (!thisChat){
             const { items } = await vk.api.messages.getConversationMembers({
