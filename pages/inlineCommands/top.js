@@ -7,6 +7,8 @@ module.exports = getTops = async (msg, payload) => {
 
     const { dayTopBudget, weekTopBudget } = await getGlobal()
 
+    if (!dayTopBudget || !weekTopBudget) return msg.send("🏆 Топ пока пустой...")
+
     const userId = id
 
     if (payload === 'dayTop') {
