@@ -32,6 +32,7 @@ const randomDependingMode = {
     },
     'dice' : function() {
     let number = getRandomValue(0, 12)
+    number = 0
     const checkForWhite = [1, 3, 5, 7, 9, 11].includes(number)
     const color = checkForWhite ? 'white' : number == 0 ? 'golden' : 'black' 
     const numberType = number % 2 == 0 ? 'even' : 'odd'
