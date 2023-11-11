@@ -22,7 +22,8 @@ const job = schedule.scheduleJob(rule, function() {
     resetWeekTopers()
 });
 
-const resetSchedule = schedule.scheduleJob({ hour: 0, minute: 0, tz: 'Europe/Moscow' }, () => {
+const resetSchedule = schedule.scheduleJob({ hour: 0, minute: 0, tz: 'Etc/GMT-3' }, () => {
+    console.log('топ обнулен')
     resetLossWin();
     resetDayTopers()
   });

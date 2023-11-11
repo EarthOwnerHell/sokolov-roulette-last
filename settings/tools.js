@@ -156,7 +156,7 @@ function range(start, end) {
 
     const rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = 1; // 0 - воскресенье, 1 - понедельник, и так далее
-    rule.tz = 'Europe/Moscow'; // Устанавливаем часовой пояс Москвы
+    rule.tz = 'Etc/GMT-3'; // Устанавливаем часовой пояс Москвы
     rule.hour = 0;
     rule.minute = 0;    
 
