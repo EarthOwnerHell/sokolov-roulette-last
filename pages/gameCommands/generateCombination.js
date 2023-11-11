@@ -27,7 +27,7 @@ const randomDependingMode = {
     return [coefficent]
     },
     'l7m' : function(){
-    const number = getRandomValue(2, 12)
+    let number = getRandomValue(2, 12)
     number = 7
     const numberType = number < 7 ? 'less' : number > 7 ? 'more' : 'seven'
     return [number, numberType]
