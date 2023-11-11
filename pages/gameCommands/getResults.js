@@ -1,7 +1,7 @@
 const bet = require("../../database/managers/bet");
 const game = require("../../database/managers/game");
 const { editDayTopBudget, editWeekTopBudget } = require("../../database/managers/global");
-const { plusBalanceUser, editWinPerDay, editWinPerWeek } = require("../../database/managers/user");
+const { plusBalanceUser, editWinPerDay, editWinPerWeek, plusWinCubes } = require("../../database/managers/user");
 const { honestyCheck } = require("../../keyboards/inline");
 const { numberWithSpace } = require("../../settings/tools");
 const { vkHelp } = require("../../settings/vk");
@@ -43,6 +43,8 @@ const getWinnersAndLoosers = async (data) => {
             await editWinPerDay(userId, userWin)
 
             await editWinPerWeek(userId, userWin)
+
+            await plusWinCubesAll(userId, userWin)
 
             deductionsToTops += userWin * 0.075
 

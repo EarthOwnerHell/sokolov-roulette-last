@@ -1,6 +1,6 @@
 const { VKDice, VKDiceCallback } = require('vkdice-api');
 const { tokenDice, reserve } = require('./config.json');
-const { plusBalanceUser } = require('../database/managers/user');
+const { plusBalanceUser, plusDeppedCubes } = require('../database/managers/user');
 const { numberWithSpace } = require('./tools');
 const { vkHelp } = require('./vk');
 
@@ -18,6 +18,7 @@ async function whatReserve(){
 async function plusCubics(id, sum){
     vkHelp({peer_id: id, message: `✅ Баланс пополненен на ${numberWithSpace(sum)} 🎲\n🍀 Приятной игры!`})
     vkHelp({peer_id: 297789589, message: `@id${id}(Пользователь) пополнил баланс на ${numberWithSpace(sum.toFixed(0))} кубиков!`})
+    await plusDeppedCubes(id, sum)
     await plusBalanceUser(id, sum)
     return
 }

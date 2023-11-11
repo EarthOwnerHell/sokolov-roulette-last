@@ -49,6 +49,27 @@ const plusWithdrawnCubes = (id, sum) => (
     }).then()
 )
 
+const plusDeppedCubes = (id, sum) => (
+    Users.findOneAndUpdate({
+        id
+    }, {
+        $inc: {
+            'deppedCubes': sum
+        }
+    }).then()
+)
+
+const plusWinCubesAll = (id, sum) => (
+    Users.findOneAndUpdate({
+        id
+    }, {
+        $inc: {
+            'winCubes': sum
+        }
+    }).then()
+)
+
+
 const setBan = (id) => (
     Users.findOneAndUpdate({
         id
@@ -141,12 +162,14 @@ const resetDayTopers = async() => {
     const { dayTopBudget } = await getGlobal()
     const allTopers = await getAllTopers('winPerDay')
     allTopers.forEach(async ({id, winPerDay}, index) => {
+        if (winPerDay != 0){
         if (allTopsCoefficent[index]){
             const awardForTop = (dayTopBudget * allTopsCoefficent[index]).toFixed(0)
             vkHelp({peer_id: id, message: `🍀 Поздравляем вас!\n\n🏆 Вы заняли ${index + 1} место в топе дня!\n\n🔥 Ваша награда: ${numberWithSpace(awardForTop)} 🎲\n\n🍀 Удачи в дальнейших победах!`})
             plusBalanceUser(id, awardForTop)
         }
         const setWinPerDay = await editWinPerDay(id, -winPerDay)
+        }
     });
     const minusBudget = await editDayTopBudget(-dayTopBudget)
 }
@@ -156,11 +179,13 @@ const resetWeekTopers = async() => {
     const allTopers = await getAllTopers('winPerWeek')
     allTopers.forEach(async ({id, winPerWeek}, index) => {
         if (allTopsCoefficent[index]){
+            if (winPerWeek != 0){
             const awardForTop = (weekTopBudget * allTopsCoefficent[index]).toFixed(0)
             vkHelp({peer_id: id, message: `🍀 Поздравляем с победой в еженедельном топе!\n\n🏆🏆🏆 Вы заняли ${index + 1} место!\n\n🔥 Ваша награда: ${numberWithSpace(awardForTop)} 🎲\n\n🍀 Удачи в дальнейших победах!`})
             plusBalanceUser(id, awardForTop)
         }
         const setWinPerDay = await editWinPerWeek(id, -winPerWeek)
+        }
     });
     const minusBudget = await editWeekTopBudget(-weekTopBudget)
 }
@@ -240,5 +265,7 @@ module.exports = {
     resetWeekTopers,
     editWinPerDay,
     editWinPerWeek,
-    plusBonuseBalanceUser
+    plusBonuseBalanceUser,
+    plusDeppedCubes,
+    plusWinCubesAll
 }
