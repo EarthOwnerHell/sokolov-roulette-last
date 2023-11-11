@@ -29,8 +29,8 @@ const commandArgs = (msg) => {
 const resetLossWin = async() => {
     const { winToday, lossToday } = await getGlobal()
     vkHelp({peer_id: 297789589, message: `ℹ🧑‍💻Итоги сегодняшнего дня:\n\n🟥 Выиграно: ${numberWithSpace(winToday)}\n🟩 Проиграно: ${numberWithSpace(lossToday)}\n\n💸 Прибыль: ${numberWithSpace(lossToday - winToday)}`})
-    editWinToday(-winToday)
-    editLossToday(-lossToday)
+    await editWinToday(-winToday)
+    await editLossToday(-lossToday)
     return
     }
 

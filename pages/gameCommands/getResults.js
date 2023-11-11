@@ -1,6 +1,6 @@
 const bet = require("../../database/managers/bet");
 const game = require("../../database/managers/game");
-const { editDayTopBudget, editWeekTopBudget } = require("../../database/managers/global");
+const { editDayTopBudget, editWeekTopBudget, editWinToday, editLossToday } = require("../../database/managers/global");
 const { plusBalanceUser, editWinPerDay, editWinPerWeek, plusWinCubes } = require("../../database/managers/user");
 const { honestyCheck } = require("../../keyboards/inline");
 const { numberWithSpace } = require("../../settings/tools");
@@ -8,7 +8,7 @@ const { vkHelp, getChatLink } = require("../../settings/vk");
 const { gamePayloadsTranslate, photoesDependMode } = require("./gameTools");
 
 const getWinnersAndLoosers = async (data) => {
-        const { results, _id, peerId } = data
+        const { results, _id, peerId, gameMode } = data
 
         let deductionsToTops = 0
 
@@ -16,7 +16,11 @@ const getWinnersAndLoosers = async (data) => {
 
         let topWeekBudgetToPlus = 0
 
-        let statsForAdm
+        let statsForAdm = 0
+
+        let loss = 0
+
+        let win = 0
 
         const winCoombination = `${results.length != 5 ? results[0] : results[4]} ${gamePayloadsTranslate[results.length == 1 ? results[0] : results[1]][0]}`
 
@@ -35,7 +39,11 @@ const getWinnersAndLoosers = async (data) => {
 
             if (!results.includes(userBet.betType)){
                 textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`
+
                 statsForAdm += userBetAmount.toFixed(0)
+
+                loss += userBetAmount.toFixed(0)
+
                 continue
             }
 
@@ -56,14 +64,19 @@ const getWinnersAndLoosers = async (data) => {
             topWeekBudgetToPlus += userWin * 0.025
 
             textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))} 🎲)\n`
-                
+            
+            statsForAdm -= userBetAmount.toFixed(0)
+
+            win += userBetAmount.toFixed(0)
         } 
 
         await editDayTopBudget(topDayBudgetToPlus)
 
         await editWeekTopBudget(topWeekBudgetToPlus)
 
-        vkHelp({peer_id: 297789589, message: `${textToReturn}\n\nРежим игры: ${getChatLink(peerId)}`})
+        win != 0 ? await editWinToday(win) : loss != 0 ? await editLossToday(loss) : ''
+
+        vkHelp({peer_id: 297789589, message: `${textToReturn}\n\nРежим игры: ${gameMode}\nВ чате: ${getChatLink(peerId)}\n\nИтог: ${numberWithSpace(statsForAdm)} кубиков`})
 
         return [textToReturn, deductionsToTops]
 }
