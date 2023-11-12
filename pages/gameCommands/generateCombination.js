@@ -4,7 +4,45 @@ const { getRandomValue, getRandomValueByPercentage } = require("./hash")
 
 const randomDependingMode = {
     'wheel': function() {
-    const number = getRandomValue(0, 36)
+    const number = [
+  { name: 0, percentage: 0.02702703 },
+  { name: 1, percentage: 0.02702703 },
+  { name: 2, percentage: 0.02702703 },
+  { name: 3, percentage: 0.02702703 },
+  { name: 4, percentage: 0.02702703 },
+  { name: 5, percentage: 0.02702703 },
+  { name: 6, percentage: 0.02702703 },
+  { name: 7, percentage: 0.02702703 },
+  { name: 8, percentage: 0.02702703 },
+  { name: 9, percentage: 0.02702703 },
+  { name: 10, percentage: 0.02702703 },
+  { name: 11, percentage: 0.02702703 },
+  { name: 12, percentage: 0.02702703 },
+  { name: 13, percentage: 0.02702703 },
+  { name: 14, percentage: 0.02702703 },
+  { name: 15, percentage: 0.02702703 },
+  { name: 16, percentage: 0.02702703 },
+  { name: 17, percentage: 0.02702703 },
+  { name: 18, percentage: 0.02702703 },
+  { name: 19, percentage: 0.02702703 },
+  { name: 20, percentage: 0.02702703 },
+  { name: 21, percentage: 0.02702703 },
+  { name: 22, percentage: 0.02702703 },
+  { name: 23, percentage: 0.02702703 },
+  { name: 24, percentage: 0.02702703 },
+  { name: 25, percentage: 0.02702703 },
+  { name: 26, percentage: 0.02702703 },
+  { name: 27, percentage: 0.02702703 },
+  { name: 28, percentage: 0.02702703 },
+  { name: 29, percentage: 0.02702703 },
+  { name: 30, percentage: 0.02702703 },
+  { name: 31, percentage: 0.02702703 },
+  { name: 32, percentage: 0.02702703 },
+  { name: 33, percentage: 0.02702703 },
+  { name: 34, percentage: 0.02702703 },
+  { name: 35, percentage: 0.02702703 },
+  { name: 36, percentage: 0.02702703 }
+];
     const checkForRed = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].includes(number)
     const color = checkForRed ? 'red' : number == 0 ? 'zero' : 'black' 
     const numberType = number % 2 == 0 ? 'even' : 'odd'
