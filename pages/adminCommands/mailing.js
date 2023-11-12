@@ -80,7 +80,7 @@ module.exports = mailing = async (msg) => {
                 });
         }
 
-        processArray(usersId, msg.send, 3000);
+        processArray(usersId, vk.api.messages.send, 3000);
     };
 
     getDialogs();
