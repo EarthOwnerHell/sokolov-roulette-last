@@ -33,5 +33,5 @@ module.exports = withdrawnCubes = async (msg) => {
 
     const balanceAfterWithdraw = await whatReserve()
     
-    return vkHelp({peer_id: 297789589, message: `@id${id}(Пользователь) выводит ${numberWithSpace(forPush.toFixed(0))} кубиков\n\nРезерв казино: ${numberWithSpace(balanceAfterWithdraw.balance.toFixed(0))}`})
+    return vkHelp({peer_id: 297789589, message: `@id${id}(Пользователь) выводит ${numberWithSpace(forPush.toFixed(0))} кубиков\n\nРезерв казино: ${numberWithSpace(Number(balanceAfterWithdraw.balance).toFixed(0))}`})
 }

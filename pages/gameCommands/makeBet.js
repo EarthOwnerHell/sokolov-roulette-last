@@ -32,7 +32,7 @@ module.exports = makeBet = async (msg) => {
 
     if (finalBet > balance) return msg.send(`❗ У вас нет столько 🎲`)
 
-    if (finalBet > reserve.balance) return msg.send(`❗ В данный момент резерв бота мал для такой ставки, повторите попытку позднее`)
+    if (finalBet > Number(reserve.balance)) return msg.send(`❗ В данный момент резерв бота мал для такой ставки, повторите попытку позднее`)
     
     let isStarted = false
 
