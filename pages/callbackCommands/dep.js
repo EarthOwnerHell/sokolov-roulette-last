@@ -13,5 +13,5 @@ module.exports = dep = async (msg) =>  {
         user_id: userId,
         peer_id: peerId
     })
-    messageEdit({peer_id: peerId, message_id: lastMessage, message: `💰 Пополнение\n\nℹ Для пополнения баланса @diceys(Кубиками) переведите любую сумму на этот аккаунт https://vk.com/id297789589\n\n👇🏻 Ниже прикреплена статья, как это сделать.`, keyboard: backToProfile(true)})
+    messageEdit({peer_id: peerId, message_id: lastMessage, message: `💰 Пополнение\n\nℹ Для пополнения баланса @diceys(Кубиками) переведите любую сумму по ссылке t.me/diceysbot/app?startapp=x297789589\n\n👇🏻 Ниже прикреплена статья, как это сделать.`, keyboard: backToProfile(true)})
 }
