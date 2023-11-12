@@ -9,7 +9,7 @@ const profileBoardWithCallback = Keyboard.keyboard([
         textButton('🎁 Промокод', 'promo', colors.blue)
     ],
     [
-        urlButtom('💰 Пополнить', "t.me/diceysbot/app?startapp=x297789589"),
+        urlButton('💰 Пополнить', "t.me/diceysbot/app?startapp=x297789589"),
         callBack('💸 Вывести', 'withdraw', colors.green),
     ]
 ]).inline()
