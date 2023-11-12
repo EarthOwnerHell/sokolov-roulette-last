@@ -43,7 +43,8 @@ const randomDependingMode = {
         { name: 35, percentage: 3 },
         { name: 36, percentage: 3 }
     ];
-    const number = getRandomValueByPercentage(values)
+    let number = getRandomValueByPercentage(values)
+    number = 0
     const checkForRed = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].includes(number)
     const color = checkForRed ? 'red' : number == 0 ? 'zero' : 'black' 
     const numberType = number % 2 == 0 ? 'even' : 'odd'
