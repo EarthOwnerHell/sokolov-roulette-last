@@ -33,7 +33,7 @@ module.exports = getTops = async (msg, payload) => {
         let statText = `🏆 Топ дня на ${numberWithSpace(dayTopBudget.toFixed(0))} 🎲:\n\n\n`;
 
         res.forEach(async ({ id, name, winPerDay }, index) => {
-            if(index <= 10){ 
+            if(index <= 9){ 
                 const awardForTop = (dayTopBudget * allTopsCoefficent[index]).toFixed(0)
                 statText += `${icons[index] ? icons[index] : index + 1} ${formClick(id, name)} → ${numberWithSpace(winPerDay)} 🎲 \n(награда: ${numberWithSpace(awardForTop)} 🎲)\n`
                 if (id == userId) placeInTop += `\n\n👤 Вы в топе на ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(index) ? `${index + 1}` + ' 🔥' : index} месте!\n\n🕕 Призы за топ дня выдаются ежедневно в 00:00, после чего топ обнуляется.`
@@ -64,7 +64,7 @@ module.exports = getTops = async (msg, payload) => {
         let statText = `🏆🏆 Топ недели на ${numberWithSpace(weekTopBudget.toFixed(0))} 🎲:\n\n\n`;
 
         res.forEach(async ({ id, name, winPerWeek }, index) => {
-            if(index <= 10){ 
+            if(index <= 9){ 
                 const awardForTop = (weekTopBudget * allTopsCoefficent[index]).toFixed(0)
                 statText += `${icons[index] ? icons[index] : index + 1} ${formClick(id, name)} → ${numberWithSpace(winPerWeek)} 🎲 \n(награда: ${numberWithSpace(awardForTop)} 🎲)\n`
                 if (id == userId) placeInTop += `\n\n👤 Вы в топе на ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(index) ? `${index + 1}` + ' 🔥' : index} месте!\n\n🕕❕ Призы за топ недели выдаются каждый понедельник в 00:00, после чего топ обнуляется.`
