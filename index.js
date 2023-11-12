@@ -19,7 +19,7 @@ connectDb();
 autoCreateGlobal();
 
 const job = schedule.scheduleJob(rule, function() {
-    //resetWeekTopers()
+    /*resetWeekTopers()*/
 });
 
 const resetSchedule = schedule.scheduleJob({ hour: 0, minute: 0, tz: 'Etc/GMT-3' }, () => {

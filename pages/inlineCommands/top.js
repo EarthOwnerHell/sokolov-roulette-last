@@ -46,7 +46,8 @@ module.exports = getTops = async (msg, payload) => {
 
     if (payload === 'weekTop') {
 
-        const icons = {
+        return msg.send('Топ недели пока выключен')
+        /*const icons = {
             0: '🥇',
             1: '🥈',
             2: '🥉',
@@ -72,6 +73,6 @@ module.exports = getTops = async (msg, payload) => {
         });
 
         return msg.send(statText + placeInTop)
-    }
+    }*/
 
 }
