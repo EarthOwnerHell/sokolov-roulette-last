@@ -39,7 +39,7 @@ module.exports = async (msg) => {
     if (type === 'wall_reply_delete'){
         vkHelp({
             peer_id: msg.deleterUserId,
-            message: `🥺 Вы убрали комментарий, снимаем с вашего баланса${amountForComment} 🎲`
+            message: `🥺 Вы убрали комментарий, снимаем с вашего баланса ${amountForComment} 🎲`
         })
         minusBalanceUser(msg.deleterUserId, amountForComment);
         console.log(`\n[ 📝 ] Удалил комментарий: https://vk.com/id${msg.deleterUserId}`)
