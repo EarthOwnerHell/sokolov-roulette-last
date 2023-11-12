@@ -91,6 +91,7 @@ module.exports = async (msg) => {
     })
     if (['резерв'].includes(msg?.text?.toLowerCase()) && msg.isChat){
         const reserve = await whatReserve()
+        console.log(reserve)
         msg.send(`💰 Резерв бота: ${numberWithSpace(reserve.balance.toFixed(0))} 🎲`)
     } 
     if (['топ'].includes(msg?.text?.toLowerCase()) && msg.isChat){
