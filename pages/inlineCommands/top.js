@@ -73,5 +73,5 @@ module.exports = getTops = async (msg, payload) => {
 
         return msg.send(statText + placeInTop)
     }*/
-
+    }
 }
