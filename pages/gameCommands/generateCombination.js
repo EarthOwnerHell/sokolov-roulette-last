@@ -4,7 +4,7 @@ const { getRandomValue, getRandomValueByPercentage } = require("./hash")
 
 const randomDependingMode = {
     'wheel': function() {
-    const number = [
+    const values = [
   { name: 0, percentage: 0.02702703 },
   { name: 1, percentage: 0.02702703 },
   { name: 2, percentage: 0.02702703 },
@@ -43,6 +43,7 @@ const randomDependingMode = {
   { name: 35, percentage: 0.02702703 },
   { name: 36, percentage: 0.02702703 }
 ];
+    const number = getRandomValueByPercentage(values)
     const checkForRed = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].includes(number)
     const color = checkForRed ? 'red' : number == 0 ? 'zero' : 'black' 
     const numberType = number % 2 == 0 ? 'even' : 'odd'
