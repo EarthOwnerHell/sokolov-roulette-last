@@ -23,7 +23,7 @@ module.exports = getTops = async (msg, payload) => {
             6: '7&#8419;',
             7: '8&#8419;',
             8: '9&#8419;',
-            9: '10&#8419;',
+            9: '&#128287;',
         }
 
         const res = await getAllTopers('winPerDay')
