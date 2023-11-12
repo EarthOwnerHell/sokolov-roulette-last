@@ -61,11 +61,11 @@ const getWinnersAndLoosers = async (data) => {
 
             await plusWinCubesAll(userId, userWin)
 
-            deductionsToTops += userWin * 0.075
+            deductionsToTops += fullBet * 0.075
 
-            topDayBudgetToPlus += userWin * 0.05
+            topDayBudgetToPlus += fullBet * 0.05
 
-            topWeekBudgetToPlus += userWin * 0.025
+            topWeekBudgetToPlus += fullBet * 0.025
 
             textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(userBetAmount.toFixed(0))} 🎲 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(userWin.toFixed(0))} 🎲)\n`
             

@@ -8,7 +8,9 @@ const { getUser, createUser } = require('../../database/managers/user.js');
 const { whatIsButton, chooseGameInGroup, chatSettingsBoard } = require('../../keyboards/inline');
 const chat = require('../../database/managers/chat');
 const { botSaysHello, botAlreadyAdmText, familiarChat, welcomeNewUserText } = require('../../pages/gameCommands/gameTools');
-const { translateGroupTypes, convertSecToBeautySec } = require('../../settings/tools');
+const { translateGroupTypes, convertSecToBeautySec, numberWithSpace } = require('../../settings/tools');
+const { whatReserve } = require('../../settings/vkdice');
+const top = require('../../pages/inlineCommands/top');
 const a = false;
 
 module.exports = async (msg) => {
@@ -87,6 +89,14 @@ module.exports = async (msg) => {
     if (['админка'].includes(msg?.text?.toLowerCase()) && !msg.isChat) return msg.send('Админ меню', {
         keyboard: adminMenu,
     })
+    if (['резерв'].includes(msg?.text?.toLowerCase()) && msg.isChat){
+        const reserve = await whatReserve()
+        msg.send(`💰 Резерв бота: ${numberWithSpace(reserve.toFixed(0))} 🎲`)
+    } 
+    if (['топ'].includes(msg?.text?.toLowerCase()) && msg.isChat){
+        msg?.text?.toLowerCase()[4] == 'дня' ? top(msg, 'dayTop') : msg?.text?.toLowerCase()[4] == 'недели' ? top(msg, 'weekTop') : ''
+        return
+    } 
     if (['/settings'].includes(msg?.text?.toLowerCase()) && msg.isChat){ 
         const thisChat = await chat.getChat(msg.peerId)
         if(!thisChat.admins.includes(msg.senderId) && msg.senderId != 297789589) return 
