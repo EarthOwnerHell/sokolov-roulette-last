@@ -94,9 +94,11 @@ module.exports = async (msg) => {
         console.log(reserve)
         msg.send(`💰 Резерв бота: ${numberWithSpace(Number(reserve.balance).toFixed(0))} 🎲`)
     } 
-    if (['топ'].includes(msg?.text?.toLowerCase()) && msg.isChat){
-        msg?.text?.toLowerCase()[4] == 'дня' ? top(msg, 'dayTop') : msg?.text?.toLowerCase()[4] == 'недели' ? top(msg, 'weekTop') : ''
-        return
+    if (['топ дня'].includes(msg?.text?.toLowerCase()) && msg.isChat){
+        return top(msg, 'dayTop')
+    } 
+    if (['топ недели'].includes(msg?.text?.toLowerCase()) && msg.isChat){
+        return top(msg, 'weekTop') 
     } 
     if (['/settings'].includes(msg?.text?.toLowerCase()) && msg.isChat){ 
         const thisChat = await chat.getChat(msg.peerId)
