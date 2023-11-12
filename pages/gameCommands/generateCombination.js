@@ -5,45 +5,44 @@ const { getRandomValue, getRandomValueByPercentage } = require("./hash")
 const randomDependingMode = {
     'wheel': function() {
     const values = [
-  { name: 0, percentage: 2.78 },
-  { name: 1, percentage: 2.78 },
-  { name: 2, percentage: 2.78 },
-  { name: 3, percentage: 2.78 },
-  { name: 4, percentage: 2.78 },
-  { name: 5, percentage: 2.78 },
-  { name: 6, percentage: 2.78 },
-  { name: 7, percentage: 2.78 },
-  { name: 8, percentage: 2.78 },
-  { name: 9, percentage: 2.78 },
-  { name: 10, percentage: 2.78 },
-  { name: 11, percentage: 2.78 },
-  { name: 12, percentage: 2.78 },
-  { name: 13, percentage: 2.78 },
-  { name: 14, percentage: 2.78 },
-  { name: 15, percentage: 2.78 },
-  { name: 16, percentage: 2.78 },
-  { name: 17, percentage: 2.78 },
-  { name: 18, percentage: 2.78 },
-  { name: 19, percentage: 2.78 },
-  { name: 20, percentage: 2.78 },
-  { name: 21, percentage: 2.78 },
-  { name: 22, percentage: 2.78 },
-  { name: 23, percentage: 2.78 },
-  { name: 24, percentage: 2.78 },
-  { name: 25, percentage: 2.78 },
-  { name: 26, percentage: 2.78 },
-  { name: 27, percentage: 2.78 },
-  { name: 28, percentage: 2.78 },
-  { name: 29, percentage: 2.78 },
-  { name: 30, percentage: 2.78 },
-  { name: 31, percentage: 2.78 },
-  { name: 32, percentage: 2.78 },
-  { name: 33, percentage: 2.78 },
-  { name: 34, percentage: 2.78 },
-  { name: 35, percentage: 2.78 },
-  { name: 36, percentage: 2.78 }
-];
-
+        { name: 0, percentage: 1 },
+        { name: 1, percentage: 3 },
+        { name: 2, percentage: 3 },
+        { name: 3, percentage: 3 },
+        { name: 4, percentage: 3 },
+        { name: 5, percentage: 3 },
+        { name: 6, percentage: 3 },
+        { name: 7, percentage: 3 },
+        { name: 8, percentage: 3 },
+        { name: 9, percentage: 3 },
+        { name: 10, percentage: 3 },
+        { name: 11, percentage: 3 },
+        { name: 12, percentage: 3 },
+        { name: 13, percentage: 3 },
+        { name: 14, percentage: 3 },
+        { name: 15, percentage: 3 },
+        { name: 16, percentage: 3 },
+        { name: 17, percentage: 3 },
+        { name: 18, percentage: 3 },
+        { name: 19, percentage: 3 },
+        { name: 20, percentage: 3 },
+        { name: 21, percentage: 3 },
+        { name: 22, percentage: 3 },
+        { name: 23, percentage: 3 },
+        { name: 24, percentage: 3 },
+        { name: 25, percentage: 3 },
+        { name: 26, percentage: 3 },
+        { name: 27, percentage: 3 },
+        { name: 28, percentage: 3 },
+        { name: 29, percentage: 3 },
+        { name: 30, percentage: 3 },
+        { name: 31, percentage: 3 },
+        { name: 32, percentage: 3 },
+        { name: 33, percentage: 3 },
+        { name: 34, percentage: 3 },
+        { name: 35, percentage: 3 },
+        { name: 36, percentage: 3 }
+    ];
     const number = getRandomValueByPercentage(values)
     const checkForRed = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].includes(number)
     const color = checkForRed ? 'red' : number == 0 ? 'zero' : 'black' 
@@ -52,7 +51,16 @@ const randomDependingMode = {
     return [number, color, interval, numberType]
     },
     'cube' : function(){
-    const number = getRandomValue(1, 6)
+        const values = [
+            { name: 1, percentage: 17 },
+            { name: 2, percentage: 17 },
+            { name: 3, percentage: 17 },
+            { name: 4, percentage: 17 },
+            { name: 5, percentage: 17 },
+            { name: 6, percentage: 17 },
+        ];
+    
+    const number = getRandomValueByPercentage(values)
     const numberType = number % 2 == 0 ? 'even' : 'odd'
     return [number, numberType, forCubeTranslate[number]]
     },
@@ -67,12 +75,40 @@ const randomDependingMode = {
     return [coefficent]
     },
     'l7m' : function(){
-    const number = getRandomValue(2, 12)
+        const values = [
+            { name: 2, percentage: 9 },
+            { name: 3, percentage: 9 },
+            { name: 4, percentage: 9 },
+            { name: 5, percentage: 9 },
+            { name: 6, percentage: 9 },
+            { name: 7, percentage: 3 },
+            { name: 8, percentage: 9 },
+            { name: 9, percentage: 9 },
+            { name: 10, percentage: 9 },
+            { name: 11, percentage: 9 },
+            { name: 12, percentage: 9 },
+        ];
+    const number = getRandomValueByPercentage(values)
     const numberType = number < 7 ? 'less' : number > 7 ? 'more' : 'seven'
     return [number, numberType]
     },
     'dice' : function() {
-    let number = getRandomValue(0, 12)
+        const values = [
+            { name: 0, percentage: 1 },
+            { name: 1, percentage: 8 },
+            { name: 2, percentage: 8 },
+            { name: 3, percentage: 8 },
+            { name: 4, percentage: 8 },
+            { name: 5, percentage: 8 },
+            { name: 6, percentage: 8 },
+            { name: 7, percentage: 8 },
+            { name: 8, percentage: 8 },
+            { name: 9, percentage: 8 },
+            { name: 10, percentage: 8 },
+            { name: 11, percentage: 8 },
+            { name: 12, percentage: 8 },
+        ];
+    const number = getRandomValueByPercentage(values)
     const checkForWhite = [1, 3, 5, 7, 9, 11].includes(number)
     const color = checkForWhite ? 'white' : number == 0 ? 'golden' : 'black' 
     const numberType = number % 2 == 0 ? 'even' : 'odd'

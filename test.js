@@ -2,7 +2,6 @@ const crypto = require('crypto');
 const { numberWithSpace } = require('./settings/tools');
 
 function getRandomValueByPercentage(values) {
-  // Считаем сумму всех процентов
   const sumOfPercentages = values.reduce((sum, value) => sum + value.percentage, 0);
 
   // Генерируем рандомное число от 0 до суммы процентов
@@ -23,28 +22,20 @@ function getRandomValueByPercentage(values) {
 
 // Пример использования
 const values = [
-  { name: '2X', percentage: 50 },
-  { name: '3X', percentage: 35 },
-  { name: '5X', percentage: 12 },
-  { name: '10X', percentage: 3 }
-  ];
-const b = 18
-let stats = {
-  '2X' : 0,
-  '3X' : 0,
-  '5X' : 0,
-  '10X' : 0
-}
+  { name: 1, percentage: 17 },
+  { name: 2, percentage: 17},
+  { name: 3, percentage: 17 },
+  { name: 4, percentage: 17 },
+  { name: 5, percentage: 17 },
+  { name: 6, percentage: 17 },
+];
+const b = 100
+
+a = {}
 
 for (let i = 0; i < b; i++){
   const randomValue = getRandomValueByPercentage(values);
-  stats[randomValue] += 1
-
+  console.log(randomValue)
 }
 
-
-console.log(`Результат ${b} игр:\n\n2X выпал ${stats['2X']} раз\n3X выпал ${stats['3X']} раз\n5X выпал ${stats['5X']} раз\n10X выпал ${stats['10X']} раз`);
-
-a = -1000000
-
-console.log(numberWithSpace(a))
+console.log(a)
