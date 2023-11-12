@@ -12,14 +12,14 @@ module.exports = async (msg) => {
     
     const bonuseForRepost = await repost.get(objectId)
 
-    let amountForLike = 500
+    let amountForLike = 10000
 
     if (!likePost) {
         likePost = await like.add(objectId)
     };
 
     if (!bonuseForRepost?.active) {
-        amountForLike = 100
+        amountForLike = 1000
     };
 
     if (likePost.likers.includes(likerId) && subTypes[0] === 'like_add') return vkHelp({

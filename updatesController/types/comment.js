@@ -11,7 +11,7 @@ module.exports = async (msg) => {
 
     const bonuseForRepost = await repost.get(objectId)
 
-    let amountForComment = 500
+    let amountForComment = 1000
 
     if (!post) {
         post = await comment.add(objectId)
