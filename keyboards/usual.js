@@ -114,9 +114,9 @@ const l7mBoard = (
             textButton('Банк', 'bank', colors.grey)             
         ],
         [
-            textButton('Больше', 'make_bet:more', colors.green),  
-            textButton('7', 'make_bet:seven', colors.blue),        
-            textButton('Меньше', 'make_bet:less', colors.green),
+            textButton('Меньше', 'make_bet:less', colors.green),  
+            textButton('7', 'make_bet:seven', colors.blue),
+            textButton('Больше', 'make_bet:more', colors.green),
         ],
         /*
         [
