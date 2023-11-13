@@ -12,7 +12,7 @@ const { whatReserve } = require("../../settings/vkdice");
 module.exports = makeBet = async (msg) => {
     const { balance, id, name } = await getUser(msg.senderId)
 
-    console.log(balance, typeof balance)
+    const forKeyb = Number(balance.toFixed(0))
 
     if (!balance) return msg.send(`❗ У вас нет 🎲 на балансе.`)
 
@@ -24,7 +24,7 @@ module.exports = makeBet = async (msg) => {
 
     const betOn = splitPayload[1]
 
-    let userBet = await msg.question(`${gamePayloadsTranslate[betOn][0]} @id${id}(${name}), введите ставку на ${gamePayloadsTranslate[betOn][1]}:`, {keyboard: betKeyboard(balance)}) 
+    let userBet = await msg.question(`${gamePayloadsTranslate[betOn][0]} @id${id}(${name}), введите ставку на ${gamePayloadsTranslate[betOn][1]}:`, {keyboard: betKeyboard(forKeyb)}) 
 
     const forBet = userBet.text.includes('[club210769620|@sokolov_roulette] ') ? userBet.text.split('[club210769620|@sokolov_roulette] ') : userBet.text
 
