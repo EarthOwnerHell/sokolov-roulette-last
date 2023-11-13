@@ -46,7 +46,7 @@ module.exports = async (msg) => {
         }
     if (msg.isChat){
         const thisChat = await chat.getChat(msg.peerId)
-        if (thisChat.groupType != 'official'){
+        //if (thisChat.groupType != 'official'){
             return msg.send('⚠ Приносим свои извинения, но на данный момент игра в частных беседах недоступна, эта возможность появится в ближайших обновлениях, следите за группой')
         }
         const groupId = msg.peerId
