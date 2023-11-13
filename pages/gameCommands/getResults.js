@@ -49,7 +49,7 @@ const getWinnersAndLoosers = async (data) => {
                 continue
             }
 
-            const fullBet = userBetAmount * gamePayloadsTranslate[userBetType][3].toFixed(0)
+            const fullBet = userBetAmount * gamePayloadsTranslate[userBetType][3]
 
             const userWin = fullBet - (fullBet * 0.075)
 
