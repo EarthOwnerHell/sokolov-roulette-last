@@ -1,5 +1,6 @@
 const like = require("../../database/managers/like")
 const repost = require("../../database/managers/repost")
+const { plusBalanceUser } = require("../../database/managers/user")
 const { numberWithSpace } = require("../../settings/tools")
 const { vkHelp } = require("../../settings/vk")
 
@@ -35,8 +36,9 @@ module.exports = async (msg) => {
         
         vkHelp({
             peer_id: likerId,
-            message: `😍 Спасибо за лайк, на ваш баланс начислено ${amountForLike} 🎲`
+            message: `😍 Спасибо за лайк, на ваш баланс начислено ${numberWithSpace(amountForLike)} 🎲`
         })
+        await plusBalanceUser(likerId, amountForLike)
 
         console.log(`\n[ 🔔 ] Лайк от: https://vk.com/id${likerId}`)
     } 
@@ -46,8 +48,6 @@ module.exports = async (msg) => {
             peer_id: likerId,
             message: `🥺 Вы убрали лайк, нам пришлось снять с вашего баланса ${amountForLike} 🎲`
         })
-    
-        dbUserStat.minus(likerId, amountForLike, 'balancesInfo.main')
         console.log(`\n[ 🔔 ] Удалил лайк: https://vk.com/id${likerId}`)
     }
 }
