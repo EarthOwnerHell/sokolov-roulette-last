@@ -4,8 +4,7 @@ const { numberWithSpace } = require("../../settings/tools");
 const { vkHelp } = require("../../settings/vk")
 
 module.exports = async (msg) => {
-    if (msg.subTypes[0] !== 'wall_repost') return;
-    
+    if (msg.subTypes[0] !== 'wall_repost') return
 
     const repostInfo = await repost.get(msg.wall.copyHistory[0].id)
     const userId = msg.wall.ownerId
