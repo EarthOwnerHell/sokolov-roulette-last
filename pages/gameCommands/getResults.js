@@ -55,11 +55,11 @@ const getWinnersAndLoosers = async (data) => {
 
             await plusBalanceUser(userId, userWin)
 
-            await editWinPerDay(userId, userWin)
+            await editWinPerDay(userId, userWin - userBetAmount)
 
-            await editWinPerWeek(userId, userWin)
+            await editWinPerWeek(userId, userWin - userBetAmount)
 
-            await plusWinCubesAll(userId, userWin)
+            await plusWinCubesAll(userId, userWin - userBetAmount)
 
             deductionsToTops += fullBet * 0.075
 
