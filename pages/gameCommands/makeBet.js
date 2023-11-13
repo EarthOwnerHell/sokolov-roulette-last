@@ -12,6 +12,8 @@ const { whatReserve } = require("../../settings/vkdice");
 module.exports = makeBet = async (msg) => {
     const { balance, id, name } = await getUser(msg.senderId)
 
+    console.log(balance, typeof balance)
+
     if (!balance) return msg.send(`❗ У вас нет 🎲 на балансе.`)
 
     const reserve = await whatReserve()
