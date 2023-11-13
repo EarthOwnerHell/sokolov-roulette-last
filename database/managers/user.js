@@ -207,7 +207,7 @@ const createUser = async (props) => {
         const { forRef } = await getGlobal()
         const forRefferer = await getUser(refferer)
 
-        console.log(await plusBalanceUser(id, 250000))
+        console.log(await plusBalanceUser(id, forRef))
 
         Users.findOneAndUpdate({
             id: [forRefferer.id]
@@ -218,8 +218,8 @@ const createUser = async (props) => {
             }
         }).then(console.log)
 
-        msg.send(id, `💸 Вы получили 250 000 🎲 за переход по реф.ссылке!`)
-        msg.send(forRefferer.id, `🚀 ${formClick(id, 'Пользователь')} перешёл по вашей ссылке!\n🎁 На баланс начислено ${forRef} 🎲\n\n🍀Удачной игры!`)
+        vkHelp({peer_id: id, message: `💸 Вы получили ${numberWithSpace(forRef)} 🎲 за переход по реф.ссылке!`})
+        vkHelp({peer_id: forRefferer.id, message: `🚀 ${formClick(id, 'Пользователь')} перешёл по вашей ссылке!\n🎁 На баланс начислено ${numberWithSpace(forRef)} 🎲\n\n🍀Удачной игры!`})
 
     }
 
