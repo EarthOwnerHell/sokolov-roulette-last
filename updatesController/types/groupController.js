@@ -13,16 +13,16 @@ module.exports = async (msg) => {
     if (type === 'group_join'){
         vkHelp({
             peer_id: userId,
-            message: '🤑 На ваш баланс начислено 15 000 🎲 за подписку на группу!',
+            message: '🤑 На ваш баланс начислено 100 000 🎲 за подписку на группу!',
         })
-        return plusBalanceUser(userId, 15000)
+        return plusBalanceUser(userId, 100000)
     } 
     else if (type === 'group_leave'){
         vkHelp({
             peer_id: userId,
-            message: '🤧 Мы сняли 15 000 🎲 с вашего баланса за отписку от группы',
+            message: '🤧 Мы сняли 100 000 🎲 с вашего баланса за отписку от группы',
         })
-        return minusBalanceUser(userId, 15000)
+        return minusBalanceUser(userId, 100000)
     }
 
 
