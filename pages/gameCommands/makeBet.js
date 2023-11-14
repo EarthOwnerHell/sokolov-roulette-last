@@ -124,7 +124,9 @@ module.exports = makeBet = async (msg) => {
             betCollection: typingBets[betOn],
             userName: name
         })
-        betsType.push(betOn)
+        minusBalanceUser(id, Number(finalBet))
+
+        return msg.send(`✅ @id${id}(${name}), успешная ставка ${numberWithSpace(finalBet.toFixed(0))} 🎲 на ${gamePayloadsTranslate[betOn][1]}!`)
     }
 
     for(let i = 0; i < betsThisGameUser.length; i++){
