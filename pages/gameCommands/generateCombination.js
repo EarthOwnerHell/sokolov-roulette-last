@@ -46,7 +46,7 @@ const randomDependingMode = {
     const number = getRandomValueByPercentage(values)
     const checkForRed = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].includes(number)
     const color = checkForRed ? 'red' : number == 0 ? 'zero' : 'black' 
-    const numberType = number % 2 == 0 ? 'even' : 'odd'
+    const numberType = number % 2 == 0 && number != 0 ? 'even' : number % 2 > 1 && number != 0 ? 'odd' : ""
     const interval = range(1, 12).includes(number) ? '1-12' : range(13, 24).includes(number) ? '13-24' : range(25, 36).includes(number) ? '25-36' : 0
     return [number, color, interval, numberType]
     },
