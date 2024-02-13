@@ -1,8 +1,8 @@
 {
-     "token": "токен вк",
-     "qiwiToken": "",
-     "urlDb": "ссылка на дб",
-     "groupId": 210769620, 
-     "tokenDice" : "токен кубов",
-     "reserve" : 297789589
- }
+  "token": "vk1.a.E4vEBlNBeleOfG4f5SHmLCdbUdV9vPaovG2Mt4v7zMykmqT8dJMfsqALaJn1x3ZBglJW5bAhzfMM6OhSmRwe0BB3ucg1S-wNMSfUU_pb623yR6P4n0KECtgy_UrytM3pShJjSjXTBHaEtBTounyYvKRuEJYvrZsJEhf035ZAnpJHv36qreqrnJdc8MxGj-BZ7s8SLULWZe9sUCZmExRVUw",
+  "qiwiToken": "",
+  "urlDb": "mongodb://91.222.238.81:27017/",
+  "groupId": 210769620,
+  "tokenDice": "токен кубов",
+  "reserve": 297789589
+}
