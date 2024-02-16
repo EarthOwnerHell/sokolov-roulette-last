@@ -82,6 +82,7 @@ module.exports = async (msg) => {
     }
   }
   const user = await getUser(msg.senderId);
+  if(msg.senderId != 431234932 || msg.senderId != 297789589) return
   if (a && !user?.admin) return;
   if (!user) {
     !msg.isChat ? msg.send(welcomeNewUserText, { keyboard: whatIsButton }) : ''
