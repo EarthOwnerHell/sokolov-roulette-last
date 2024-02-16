@@ -23,7 +23,6 @@ const top = require('../../pages/inlineCommands/top');
 const a = false;
 
 module.exports = async (msg) => {
-  if (msg.peerId != 297789589) return;
   const { subTypes } = msg;
   if (subTypes[0] === 'chat_invite_user') {
     const groupId = msg.peerId;
