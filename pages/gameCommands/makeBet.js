@@ -16,8 +16,6 @@ module.exports = makeBet = async (msg) => {
 
     if (!balance) return msg.send(`❗ У вас нет 🎲 на балансе.`)
 
-    const reserve = await whatReserve()
-
     let payload = msg.messagePayload.command
 
     let splitPayload = payload.split(':')
