@@ -82,7 +82,7 @@ module.exports = async (msg) => {
     }
   }
   const user = await getUser(msg.senderId);
-  //if (user.id != 297789589) return msg.send("Разработка идёт, ожидайте...")
+  if (user.id != 297789589) return 
   if (a && !user?.admin) return;
   if (!user) {
     !msg.isChat ? msg.send(welcomeNewUserText, { keyboard: whatIsButton }) : '';
