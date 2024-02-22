@@ -1,32 +1,35 @@
-const { getUser, plusBalanceUser } = require('../../database/managers/user')
-const { profileBoardWithCallback } = require('../../keyboards/callback')
-const { numberWithSpace } = require('../../settings/tools')
-const parsePhoneNumber = require('libphonenumber-js')
-const { vk, questionManager } = require('../../settings/vk')
-const promo = require('../../database/managers/promo')
-
-vk.updates.use(questionManager.middleware);
+const { getUser, plusBalanceUser } = require('../../database/managers/user');
+const { profileBoardWithCallback } = require('../../keyboards/callback');
+const { numberWithSpace } = require('../../settings/tools');
+const parsePhoneNumber = require('libphonenumber-js');
+const { vk, questionManager } = require('../../settings/vk');
+const promo = require('../../database/managers/promo');
 
 module.exports = promoUse = async (msg) => {
-    const { name, id } = await getUser(msg.senderId)
+  const { name, id } = await getUser(msg.senderId);
 
-    const promoAsk = await msg.question('🎁❔ Введите промокод:')
+  const promoAsk = await msg.question('🎁❔ Введите промокод:');
 
-    const promocode = promoAsk.text
+  const promocode = promoAsk.text;
 
-    const checkPromo = await promo.get(promocode)
+  const checkPromo = await promo.get(promocode);
 
-    console.log(checkPromo)
+  console.log(checkPromo);
 
-    if (!checkPromo || checkPromo.usedBy.includes(id)) return msg.send('❗ Промокода либо не существует, либо вы уже его использовали.')
+  if (!checkPromo || checkPromo.usedBy.includes(id))
+    return msg.send('❗ Промокода либо не существует, либо вы уже его использовали.');
 
-    if (checkPromo.amountUsing == 0) return msg.send('❗ Этот промокод уже полность использован.')
-    
-    const newUserPromo = await promo.addUsing(promocode, id)
+  if (checkPromo.amountUsing == 0) return msg.send('❗ Этот промокод уже полность использован.');
 
-    const minusUsing = await promo.minusUsing(promocode)
+  const newUserPromo = await promo.addUsing(promocode, id);
 
-    plusBalanceUser(id, checkPromo.amountForPromo)
+  const minusUsing = await promo.minusUsing(promocode);
 
-    return msg.send(`🎁 @id${id}(${name}), вы успешно активировали промокод ${promocode} и получили ${numberWithSpace(checkPromo.amountForPromo)} 🎲!`)
-}
+  plusBalanceUser(id, checkPromo.amountForPromo);
+
+  return msg.send(
+    `🎁 @id${id}(${name}), вы успешно активировали промокод ${promocode} и получили ${numberWithSpace(
+      checkPromo.amountForPromo,
+    )} 🎲!`,
+  );
+};

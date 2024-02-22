@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+/*const crypto = require('crypto');
 const { numberWithSpace } = require('./settings/tools');
 
 function getRandomValueByPercentage(values) {
@@ -69,3 +69,40 @@ for (let i = 0; i < b; i++){
 }
 
 console.log(a)
+*/
+// Создаем новый объект XMLHttpRequest
+var token = 'sfuur7t6m1tw9jioj7al3h3cxnm7hczu';
+
+fetch('https://richbum.ru/api/v1/callback', {
+  headers: {
+    Authorization: 'Bearer ' + token,
+  },
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+const axios = require('axios');
+
+const url = 'https://richbum.ru/api/v1/callback';
+const data = {
+  url: 'https://blackjack-server.online',
+};
+const headers = {
+  accept: 'application/json',
+  'Content-Type': 'application/json',
+  Authorization: 'Bearer ' + token,
+};
+
+axios
+  .post(url, data, { headers })
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });

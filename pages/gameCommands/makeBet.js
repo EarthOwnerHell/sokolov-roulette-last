@@ -1,153 +1,194 @@
-const bet = require("../../database/managers/bet");
-const game = require("../../database/managers/game");
-const { getUser, minusBalanceUser } = require("../../database/managers/user");
-const { gamePayloadsTranslate, typingBets, maxOfBets } = require("./gameTools");
-const { randomDependingMode, makeArrayFromObject, totalValues } = require("./generateCombination");
-const { createSecretWord, createHash } = require("./hash");
-const chat = require("../../database/managers/chat");
-const { numberWithSpace } = require("../../settings/tools");
-const { betKeyboard } = require("../../keyboards/inline");
-const { whatReserve } = require("../../settings/vkdice");
+const bet = require('../../database/managers/bet');
+const game = require('../../database/managers/game');
+const { getUser, minusBalanceUser } = require('../../database/managers/user');
+const { gamePayloadsTranslate, typingBets, maxOfBets } = require('./gameTools');
+const { randomDependingMode, makeArrayFromObject, totalValues } = require('./generateCombination');
+const { createSecretWord, createHash } = require('./hash');
+const chat = require('../../database/managers/chat');
+const { numberWithSpace } = require('../../settings/tools');
+const { betKeyboard } = require('../../keyboards/inline');
+const { whatReserve } = require('../../settings/vkdice');
 
 module.exports = makeBet = async (msg) => {
-    const { balance, id, name } = await getUser(msg.senderId)
+  const { balance, id, name } = await getUser(msg.senderId);
 
-    const forKeyb = Number(balance.toFixed(0))
+  const forKeyb = Number(balance.toFixed(0));
 
-    if (!balance) return msg.send(`❗ У вас нет 🎲 на балансе.`)
+  if (!balance) return msg.send(`❗ У вас нет 🎲 на балансе.`);
 
-    const reserve = await whatReserve()
+  const reserve = await whatReserve();
 
-    let payload = msg.messagePayload.command
+  let payload = msg.messagePayload.command;
 
-    let splitPayload = payload.split(':')
+  let splitPayload = payload.split(':');
 
-    const betOn = splitPayload[1]
+  const betOn = splitPayload[1];
 
-    let userBet = await msg.question(`${gamePayloadsTranslate[betOn][0]} @id${id}(${name}), введите ставку на ${gamePayloadsTranslate[betOn][1]}:`, {keyboard: betKeyboard(forKeyb)}) 
+  let userBet = await msg.question(
+    `${gamePayloadsTranslate[betOn][0]} @id${id}(${name}), введите ставку на ${gamePayloadsTranslate[betOn][1]}:`,
+    { keyboard: betKeyboard(forKeyb) },
+  );
 
-    const forBet = userBet.text.includes('[club210769620|@sokolov_roulette] ') ? userBet.text.split('[club210769620|@sokolov_roulette] ') : userBet.text
+  const forBet = userBet.text.includes('[club210769620|@sokolov_roulette] ')
+    ? userBet.text.split('[club210769620|@sokolov_roulette] ')
+    : userBet.text;
 
-    let finalBet = Array.isArray(forBet) ? Number(forBet[1].replace(/к/g, "000").replace(/\s/g, "")) : String(forBet) ? Number(forBet.replace(/к/g, "000").replace(/\s/g, "")) : Number(forBet)
+  let finalBet = Array.isArray(forBet)
+    ? Number(forBet[1].replace(/к/g, '000').replace(/\s/g, ''))
+    : String(forBet)
+    ? Number(forBet.replace(/к/g, '000').replace(/\s/g, ''))
+    : Number(forBet);
 
-    if (!finalBet || finalBet < 0) return msg.send(`❗ Что-то не так, проверьте введённые данные`)
+  if (!finalBet || finalBet < 0) return msg.send(`❗ Что-то не так, проверьте введённые данные`);
 
-    if (finalBet > balance) return msg.send(`❗ У вас нет столько 🎲`)
+  if (finalBet > balance) return msg.send(`❗ У вас нет столько 🎲`);
 
-    if (finalBet > Number(reserve.balance)) return msg.send(`❗ В данный момент резерв бота мал для такой ставки, повторите попытку позднее`)
-    
-    let isStarted = false
+  if (finalBet > Number(reserve.balance))
+    return msg.send(
+      `❗ В данный момент резерв бота мал для такой ставки, повторите попытку позднее`,
+    );
 
-    const peerId = msg.peerId
+  let isStarted = false;
 
-    const thisChat = await chat.getChat(peerId)
+  const peerId = msg.peerId;
 
-    const endTimeChat = thisChat.endTime
+  const thisChat = await chat.getChat(peerId);
 
-    let gameId = ''
+  const endTimeChat = thisChat.endTime;
 
-    const gameMode = thisChat.game
+  let gameId = '';
 
-    const checkGame = await game.getGame(peerId)
+  const gameMode = thisChat.game;
 
-    if (checkGame) {
-        gameId = await game.getGameId(peerId)
+  const checkGame = await game.getGame(peerId);
 
-        const betsOnType = await bet.getBetsUserOnType(gameId, id, typingBets[betOn])
+  if (checkGame) {
+    gameId = await game.getGameId(peerId);
 
-        let betTypes = { 'color' : 0, 'interval' : 0, 'range' : 0, 'special' : 0, 'property' : 0, 'number' : 0, 'coefficent' : 0}
+    const betsOnType = await bet.getBetsUserOnType(gameId, id, typingBets[betOn]);
 
-        betTypes[typingBets[betOn]] += 1
+    let betTypes = {
+      color: 0,
+      interval: 0,
+      range: 0,
+      special: 0,
+      property: 0,
+      number: 0,
+      coefficent: 0,
+    };
 
-        betsOnType.forEach(betUser => {
-            const betType = betUser.betType
-            const typeForArray = typingBets[betType]
-            if (betType != betOn) betTypes[typeForArray] += 1
-        })
-        
-        if (maxOfBets[typingBets[betOn]] < betTypes[typingBets[betOn]]) return msg.send('❗ Нельзя делать столько ставок на различные события')
+    betTypes[typingBets[betOn]] += 1;
 
-        isStarted = true
+    betsOnType.forEach((betUser) => {
+      const betType = betUser.betType;
+      const typeForArray = typingBets[betType];
+      if (betType != betOn) betTypes[typeForArray] += 1;
+    });
+
+    if (maxOfBets[typingBets[betOn]] < betTypes[typingBets[betOn]])
+      return msg.send('❗ Нельзя делать столько ставок на различные события');
+
+    isStarted = true;
+  }
+
+  if (checkGame) {
+    const betsThisGame = await bet.getBets(gameId);
+    console.log(checkGame.endTime - Date.now());
+    if (betsThisGame.length > 0 && checkGame.endTime - Date.now() <= 3_000)
+      return msg.send(
+        `🕖❗ @id${id}(${name}), нельзя сделать ставку за 3 секунды до конца раунда!`,
+      );
+  }
+
+  if (!checkGame || checkGame.gameMode != gameMode) {
+    if (checkGame && checkGame.gameMode != gameMode) {
+      const betsOnGame = await bet.getBets(checkGame._id);
+      if (betsOnGame.length > 0) return;
+      const delGame = await game.deleteGame(checkGame._id);
     }
 
-    if(checkGame){
-        const betsThisGame = await bet.getBets(gameId)
-        console.log(checkGame.endTime - Date.now())
-        if(betsThisGame.length > 0 && checkGame.endTime - Date.now() <= 3_000) return msg.send(`🕖❗ @id${id}(${name}), нельзя сделать ставку за 3 секунды до конца раунда!`)
+    const valuesForHash = randomDependingMode[gameMode]();
+
+    const hashData = totalValues(valuesForHash);
+
+    let secretWord = createSecretWord(hashData, gameMode);
+
+    secretWord = hashData + secretWord;
+
+    const hash = createHash(secretWord);
+
+    const newGame = await game.createGame({
+      peerId,
+      hash,
+      hashKey: secretWord,
+      gameMode: gameMode,
+      endTime: endTimeChat,
+      results: valuesForHash,
+      isEnded: false,
+      isStarted: false,
+    });
+
+    gameId = newGame._id;
+
+    isStarted = false;
+  }
+
+  if (isStarted == false) {
+    const gameChangeStatus = game.changeStartStatus(gameId);
+    const startGame = game.startEndTime(gameId, endTimeChat + Date.now());
+  } else if (isStarted == true) {
+    const bets = await bet.getBets(gameId);
+    if (bets.length == 0) {
+      const gameChangeStatus = game.changeStartStatus(gameId);
+      const startGame = game.startEndTime(gameId, endTimeChat + Date.now());
     }
+  }
 
-    if (!checkGame || checkGame.gameMode != gameMode){
-        if (checkGame && checkGame.gameMode != gameMode){
-            const betsOnGame = await bet.getBets(checkGame._id)
-            if(betsOnGame.length > 0) return
-            const delGame = await game.deleteGame(checkGame._id)
-        }
+  let betsType = [];
 
-        const valuesForHash = randomDependingMode[gameMode]()
+  const betsThisGameUser = await bet.getBetsUser(gameId, id);
 
-        const hashData = totalValues(valuesForHash)
+  if (betsThisGameUser.length == 0) {
+    const newBet = await bet.createBet({
+      gameId: gameId,
+      userId: id,
+      betType: betOn,
+      betAmount: Number(finalBet),
+      betCollection: typingBets[betOn],
+      userName: name,
+    });
+    minusBalanceUser(id, Number(finalBet));
 
-        let secretWord = createSecretWord(hashData, gameMode)
+    return msg.send(
+      `✅ @id${id}(${name}), успешная ставка ${numberWithSpace(finalBet.toFixed(0))} 🎲 на ${
+        gamePayloadsTranslate[betOn][1]
+      }!`,
+    );
+  }
 
-        secretWord = hashData + secretWord
+  for (let i = 0; i < betsThisGameUser.length; i++) {
+    const checkType = betsThisGameUser[i].betType;
+    betsType.push(checkType);
+  }
 
-        const hash = createHash(secretWord);
+  if (betsType.includes(betOn)) {
+    const editBet = await bet.editBet(gameId, id, betOn, Number(finalBet));
+  } else {
+    const newBet = await bet.createBet({
+      gameId: gameId,
+      userId: id,
+      betType: betOn,
+      betAmount: Number(finalBet),
+      betCollection: typingBets[betOn],
+      userName: name,
+    });
+  }
 
-        const newGame = await game.createGame({peerId,hash,hashKey:secretWord,gameMode: gameMode, endTime: endTimeChat, results:valuesForHash, isEnded:false, isStarted: false});
+  minusBalanceUser(id, Number(finalBet));
 
-        gameId = newGame._id
-
-        isStarted = false
-    }
-
-    if (isStarted == false){
-        const gameChangeStatus = game.changeStartStatus(gameId)
-        const startGame = game.startEndTime(gameId, endTimeChat + Date.now())
-    } else if (isStarted == true){
-        const bets = await bet.getBets(gameId)
-        if (bets.length == 0){
-            const gameChangeStatus = game.changeStartStatus(gameId)
-            const startGame = game.startEndTime(gameId, endTimeChat + Date.now())
-        }
-    }
-
-   let betsType = [] 
-
-   const betsThisGameUser = await bet.getBetsUser(gameId, id)
-
-    if(betsThisGameUser.length == 0){
-        const newBet = await bet.createBet({
-            gameId: gameId,
-            userId : id,
-            betType: betOn,
-            betAmount: Number(finalBet),
-            betCollection: typingBets[betOn],
-            userName: name
-        })
-        minusBalanceUser(id, Number(finalBet))
-
-        return msg.send(`✅ @id${id}(${name}), успешная ставка ${numberWithSpace(finalBet.toFixed(0))} 🎲 на ${gamePayloadsTranslate[betOn][1]}!`)
-    }
-
-    for(let i = 0; i < betsThisGameUser.length; i++){
-        const checkType = betsThisGameUser[i].betType
-        betsType.push(checkType)
-    }
-
-    if(betsType.includes(betOn)){
-        const editBet = await bet.editBet(gameId, id, betOn, Number(finalBet))
-    } else {
-            const newBet = await bet.createBet({
-                gameId: gameId,
-                userId : id,
-                betType: betOn,
-                betAmount: Number(finalBet),
-                betCollection: typingBets[betOn],
-                userName: name
-            })
-        }
-
-        minusBalanceUser(id, Number(finalBet))
-
-        return msg.send(`✅ @id${id}(${name}), успешная ставка ${numberWithSpace(finalBet.toFixed(0))} 🎲 на ${gamePayloadsTranslate[betOn][1]}!`)
-    }
+  return msg.send(
+    `✅ @id${id}(${name}), успешная ставка ${numberWithSpace(finalBet.toFixed(0))} 🎲 на ${
+      gamePayloadsTranslate[betOn][1]
+    }!`,
+  );
+};

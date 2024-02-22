@@ -1,7 +1,7 @@
 const https = require('https');
 const { plusCubics } = require('./vkdice');
 const fs = require('fs');
-/*
+
 const options = {
   key: 'ff', //fs.readFileSync('/etc/letsencrypt/live/blackjack-server.online/privkey.pem'),
   cert: 'ff', //fs.readFileSync('/etc/letsencrypt/live/blackjack-server.online/fullchain.pem')
@@ -33,5 +33,5 @@ function serverListen() {
       console.log('Сервер запущен на порту 443');
     });
 }
-*/
+
 module.exports = serverListen;

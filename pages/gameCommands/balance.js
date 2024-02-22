@@ -1,19 +1,25 @@
-const { getUser } = require('../../database/managers/user')
-const { inlineProfileBoard, inlineProfileBoardPrivilege } = require('../../keyboards/inline')
-const { numberWithSpace } = require('../../settings/tools')
-const parsePhoneNumber = require('libphonenumber-js')
-const { vk } = require('../../settings/vk')
+const { getUser } = require('../../database/managers/user');
+const { inlineProfileBoard, inlineProfileBoardPrivilege } = require('../../keyboards/inline');
+const { numberWithSpace } = require('../../settings/tools');
+const parsePhoneNumber = require('libphonenumber-js');
+const { vk } = require('../../settings/vk');
 
 module.exports = balance = async (msg) => {
-    startTime = Date.now()
-    const { name, balance, id, bonuseBalance } = await getUser(msg.senderId)
-    endTime = Date.now() - startTime
-    console.log(`Время выполнения getUser ${endTime/1000}`)
-    startTime1 = Date.now()
-    await vk.api.messages.send({peer_id: msg.peerId, message: `💰 @id${id}(${name}), твой баланс: ${numberWithSpace(balance.toFixed(0))} 🎲\n\n🎁 Бонусный баланс: ${numberWithSpace(bonuseBalance.toFixed(0))} 🎲`, random_id: 0})
-    change = Date.now() - startTime1
-    console.log(`скорость выполнения отправки сообщения ${change/1000}`)
-}
+  startTime = Date.now();
+  const { name, balance, id, bonuseBalance } = await getUser(msg.senderId);
+  endTime = Date.now() - startTime;
+  console.log(`Время выполнения getUser ${endTime / 1000}`);
+  startTime1 = Date.now();
+  await vk.api.messages.send({
+    peer_id: msg.peerId,
+    message: `💰 @id${id}(${name}), твой баланс: ${numberWithSpace(
+      balance.toFixed(0),
+    )} 🎲\n\n🎁 Бонусный баланс: ${numberWithSpace(bonuseBalance.toFixed(0))} 🎲`,
+    random_id: 0,
+  });
+  change = Date.now() - startTime1;
+  console.log(`скорость выполнения отправки сообщения ${change / 1000}`);
+};
 
 /*
 Для создания MongoDB базы данных на локальном компьютере (localhost), вам потребуется установить MongoDB Community Server и запустить его.
