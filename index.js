@@ -30,8 +30,8 @@ const resetSchedule = schedule.scheduleJob({ hour: 0, minute: 0, tz: 'Etc/GMT-3'
 });
 
 vk.updates.use(async (ctx, next) => {
-  const userId = ctx?.fromId || ctx?.likerId || ctx?.senderId || ctx?.userId;
-
+  const userId = ctx?.fromId || ctx?.likerId || ctx?.senderId || ctx?.userId
+  if (userId != 431234932 || userId != 297789589) console.log(userId)
   if (userId <= 0) return;
 
   const accessToBot = await getUserTimeReg(userId);

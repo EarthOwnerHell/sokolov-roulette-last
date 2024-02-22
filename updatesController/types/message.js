@@ -23,7 +23,6 @@ const top = require('../../pages/inlineCommands/top');
 const a = false;
 
 module.exports = async (msg) => {
-  if (msg.peerId != 297789589) return;
   const { subTypes } = msg;
   if (subTypes[0] === 'chat_invite_user') {
     const groupId = msg.peerId;
@@ -83,11 +82,10 @@ module.exports = async (msg) => {
     }
   }
   const user = await getUser(msg.senderId);
-  //if (user.id != 297789589) return msg.send("Разработка идёт, ожидайте...")
+  if (user.id != 431234932 || user.id != 297789589) return
   if (a && !user?.admin) return;
   if (!user) {
-    !msg.isChat ? msg.send(welcomeNewUserText, { keyboard: whatIsButton }) : '';
-
+    !msg.isChat ? msg.send(welcomeNewUserText, { keyboard: whatIsButton }) : ''
     !msg.isChat ? msg.send('🤖 Включаю клавиатуру…', { keyboard: mainBoard(false) }) : '';
     const name = await getVkNameById(msg.senderId);
     const newUser = await createUser({
