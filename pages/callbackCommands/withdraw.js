@@ -6,6 +6,7 @@ const { sendCazis, whatReserve } = require('../../settings/cazis');
 module.exports = withdrawnCubes = async (msg) => {
   const { id, balance } = await getUser(msg.userId);
   const reserve = await whatReserve();
+  console.log(reserve);
 
   if (balance <= 0) {
     return sendEventAnswer(msg, '❗Нельзя вывести пустой баланс', 'show_snackbar');
