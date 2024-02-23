@@ -1,7 +1,7 @@
 const https = require('https');
 const { plusCubics } = require('./vkdice');
 const fs = require('fs');
-const { plus💎is } = require('./💎is');
+const { plusCazis } = require('./💎is');
 
 const options = {
   key: fs.readFileSync('/etc/letsencrypt/live/blackjack-server.online/privkey.pem'),
@@ -21,7 +21,7 @@ function serverListen() {
           // Ваш код обработки POST запроса здесь
           console.log('POST запрос получен:', body);
           const data = JSON.parse(body); // преобразование строки в объект JSON
-          plus💎is(data.sender_id, data.amount);
+          plusCazis(data.sender_id, data.amount);
           res.end('POST запрос получен');
         });
       } else {

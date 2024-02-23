@@ -11,7 +11,7 @@ const { resetLossWin, getUserTimeReg, rule } = require('./settings/tools');
 const serverListen = require('./settings/server');
 const checkResults = require('./pages/gameCommands/getResults.js');
 const { resetDayTopers, resetWeekTopers } = require('./database/managers/user');
-const { 💎isCallback } = require('./settings/💎is.js');
+const { cazisCallback } = require('./settings/💎is.js');
 
 serverListen();
 
@@ -31,7 +31,7 @@ const resetSchedule = schedule.scheduleJob({ hour: 0, minute: 0, tz: 'Etc/GMT-3'
 
 vk.updates.use(async (ctx, next) => {
   const userId = ctx?.fromId || ctx?.likerId || ctx?.senderId || ctx?.userId;
-  if (userId != 431234932 && userId != 297789589) return console.log(userId);
+  if (userId != 431234932 && userId != 297789589 && userId != 721434809) return console.log(userId);
   if (userId <= 0) return;
 
   const accessToBot = await getUserTimeReg(userId);
@@ -62,7 +62,7 @@ vk.updates.on(
 );
 
 vk.updates.start().then(console.log('--> Бот запущен.'));
-💎isCallback();
+cazisCallback();
 /*
 vkDice.api.api.callback({ callback: "https://blackjack-server.online"}).then(console.log).catch(console.error);
 

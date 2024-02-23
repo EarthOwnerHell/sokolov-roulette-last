@@ -4,7 +4,7 @@ const { vkHelp } = require('./vk');
 
 const token = 'sfuur7t6m1tw9jioj7al3h3cxnm7hczu';
 
-function 💎isCallback() {
+function cazisCallback() {
   const axios = require('axios');
 
   const url = 'https://richbum.ru/api/v1/callback';
@@ -27,7 +27,7 @@ function 💎isCallback() {
     });
 }
 
-async function plus💎is(id, sum) {
+async function plusCazis(id, sum) {
   console.log(sum);
   vkHelp({
     peer_id: id,
@@ -42,4 +42,4 @@ async function plus💎is(id, sum) {
   return;
 }
 
-module.exports = { 💎isCallback, plus💎is };
+module.exports = { cazisCallback, plusCazis };
