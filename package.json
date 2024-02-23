@@ -2,6 +2,7 @@
   "dependencies": {
     "@qiwi/bill-payments-node-js-sdk": "^3.2.1",
     "axios": "^0.24.0",
+    "black-coin-api": "^1.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",

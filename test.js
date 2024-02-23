@@ -71,35 +71,32 @@ for (let i = 0; i < b; i++){
 console.log(a)
 */
 // Создаем новый объект XMLHttpRequest
-var token = 'sfuur7t6m1tw9jioj7al3h3cxnm7hczu';
+const { API } = require('black-coin-api');
+const bc = new API({
+  token: 'sfuur7t6m1tw9jioj7al3h3cxnm7hczu',
+});
+setTimeout(async () => {
+  console.log(
+    await bc.getTransHistory({
+      type: 'all',
+      after_id: 120000,
+      limit: 1,
+    }),
+  );
+}, 1000);
 
-fetch('https://richbum.ru/api/v1/callback', {
-  headers: {
-    Authorization: 'Bearer ' + token,
-  },
-})
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+var token = 'sfuur7t6m1tw9jioj7al3h3cxnm7hczu';
 
 const axios = require('axios');
 
-const url = 'https://richbum.ru/api/v1/callback';
-const data = {
-  url: 'https://blackjack-server.online',
-};
+const url = 'https://richbum.ru/api/v1/transactions';
+
 const headers = {
-  accept: 'application/json',
-  'Content-Type': 'application/json',
   Authorization: 'Bearer ' + token,
 };
 
-axios
-  .post(url, data, { headers })
+return axios
+  .get(url, { headers })
   .then((response) => {
     console.log(response.data);
   })
