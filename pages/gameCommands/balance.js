@@ -14,7 +14,7 @@ module.exports = balance = async (msg) => {
     peer_id: msg.peerId,
     message: `💰 @id${id}(${name}), твой баланс: ${numberWithSpace(
       balance.toFixed(0),
-    )} 🎲\n\n🎁 Бонусный баланс: ${numberWithSpace(bonuseBalance.toFixed(0))} 🎲`,
+    )} Caz\n\n🎁 Бонусный баланс: ${numberWithSpace(bonuseBalance.toFixed(0))} Caz`,
     random_id: 0,
   });
   change = Date.now() - startTime1;

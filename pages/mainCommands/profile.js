@@ -17,9 +17,9 @@ module.exports = getProfile = async (msg) => {
 🔗 Рефералов у вас: ${numberWithSpace(value)}
 ———
 
-💰 Баланс: ${numberWithSpace(balance.toFixed(0))} 🎲
+💰 Баланс: ${numberWithSpace(balance.toFixed(0))} Caz
 ———
 
-🎁 Бонусный баланс: ${numberWithSpace(bonuseBalance.toFixed(0))} 🎲`;
+🎁 Бонусный баланс: ${numberWithSpace(bonuseBalance.toFixed(0))} Caz`;
   return msg.send(text, { keyboard: profileBoardWithCallback });
 };

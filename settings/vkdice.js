@@ -18,7 +18,7 @@ async function whatReserve() {
 async function plusCubics(id, sum) {
   vkHelp({
     peer_id: id,
-    message: `✅ Баланс пополненен на ${numberWithSpace(sum)} 🎲\n🍀 Приятной игры!`,
+    message: `✅ Баланс пополненен на ${numberWithSpace(sum)} Caz\n🍀 Приятной игры!`,
   });
   vkHelp({
     peer_id: 297789589,

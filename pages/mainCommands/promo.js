@@ -30,6 +30,6 @@ module.exports = promoUse = async (msg) => {
   return msg.send(
     `🎁 @id${id}(${name}), вы успешно активировали промокод ${promocode} и получили ${numberWithSpace(
       checkPromo.amountForPromo,
-    )} 🎲!`,
+    )} Caz!`,
   );
 };

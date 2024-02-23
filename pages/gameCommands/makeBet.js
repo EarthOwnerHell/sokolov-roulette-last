@@ -14,7 +14,7 @@ module.exports = makeBet = async (msg) => {
 
   const forKeyb = Number(balance.toFixed(0));
 
-  if (!balance) return msg.send(`❗ У вас нет 🎲 на балансе.`);
+  if (!balance) return msg.send(`❗ У вас нет Caz на балансе.`);
 
   const reserve = 10 ** 100;
   let payload = msg.messagePayload.command;
@@ -40,7 +40,7 @@ module.exports = makeBet = async (msg) => {
 
   if (!finalBet || finalBet < 0) return msg.send(`❗ Что-то не так, проверьте введённые данные`);
 
-  if (finalBet > balance) return msg.send(`❗ У вас нет столько 🎲`);
+  if (finalBet > balance) return msg.send(`❗ У вас нет столько Caz`);
 
   if (finalBet > Number(reserve.balance))
     return msg.send(
@@ -159,7 +159,7 @@ module.exports = makeBet = async (msg) => {
     minusBalanceUser(id, Number(finalBet));
 
     return msg.send(
-      `✅ @id${id}(${name}), успешная ставка ${numberWithSpace(finalBet.toFixed(0))} 🎲 на ${
+      `✅ @id${id}(${name}), успешная ставка ${numberWithSpace(finalBet.toFixed(0))} Caz на ${
         gamePayloadsTranslate[betOn][1]
       }!`,
     );
@@ -186,7 +186,7 @@ module.exports = makeBet = async (msg) => {
   minusBalanceUser(id, Number(finalBet));
 
   return msg.send(
-    `✅ @id${id}(${name}), успешная ставка ${numberWithSpace(finalBet.toFixed(0))} 🎲 на ${
+    `✅ @id${id}(${name}), успешная ставка ${numberWithSpace(finalBet.toFixed(0))} Caz на ${
       gamePayloadsTranslate[betOn][1]
     }!`,
   );
