@@ -20,9 +20,9 @@ module.exports = myStats = async (msg) => {
     message_id: lastMessage,
     message: `🍀 Вы выиграли за всё время: ${numberWithSpace(
       winCubes.toFixed(0),
-    )} Caz\n———\n💰 Вы пополнили: ${numberWithSpace(
+    )} 💎\n———\n💰 Вы пополнили: ${numberWithSpace(
       deppedCubes.toFixed(0),
-    )} Caz\n———\nCaz Вы вывели: ${numberWithSpace(withdrawnCubes.toFixed(0))} Caz`,
+    )} 💎\n———\n💎 Вы вывели: ${numberWithSpace(withdrawnCubes.toFixed(0))} 💎`,
     keyboard: backToProfile(false),
   });
 };

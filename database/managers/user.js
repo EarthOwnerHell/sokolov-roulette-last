@@ -188,7 +188,7 @@ const resetDayTopers = async () => {
             index + 1
           } место в топе дня!\n\n🔥 Ваша награда: ${numberWithSpace(
             awardForTop,
-          )} Caz\n\n🍀 Удачи в дальнейших победах!`,
+          )} 💎\n\n🍀 Удачи в дальнейших победах!`,
         });
         plusBalanceUser(id, awardForTop);
       }
@@ -211,7 +211,7 @@ const resetWeekTopers = async () => {
             index + 1
           } место!\n\n🔥 Ваша награда: ${numberWithSpace(
             awardForTop,
-          )} Caz\n\n🍀 Удачи в дальнейших победах!`,
+          )} 💎\n\n🍀 Удачи в дальнейших победах!`,
         });
         plusBalanceUser(id, awardForTop);
       }
@@ -253,7 +253,7 @@ const createUser = async (props) => {
 
     vkHelp({
       peer_id: id,
-      message: `💸 Вы получили ${numberWithSpace(forRef)} Caz за переход по реф.ссылке!`,
+      message: `💸 Вы получили ${numberWithSpace(forRef)} 💎 за переход по реф.ссылке!`,
     });
     vkHelp({
       peer_id: forRefferer.id,
@@ -262,7 +262,7 @@ const createUser = async (props) => {
         'Пользователь',
       )} перешёл по вашей ссылке!\n🎁 На баланс начислено ${numberWithSpace(
         forRef,
-      )} Caz\n\n🍀Удачной игры!`,
+      )} 💎\n\n🍀Удачной игры!`,
     });
   }
 };

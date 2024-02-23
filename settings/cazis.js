@@ -4,7 +4,7 @@ const { vkHelp } = require('./vk');
 
 const token = 'sfuur7t6m1tw9jioj7al3h3cxnm7hczu';
 
-function cazisCallback() {
+function 💎isCallback() {
   const axios = require('axios');
 
   const url = 'https://richbum.ru/api/v1/callback';
@@ -27,19 +27,19 @@ function cazisCallback() {
     });
 }
 
-async function plusCazis(id, sum) {
+async function plus💎is(id, sum) {
   console.log(sum);
   vkHelp({
     peer_id: id,
-    message: `✅ Баланс пополненен на ${numberWithSpace(sum)} Caz\n🍀 Приятной игры!`,
+    message: `✅ Баланс пополненен на ${numberWithSpace(sum)} 💎\n🍀 Приятной игры!`,
   });
   vkHelp({
     peer_id: 297789589,
-    message: `@id${id}(Пользователь) пополнил баланс на ${numberWithSpace(sum.toFixed(0))} Caz!`,
+    message: `@id${id}(Пользователь) пополнил баланс на ${numberWithSpace(sum.toFixed(0))} 💎!`,
   });
   await plusDeppedCubes(id, sum);
   await plusBalanceUser(id, sum);
   return;
 }
 
-module.exports = { cazisCallback, plusCazis };
+module.exports = { 💎isCallback, plus💎is };

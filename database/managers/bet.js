@@ -23,7 +23,7 @@ const bet = {
         console.log(
           `Новая ставка!\n---\nПоставил: https://vk.com/id${userId}\n---\nСтавка на: ${betType}\n---\nСумма: ${numberWithSpace(
             betAmount,
-          )} Caz\n---\nID игры: ${gameId}`,
+          )} 💎\n---\nID игры: ${gameId}`,
         ),
       );
   },

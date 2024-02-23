@@ -60,7 +60,7 @@ const getWinnersAndLoosers = async (data) => {
     if (!results.includes(userBet.betType)) {
       textToReturn += `❌ @id${userId}(${userName}) - ставка ${numberWithSpace(
         userBetAmount.toFixed(0),
-      )} Caz на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`;
+      )} 💎 на ${gamePayloadsTranslate[userBetType][1]} проиграла!\n`;
 
       statsForAdm += Number(userBetAmount);
 
@@ -89,9 +89,9 @@ const getWinnersAndLoosers = async (data) => {
 
     textToReturn += `✅ @id${userId}(${userName}) - ставка ${numberWithSpace(
       userBetAmount.toFixed(0),
-    )} Caz на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(
+    )} 💎 на ${gamePayloadsTranslate[userBetType][1]} выиграла! (+${numberWithSpace(
       userWin.toFixed(0),
-    )} Caz)\n`;
+    )} 💎)\n`;
 
     statsForAdm -= Number(userWin);
 
@@ -150,7 +150,7 @@ function checkResults() {
           message:
             finalText[0] +
             `${
-              finalText[1] > 0 ? deductionsToTop + ' Caz' : ''
+              finalText[1] > 0 ? deductionsToTop + ' 💎' : ''
             }\n\n❓ Хэш игры: ${hash}\n🔑 Ключ к хэшу: ${hashKey}`,
           keyboard: honestyCheck,
           attachment: photoesDependMode[gameMode][results[0]]

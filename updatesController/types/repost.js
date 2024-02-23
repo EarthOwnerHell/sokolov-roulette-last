@@ -17,7 +17,7 @@ module.exports = async (msg) => {
     peer_id: userId,
     message: `📣 Спасибо за репост!\n\n💰На ваш баланс начислено ${numberWithSpace(
       repostInfo.bonuseAmount,
-    )} Caz`,
+    )} 💎`,
   });
   plusBalanceUser(userId, repostInfo.bonuseAmount);
   repost.addReposter(msg.wall.copyHistory[0].id, userId);

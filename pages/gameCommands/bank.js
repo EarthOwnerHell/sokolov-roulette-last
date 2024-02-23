@@ -90,7 +90,7 @@ module.exports = bank = async (msg) => {
     }
     betsTexts[betType] += `    @id${userId}(${userName}) → ${numberWithSpace(
       betAmount.toFixed(0),
-    )} Caz\n`;
+    )} 💎\n`;
     betsAmount += betAmount;
   });
 
@@ -100,7 +100,7 @@ module.exports = bank = async (msg) => {
   });
 
   const totalText =
-    `🏦 Банк раунда: ${numberWithSpace(betsAmount.toFixed(0))} Caz\n\n` +
+    `🏦 Банк раунда: ${numberWithSpace(betsAmount.toFixed(0))} 💎\n\n` +
     suppliersText +
     `\n\n&#10067; Хэш игры: ${checkGame.hash}` +
     `\n⌛ До конца раунда: ${convertSecToBeautySec((endTime - Date.now()) / 1000)}`;

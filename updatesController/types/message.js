@@ -105,7 +105,7 @@ module.exports = async (msg) => {
   if (['резерв'].includes(msg?.text?.toLowerCase()) && msg.isChat) {
     const reserve = await whatReserve();
     console.log(reserve);
-    msg.send(`💰 Резерв бота: ${numberWithSpace(Number(reserve.balance).toFixed(0))} Caz`);
+    msg.send(`💰 Резерв бота: ${numberWithSpace(Number(reserve.balance).toFixed(0))} 💎`);
   }
   if (['топ дня'].includes(msg?.text?.toLowerCase()) && msg.isChat) {
     return top(msg, 'dayTop');

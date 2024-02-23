@@ -29,7 +29,7 @@ const honestyCheck = Keyboard.keyboard([
 ]).inline();
 
 const articleAboutCubics = Keyboard.keyboard([
-  [urlButton(`📎 «Что такое Caz»`, 'https://vk.com/@sokolov_roulette-article-cubics')],
+  [urlButton(`📎 «Что такое 💎»`, 'https://vk.com/@sokolov_roulette-article-cubics')],
 ]).inline();
 
 const chatSettingsBoard = Keyboard.keyboard([
@@ -41,7 +41,7 @@ const chatSettingsBoard = Keyboard.keyboard([
 
 const chooseGameInGroup = Keyboard.keyboard([
   [
-    textButton('Caz Cube ', 'set_game:cube', colors.green),
+    textButton('💎 Cube ', 'set_game:cube', colors.green),
     textButton('🎰 Wheel ', 'set_game:wheel', colors.green),
   ],
   [
@@ -68,13 +68,13 @@ const mailingMenu = Keyboard.keyboard([
   [textButton('🎰 Играть', 'games', colors.red)],
   [
     urlButton('💬 Отзывы', 'https://vk.com/topic-210769620_50082905'),
-    urlButton(`📎 «Что такое Caz»`, 'https://vk.com/@sokolov_roulette-article-cubics'),
+    urlButton(`📎 «Что такое 💎»`, 'https://vk.com/@sokolov_roulette-article-cubics'),
   ],
 ]).inline();
 
 /*const chooseGameInGroup = (payload) => Keyboard.keyboard([
         [
-            textButton('Caz Cube ', `set_game:cube:${payload}`, colors.green),
+            textButton('💎 Cube ', `set_game:cube:${payload}`, colors.green),
             textButton('🎰 Wheel ', `set_game:wheel:${payload}`, colors.green)
         ],
         [

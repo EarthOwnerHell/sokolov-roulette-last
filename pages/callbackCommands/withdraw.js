@@ -42,7 +42,7 @@ module.exports = withdrawnCubes = async (msg) => {
 
   sendEventAnswer(
     msg,
-    `✅ Успешно вывели ${numberWithSpace(balance.toFixed(0))} Caz, ждём вас снова!`,
+    `✅ Успешно вывели ${numberWithSpace(balance.toFixed(0))} 💎, ждём вас снова!`,
     'show_snackbar',
   );
 

@@ -27,7 +27,7 @@ module.exports = profile = async (msg) => {
       value,
     )}\n———\n\n💰 Баланс: ${numberWithSpace(
       balance.toFixed(0),
-    )} Caz\n———\n\n🎁 Бонусный баланс: ${numberWithSpace(bonuseBalance.toFixed(0))} Caz`,
+    )} 💎\n———\n\n🎁 Бонусный баланс: ${numberWithSpace(bonuseBalance.toFixed(0))} 💎`,
     keyboard: profileBoardWithCallback,
   });
 };

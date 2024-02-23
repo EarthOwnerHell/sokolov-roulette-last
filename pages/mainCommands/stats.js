@@ -35,7 +35,7 @@ module.exports = stats = async (msg) => {
 
   msg.send(
     `ℹ Общая статистика бота:\n\n👥 Пользователей: ${numberWithSpace(count)}\n---
-        \n🍀 Выиграно за всё время: ${numberWithSpace(allWin)} Caz\n---
-        \n💸 Всего выведено: ${numberWithSpace(allWithdraw)} Caz`,
+        \n🍀 Выиграно за всё время: ${numberWithSpace(allWin)} 💎\n---
+        \n💸 Всего выведено: ${numberWithSpace(allWithdraw)} 💎`,
   );
 };

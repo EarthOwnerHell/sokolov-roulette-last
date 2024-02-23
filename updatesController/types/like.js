@@ -36,7 +36,7 @@ module.exports = async (msg) => {
 
     vkHelp({
       peer_id: likerId,
-      message: `😍 Спасибо за лайк, на ваш баланс начислено ${numberWithSpace(amountForLike)} Caz`,
+      message: `😍 Спасибо за лайк, на ваш баланс начислено ${numberWithSpace(amountForLike)} 💎`,
     });
     await plusBalanceUser(likerId, amountForLike);
 
@@ -46,7 +46,7 @@ module.exports = async (msg) => {
   if (subTypes[0] === 'like_remove') {
     vkHelp({
       peer_id: likerId,
-      message: `🥺 Вы убрали лайк, нам пришлось снять с вашего баланса ${amountForLike} Caz`,
+      message: `🥺 Вы убрали лайк, нам пришлось снять с вашего баланса ${amountForLike} 💎`,
     });
     console.log(`\n[ 🔔 ] Удалил лайк: https://vk.com/id${likerId}`);
   }

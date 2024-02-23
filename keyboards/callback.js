@@ -11,7 +11,7 @@ const backToProfile = (commandIsDep) =>
   Keyboard.keyboard([
     [callBack('⏪ Назад', 'profile', colors.green)],
     commandIsDep
-      ? [urlButton(`📎 «Как пополнить баланс Caz»`, 'https://vk.com/sokolov_roulette')]
+      ? [urlButton(`📎 «Как пополнить баланс 💎»`, 'https://vk.com/sokolov_roulette')]
       : [],
   ]).inline();
 

@@ -32,14 +32,14 @@ module.exports = async (msg) => {
   if (type === 'wall_reply_new') {
     vkHelp({
       peer_id: fromId,
-      message: `✉ Спасибо за комментарий!\n\n🤑 На ваш баланс начислено ${amountForComment} Caz`,
+      message: `✉ Спасибо за комментарий!\n\n🤑 На ваш баланс начислено ${amountForComment} 💎`,
     });
     plusBalanceUser(msg.fromId, amountForComment);
   }
   if (type === 'wall_reply_delete') {
     vkHelp({
       peer_id: msg.deleterUserId,
-      message: `🥺 Вы убрали комментарий, снимаем с вашего баланса ${amountForComment} Caz`,
+      message: `🥺 Вы убрали комментарий, снимаем с вашего баланса ${amountForComment} 💎`,
     });
     minusBalanceUser(msg.deleterUserId, amountForComment);
     console.log(`\n[ 📝 ] Удалил комментарий: https://vk.com/id${msg.deleterUserId}`);

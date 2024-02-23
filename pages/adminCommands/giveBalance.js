@@ -21,7 +21,7 @@ module.exports = async (msg) => {
       Number(plusBalance.text),
     )}`,
   );
-  msg.send(userId.id, `😳 Вам было выдано ${numberWithSpace(Number(plusBalance.text))} Caz!`);
+  msg.send(userId.id, `😳 Вам было выдано ${numberWithSpace(Number(plusBalance.text))} 💎!`);
 
   plusBalanceUser(userId.id, Number(plusBalance.text));
 };

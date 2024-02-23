@@ -11,7 +11,7 @@ const { resetLossWin, getUserTimeReg, rule } = require('./settings/tools');
 const serverListen = require('./settings/server');
 const checkResults = require('./pages/gameCommands/getResults.js');
 const { resetDayTopers, resetWeekTopers } = require('./database/managers/user');
-const { cazisCallback } = require('./settings/cazis.js');
+const { 💎isCallback } = require('./settings/💎is.js');
 
 serverListen();
 
@@ -62,7 +62,7 @@ vk.updates.on(
 );
 
 vk.updates.start().then(console.log('--> Бот запущен.'));
-cazisCallback();
+💎isCallback();
 /*
 vkDice.api.api.callback({ callback: "https://blackjack-server.online"}).then(console.log).catch(console.error);
 
