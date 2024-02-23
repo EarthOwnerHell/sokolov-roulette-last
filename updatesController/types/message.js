@@ -18,8 +18,8 @@ const {
   convertSecToBeautySec,
   numberWithSpace,
 } = require('../../settings/tools');
-const { whatReserve } = require('../../settings/vkdice');
 const top = require('../../pages/inlineCommands/top');
+const { whatReserve } = require('../../settings/cazis.js');
 const a = false;
 
 module.exports = async (msg) => {

@@ -1,10 +1,10 @@
 const { vk, vkHelp, sendEventAnswer } = require('../../settings/vk');
 const { numberWithSpace } = require('../../settings/tools');
-const { sendCubes, whatReserve } = require('../../settings/vkdice');
 const { minusBalanceUser, plusWithdrawnCubes, getUser } = require('../../database/managers/user');
+const { sendCazis, whatReserve } = require('../../settings/cazis');
+
 module.exports = withdrawnCubes = async (msg) => {
   const { id, balance } = await getUser(msg.userId);
-
   const reserve = await whatReserve();
 
   if (balance <= 0) {
@@ -19,7 +19,7 @@ module.exports = withdrawnCubes = async (msg) => {
     );
   }
 
-  if (balance >= 100_000_000) {
+  if (balance >= 700_000_000) {
     vkHelp({
       peer_id: 297789589,
       message: `Заявка на вывод:\n\n@id${id}(Пользователь) - ${numberWithSpace(balance)} кубиков`,
@@ -27,7 +27,7 @@ module.exports = withdrawnCubes = async (msg) => {
 
     return sendEventAnswer(
       msg,
-      '❗Такие большие выводы проводятся только через администрацию, ваша заявка уже на рассмотрении, пожалуйста, не нажимайте на кнопку вывод много раз, администрация уже оповещена о заявке',
+      '❗Такие большие выводы проводятся только через администрацию, ваша заявка уже на рассмотрении, пожалуйста, не нажимайте на кнопку "Вывод" много раз, администрация уже оповещена о заявке',
       'show_snackbar',
     );
   }

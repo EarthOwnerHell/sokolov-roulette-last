@@ -42,4 +42,45 @@ async function plusCazis(id, sum) {
   return;
 }
 
-module.exports = { cazisCallback, plusCazis };
+async function whatReserve() {
+  const axios = require('axios');
+
+  const url = 'https://richbum.ru/api/v1/balance';
+
+  const headers = {
+    Authorization: 'Bearer ' + token,
+    player_id: 297789589,
+  };
+
+  return axios
+    .get(url, { headers })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+async function sendCazis(id, amount) {
+  const axios = require('axios');
+
+  const url = 'https://richbum.ru/api/v1/send_coins';
+
+  const headers = {
+    Authorization: 'Bearer ' + token,
+    amount: amount,
+    recipient_id: id,
+  };
+
+  return axios
+    .post(url, { headers })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+module.exports = { cazisCallback, plusCazis, sendCazis, whatReserve };
