@@ -52,18 +52,14 @@ async function whatReserve() {
     player_id: 297789589,
   };
 
-  let reserve = 0;
-
   axios
     .get(url, { headers })
     .then((response) => {
-      reserve = response.data.balance;
+      return response.data.balance;
     })
     .catch((error) => {
       console.error(error);
     });
-  console.log(reserve);
-  return reserve;
 }
 
 async function sendCazis(id, amount) {
