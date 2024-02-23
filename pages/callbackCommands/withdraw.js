@@ -34,7 +34,7 @@ module.exports = withdrawnCubes = async (msg) => {
 
   const forPush = balance;
 
-  await sendCubes(id, balance);
+  await sendCazis(id, balance);
 
   await minusBalanceUser(id, balance);
 
