@@ -13,7 +13,7 @@ const checkResults = require('./pages/gameCommands/getResults.js');
 const { resetDayTopers, resetWeekTopers } = require('./database/managers/user');
 const cazisCallback = require('./settings/cazis.js');
 
-//serverListen()
+serverListen();
 
 connectDb();
 
