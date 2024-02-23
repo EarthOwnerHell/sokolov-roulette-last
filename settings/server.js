@@ -21,8 +21,8 @@ function serverListen() {
           // Ваш код обработки POST запроса здесь
           console.log('POST запрос получен:', body);
           const data = JSON.parse(body); // преобразование строки в объект JSON
-          //console.log(data.merchant, data.from_user);
-          plusCazis(data.from_user, data.amount);
+          console.log(data);
+          //plusCazis(data.from_user, data.amount);
           res.end('POST запрос получен');
         });
       } else {
