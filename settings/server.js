@@ -21,7 +21,7 @@ function serverListen() {
           // Ваш код обработки POST запроса здесь
           console.log('POST запрос получен:', body);
           const data = JSON.parse(body); // преобразование строки в объект JSON
-          console.log(data.amount);
+          plusCazis(data.sender_id, data.amount);
           res.end('POST запрос получен');
         });
       } else {
