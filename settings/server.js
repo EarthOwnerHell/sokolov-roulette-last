@@ -1,5 +1,4 @@
 const https = require('https');
-const { plusCubics } = require('./vkdice');
 const fs = require('fs');
 const { plusCazis } = require('./cazis');
 
