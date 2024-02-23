@@ -4,8 +4,8 @@ const fs = require('fs');
 const { plusCazis } = require('./cazis');
 
 const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/blackjack-server.online/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/blackjack-server.online/fullchain.pem'),
+  key: '', //fs.readFileSync('/etc/letsencrypt/live/blackjack-server.online/privkey.pem'),
+  cert: '', //fs.readFileSync('/etc/letsencrypt/live/blackjack-server.online/fullchain.pem'),
 };
 function serverListen() {
   https

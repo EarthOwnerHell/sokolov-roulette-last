@@ -11,10 +11,6 @@ async function sendCubes(id, amount) {
   return vkDice.api.coins.send({ user: id, amount: amount });
 }
 
-async function whatReserve() {
-  return vkDice.api.coins.balance({ user: reserve });
-}
-
 async function plusCubics(id, sum) {
   vkHelp({
     peer_id: id,
@@ -35,6 +31,5 @@ module.exports = {
   vkDice,
   vkDiceCallback,
   sendCubes,
-  whatReserve,
   plusCubics,
 };

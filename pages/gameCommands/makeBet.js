@@ -7,7 +7,7 @@ const { createSecretWord, createHash } = require('./hash');
 const chat = require('../../database/managers/chat');
 const { numberWithSpace } = require('../../settings/tools');
 const { betKeyboard } = require('../../keyboards/inline');
-const { whatReserve } = require('../../settings/vkdice');
+const { whatReserve } = require('../../settings/cazis');
 
 module.exports = makeBet = async (msg) => {
   const { balance, id, name } = await getUser(msg.senderId);
