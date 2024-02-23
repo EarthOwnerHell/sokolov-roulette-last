@@ -1,4 +1,6 @@
 const { plusDeppedCubes, plusBalanceUser } = require('../database/managers/user');
+const { numberWithSpace } = require('./tools');
+const { vkHelp } = require('./vk');
 
 const token = 'sfuur7t6m1tw9jioj7al3h3cxnm7hczu';
 
