@@ -42,5 +42,4 @@ async function plusCazis(id, sum) {
   return;
 }
 
-module.exports = cazisCallback;
-module.exports = plusCazis;
+module.exports = { cazisCallback, plusCazis };
