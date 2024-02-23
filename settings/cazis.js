@@ -27,20 +27,7 @@ function cazisCallback() {
     });
 }
 
-async function plusCazis(id, sum) {
-  console.log(sum);
-  vkHelp({
-    peer_id: id,
-    message: `✅ Баланс пополненен на ${numberWithSpace(sum)} 🎲\n🍀 Приятной игры!`,
-  });
-  vkHelp({
-    peer_id: 297789589,
-    message: `@id${id}(Пользователь) пополнил баланс на ${numberWithSpace(sum.toFixed(0))} Caz!`,
-  });
-  await plusDeppedCubes(id, sum);
-  await plusBalanceUser(id, sum);
-  return;
-}
+async function plusCazis(id, sum) {}
 
 module.exports = cazisCallback;
 module.exports = plusCazis;
