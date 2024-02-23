@@ -28,6 +28,7 @@ function cazisCallback() {
 }
 
 async function plusCazis(id, sum) {
+  console.log(sum);
   vkHelp({
     peer_id: id,
     message: `✅ Баланс пополненен на ${numberWithSpace(sum)} 🎲\n🍀 Приятной игры!`,
