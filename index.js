@@ -11,7 +11,7 @@ const { resetLossWin, getUserTimeReg, rule } = require('./settings/tools');
 const serverListen = require('./settings/server');
 const checkResults = require('./pages/gameCommands/getResults.js');
 const { resetDayTopers, resetWeekTopers } = require('./database/managers/user');
-const { cazisCallback } = require('./settings/💎is.js');
+const { cazisCallback } = require('./settings/cazis.js');
 
 serverListen();
 
