@@ -11,7 +11,7 @@ module.exports = withdrawnCubes = async (msg) => {
     return sendEventAnswer(msg, '❗Нельзя вывести пустой баланс', 'show_snackbar');
   }
 
-  if (balance > reserve.balance) {
+  if (balance > reserve) {
     return sendEventAnswer(
       msg,
       '❗Сейчас не хватает резерва для вывода этой суммы, попробуйте вывести позже',
@@ -52,8 +52,6 @@ module.exports = withdrawnCubes = async (msg) => {
     peer_id: 297789589,
     message: `@id${id}(Пользователь) выводит ${numberWithSpace(
       forPush.toFixed(0),
-    )} кубиков\n\nРезерв казино: ${numberWithSpace(
-      Number(balanceAfterWithdraw.balance).toFixed(0),
-    )}`,
+    )} кубиков\n\nРезерв казино: ${numberWithSpace(Number(balanceAfterWithdraw).toFixed(0))}`,
   });
 };

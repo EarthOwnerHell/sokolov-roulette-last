@@ -70,33 +70,22 @@ for (let i = 0; i < b; i++){
 
 console.log(a)
 */
-// Создаем новый объект XMLHttpRequest
-const { API } = require('black-coin-api');
-const bc = new API({
-  token: 'sfuur7t6m1tw9jioj7al3h3cxnm7hczu',
-});
-setTimeout(async () => {
-  console.log(
-    await bc.getTransHistory({
-      type: 'all',
-      after_id: 120000,
-      limit: 1,
-    }),
-  );
-}, 1000);
+// Создаем новый объект XMLHttpReques
 
-var token = 'sfuur7t6m1tw9jioj7al3h3cxnm7hczu';
+const token = 'sfuur7t6m1tw9jioj7al3h3cxnm7hczu';
 
 const axios = require('axios');
-
-const url = 'https://richbum.ru/api/v1/transactions';
-
+const url = 'https://richbum.ru/api/v1/send_coins';
+const data = {
+  amount: 10,
+  recipient_id: 721434809,
+};
 const headers = {
   Authorization: 'Bearer ' + token,
 };
 
 return axios
-  .get(url, { headers })
+  .post(url, data, { headers })
   .then((response) => {
     console.log(response.data);
   })

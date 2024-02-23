@@ -70,15 +70,16 @@ async function sendCazis(id, amount) {
   const axios = require('axios');
 
   const url = 'https://richbum.ru/api/v1/send_coins';
-
-  const headers = {
-    Authorization: 'Bearer ' + token,
+  const data = {
     amount: amount,
     recipient_id: id,
   };
+  const headers = {
+    Authorization: 'Bearer ' + token,
+  };
 
   return axios
-    .post(url, { headers })
+    .post(url, data, { headers })
     .then((response) => {
       console.log(response.data);
     })
