@@ -58,6 +58,7 @@ async function whatReserve() {
     .get(url, { headers })
     .then((response) => {
       reserve = response.data.balance;
+      console.log(reserve);
     })
     .catch((error) => {
       console.error(error);
