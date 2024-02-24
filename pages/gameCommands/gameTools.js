@@ -166,7 +166,7 @@ const botSaysHello = `👋🏻 Спасибо за приглашение!\n\n�
 
 const familiarChat = `👀 Знакомое место, кажется, я здесь был…\n\n🎰 Может, попробуем сначала? Выбирай режим!\n\n⚙ Если захотите поменять его, напишите команду /settings.`;
 
-const welcomeNewUserText = `👋🏻 Привет!\n\n🎰 Это @sokolov_roulette(SOKOLOV ROULETTE), игра на виртуальную валюту @diceys(Кубики) в формате бота.\n\n🤑 Топы дня, промокоды, раздачи, конкурсы и многое другое ждёт тебя в нашем проекте!`;
+const welcomeNewUserText = `👋🏻 Привет!\n\n🎰 Это @sokolov_roulette(SOKOLOV ROULETTE), игра на виртуальную валюту @cazis(💎) в формате бота.\n\n🤑 Клавиатура уже на экране, удачи!`;
 
 module.exports = {
   forCubeTranslate,

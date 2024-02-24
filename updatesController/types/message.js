@@ -85,8 +85,7 @@ module.exports = async (msg) => {
   //if (user.id != 431234932 || user.id != 297789589) console.log(user.id == 29778958, user.i);
   if (a && !user?.admin) return;
   if (!user) {
-    !msg.isChat ? msg.send(welcomeNewUserText, { keyboard: whatIsButton }) : '';
-    !msg.isChat ? msg.send('🤖 Включаю клавиатуру…', { keyboard: mainBoard(false) }) : '';
+    !msg.isChat ? msg.send(welcomeNewUserText, { keyboard: mainBoard(false) }) : '';
     const name = await getVkNameById(msg.senderId);
     const newUser = await createUser({
       id: msg.senderId,
